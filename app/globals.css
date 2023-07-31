@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+
+    padding:0.5rem;
+}
+
+.landingcard{
+    border:1px solid black;
+}
+
+.sign-in-form{
+    border:1px solid black;
+    display: flex;
+    flex-direction: column;
+    max-width:30vw;
+    margin: 0 auto;    
+    
+}
+
+.sign-in-form input{
+    border: 1px solid gray;
+
+}
+
+.logo{
+    font-weight: bold;
+}
+
+nav{
+    
+    display: flex;
+    flex-direction: row;
+    max-width:30vw;
+    justify-content: space-between;
+    margin: 0 auto;
+    border:1px solid black;
+}
+
+button{
+    border: 1px solid red;
+    width:20vw;
+    
+}
