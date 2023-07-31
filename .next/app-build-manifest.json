@@ -5,6 +5,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+    "/gameboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/gameboard/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
