@@ -1,6 +1,6 @@
 {
   "/page": "app/page.js",
   "/singleplayerdisplay/page": "app/singleplayerdisplay/page.js",
-  "/lobby/page": "app/lobby/page.js",
-  "/twoplayerdisplay/page": "app/twoplayerdisplay/page.js"
+  "/twoplayerdisplay/page": "app/twoplayerdisplay/page.js",
+  "/lobby/page": "app/lobby/page.js"
 }

@@ -1,5 +1,5 @@
 export default function EndGameModal(){
-
+    
     return (
         <div className="modal">
         <div className="text-box">
