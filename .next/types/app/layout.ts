@@ -1,4 +1,4 @@
-// File: /Users/jamesyuill/Desktop/Northcoders/project-phase/guess-what-fe/app/layout.js
+// File: /home/mike/Documents/Northcoders/Project-phase/guess-what-fe/app/layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
