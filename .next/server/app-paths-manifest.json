@@ -1,4 +1,7 @@
 {
   "/page": "app/page.js",
-  "/gameboard/page": "app/gameboard/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/lobby/page": "app/lobby/page.js",
+  "/twoplayerdisplay/page": "app/twoplayerdisplay/page.js",
+  "/singleplayerdisplay/page": "app/singleplayerdisplay/page.js"
 }
