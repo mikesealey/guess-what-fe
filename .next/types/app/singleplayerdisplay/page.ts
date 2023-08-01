@@ -1,4 +1,4 @@
-// File: /Users/jamesyuill/Desktop/Northcoders/project-phase/guess-what-fe/app/singleplayerdisplay/page.jsx
+// File: /home/connork/Northcoders/Project/guess-what-fe/app/singleplayerdisplay/page.jsx
 import * as entry from '../../../../app/singleplayerdisplay/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
