@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 export default function Timer() {
   const [seconds, setSeconds] = useState(0);
@@ -43,8 +43,8 @@ export default function Timer() {
         {seconds}
       </h1>
       <button className="stopstart" onClick={handletimer}>
-        {' '}
-        Stop{' '}
+        {" "}
+        Pause{" "}
       </button>
 
       <button className="stopstart" onClick={restart}>
