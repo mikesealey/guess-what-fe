@@ -10,7 +10,7 @@ import UserStats from '@/components/UserStats';
 import { useState } from 'react';
 
 export default function SinglePlayerDisplay() {
-  const [isGameFinished, setIsGameFinished] = useState(true);
+  const [isGameFinished, setIsGameFinished] = useState(false);
 
   return (
     <>

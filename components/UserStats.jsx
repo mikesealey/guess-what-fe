@@ -1,8 +1,11 @@
-export default function UserStats(){
+'use client';
 
-    return (
-        <div className="user-stats">
-            <h1>User Stats</h1>
-        </div>
-    )
+import Timer from './Timer';
+
+export default function UserStats() {
+  return (
+    <div>
+      <Timer />
+    </div>
+  );
 }
