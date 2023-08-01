@@ -14,7 +14,7 @@ export default function Gameboard() {
   return (
     <div className="gameboard">
       {alienObjects.map((alien) => {
-        return <AlienCard alien={alien} key={alien._id} />;
+        return <AlienCard alien={alien} alienObjects={alienObjects} setAlienObjects={setAlienObjects} key={alien._id} />;
       })}
     </div>
   );

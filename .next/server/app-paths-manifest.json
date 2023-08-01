@@ -1,5 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/twoplayerdisplay/page": "app/twoplayerdisplay/page.js",
   "/singleplayerdisplay/page": "app/singleplayerdisplay/page.js"
 }
