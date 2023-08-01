@@ -1,4 +1,5 @@
 import AlienCard from './AlienCard';
+import EndGameModal from './EndGameModal';
 
 export default function Gameboard() {
   //useEffect that gets the aliens from a get request and sets them as state
