@@ -50,43 +50,151 @@ button{
     grid-template-rows: 2fr 1fr;
 }
 
+.two-player-game-wrapper{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+}
+
 
 .gameboard{
-    
     display:flex;
     flex-wrap: wrap;
     height:75vh;
     max-width: 80vw;
     border:1px solid red;
     aspect-ratio: 8/3;
-
+    grid-row: 1/3;
+    grid-column: 1;
 }
 
 .questioncard{
-    grid-row: 2;
+    grid-row: 3;
     border: 2px solid black;
 }
 
 .opponentcard{
-    
     grid-column: 2;
     border: 3px solid green;
 }
 
+.two-player-opponentcard{
+    grid-column: 2;
+    grid-row: 1;
+    border: 3px solid green;
+
+}
+
+.two-player-usercard{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: blue;
+}
 
 .aliencard{
+    position: relative;
     height:33%;
     width: 12%;
-    padding: 0.5rem;
+    padding: 0.1rem;
+    /* border: 2px solid black; */
+}
+
+/* img{
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+} */
+
+.alien-body{
+    position: relative;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    
+}
+
+.alien-eyes{
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    
+}
+
+.alien-mouth{
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    
+}
+
+.alien-horns{
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    
+}
+
+.alien-antenna{
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    
+}
+
+
+.user-stats {
+    border: 2px solid black;
+    grid-row: 3;
+}
+
+.longer {
+    grid-row: 1/3;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(35, 35, 35, 0.65);
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.text-box {
+    width: 50vw;
+    height: 50vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    top: 25%;
+    left: 25%;
+    z-index: 2;
+    border-radius: 15px;
+    padding: 25px;
     border: 2px solid black;
     
 }
 
-img{
-  
-    height:100%;
-    width: 100%;
-    object-fit: cover;
-    border:2px solid red;
+#room-name {
+    font-size: 4rem;
+    font-weight: 900;
 }
-
