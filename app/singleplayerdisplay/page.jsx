@@ -7,18 +7,27 @@ import { Header } from '@/components/Header';
 import OpponentCard from '@/components/OpponentCard';
 import QuestionCard from '@/components/QuestionCard';
 import UserStats from '@/components/UserStats';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getAliens } from '../utils/getAliens';
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
+
+  const [alienObjects, setAlienObjects] = useState([]);
+
+  useEffect(() => {
+    getAliens().then((res) => {
+      setAlienObjects(res);
+    });
+  }, []);
 
   return (
     <>
       <Header />
       <div className="game-wrapper">
         {isGameFinished && <EndGameModal />}
-        <Gameboard />
-        <QuestionCard />
+        <Gameboard alienObjects={alienObjects} setAlienObjects={setAlienObjects}/>
+        <QuestionCard alienObjects={alienObjects} setAlienObjects={setAlienObjects} />
         <OpponentCard />
         <UserStats />
       </div>
