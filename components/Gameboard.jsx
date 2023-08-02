@@ -1,21 +1,22 @@
-import { getAliens } from '@/app/utils/getAliens';
 import AlienCard from './AlienCard';
-import { useEffect, useState } from 'react';
 
-export default function Gameboard(  ) {
-  const [alienObjects, setAlienObjects] = useState([]);
+export default function Gameboard({ alienObjects, setAlienObjects }) {
 
-  useEffect(() => {
-    getAliens().then((res) => {
-      setAlienObjects(res);
-    });
-  }, []);
-  console.log(alienObjects)
+  const alienNames = ["Zorkon", "Xyloph", "Velnar", "Qwixar", "Zyla", "Gorgon", "Xandria", "Vortek", "Azura", "Krellus", "Xalon", "Zephyr", "Krysta", "Ylthar", "Vexxor", "Zyndra", "Drakthar", "Quilrax", "Thelora", "Zygor", "Xarix", "Vylara", "Zindor", "Krognar" ]
+
 
   return (
     <div className="gameboard">
       {alienObjects.map((alien) => {
-        return <AlienCard alien={alien} alienObjects={alienObjects} setAlienObjects={setAlienObjects} key={alien._id} />;
+        alien.name = alienNames[alienObjects.indexOf(alien)]
+        return (
+          <AlienCard
+            alien={alien}
+            alienObjects={alienObjects}
+            setAlienObjects={setAlienObjects}
+            key={alien._id}
+          />
+        );
       })}
     </div>
   );
