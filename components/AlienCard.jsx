@@ -5,7 +5,6 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
 
   const [clicked, setClicked] = useState(false)
   let locallyStoredAlienObjects = [...alienObjects]
-  console.log(alienObjects)
 
   function adjusted(alienId){
     locallyStoredAlienObjects.forEach((alien)=> {
@@ -64,7 +63,7 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
       {!alien.isActive ? (<img className="alien-isActive" src={`assets/alien-layers/redX.png`} />  ): null}
       <div className="alien-name-holder">
         <div className="alien-name">
-          {alien._id.substring(18)}
+          {alien.name}
         </div>
       </div>
 

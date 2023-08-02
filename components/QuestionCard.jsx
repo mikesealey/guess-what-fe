@@ -78,7 +78,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
             <option>Take a guess</option>
             {alienObjects.map((alien) => {
               if (alien.isActive) {
-                return <option value={alien._id}>{alien._id}</option>
+                return <option value={alien._id} key={alien.name}>{alien.name}</option>
               }
             })}
           </select>
