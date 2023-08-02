@@ -6,6 +6,10 @@ import generateQuestions from '../app/utils/GenerateQuestions';
 export default function QuestionCard({alienObjects, setAlienObjects}) {
   const [validQuestions, setValidQuestions] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [indexer, setIndexer] = useState(0)
+  const [answer, setAnswer] = useState(null);
+  const [guess, setGuess] = useState()
+
 
   useEffect(()=>{
     generateQuestions(alienObjects).then((questions)=> {
@@ -14,109 +18,77 @@ export default function QuestionCard({alienObjects, setAlienObjects}) {
     })
   }, [alienObjects])
 
+  const chosenAlien = alienObjects[0]
+  console.log(chosenAlien)
+
   console.log(validQuestions)
   if (isLoading) {
     return <h1>loading</h1>
   }
 
-  return (
+  const indexIncrementer = (dir) => {
+    if (dir === +1 && indexer === (validQuestions.length-1)) {
+      setIndexer(indexer - (validQuestions.length -1))
+    } else if (dir === -1 && indexer === 0){
+      setIndexer(validQuestions.length - 1)
+    } else {
+      setIndexer(indexer + dir)
+    }
+    
+  }
 
+  function questionChecker(alienProp, checkFor) {
+    if (chosenAlien[alienProp].toString() === checkFor) {
+      setAnswer(true);
+    } else {
+      setAnswer(false);
+    }
+  }
 
-      <div className="questioncard">
-        <h1>{validQuestions.skinColour.length ? validQuestions.skinColour[0].question : null}</h1>
-      </div>
-    );
+  function handleSubmit() {
+    questionChecker(validQuestions[indexer].alienProp, validQuestions[indexer].checkFor);
+  }
+
+  function submitGuess(e){
+    e.preventDefault()
+    // console.log(guess)
+    guessChecker(guess, chosenAlien)
+  }
+
+  function guessChecker(guess, chosenAlien) {
+    if (guess === chosenAlien._id) {
+      console.log("Winner winner chicken dinner")
+    } else {
+      console.log("Nah,.")
+    }
+  }
+
+  if (validQuestions.length) {
+    return (
+        <div className="questioncard">
+          {/* {validQuestions.map((question) => {
+            return <h3>Does you alien have {question.question}?</h3>
+          })} */}
+          <button onClick={()=>{indexIncrementer(-1)}}>back</button>
+          <h3>{validQuestions[indexer].question}</h3>
+          <button onClick={()=>{indexIncrementer(+1)}}>Forward</button>
+          <button onClick={()=>{handleSubmit()}}>Submit</button>
+          <div>{answer ? "Yes" : "No"}</div>
+
+          <form onSubmit={(e)=>{submitGuess(e)}}>
+            <select onChange={(e)=>{setGuess(e.target.value)}}>
+            {alienObjects.map((alien) => {
+              if (alien.isActive) {
+                return <option value={alien._id}>{alien._id}</option>
+              }
+            })}
+            </select>
+            <button>Submit My Guess!</button>
+          </form>
+        </div>
+      );
+  }
 
 }
 
-const chosenAlien = {
-  name: 'klargon',
-  colour: 'purple',
-  horn_count: 2,
-  eye_count: 3,
-  eye_colour: 'red',
-  hasAntenna: true,
-  isFriendly: false,
-  skinTexture: 'smooth',
-};
 
-const colourQuestion = [
-  { alienProp: 'colour', checkFor: 'blue', question: 'is your alien blue?' },
-  { alienProp: 'colour', checkFor: 'green', question: 'is your alien green?' },
-  {
-    alienProp: 'colour',
-    checkFor: 'purple',
-    question: 'is your alien purple?',
-  },
-];
-
-const skinQuestion = [
-  {
-    alienProp: 'skinTexture',
-    checkFor: 'furry',
-    question: 'does your alien have fur?',
-  },
-  {
-    alienProp: 'skinTexture',
-    checkFor: 'scaly',
-    question: 'does your alien have scales?',
-  },
-  {
-    alienProp: 'skinTexture',
-    checkFor: 'smooth',
-    question: 'is your alien smooth?',
-  },
-];
-
-// export default function Home() {
-//   const [answer, setAnswer] = useState(null);
-//   const [questionAsked, setQuestionAsked] = useState({
-//     alienProp: '',
-//     checkFor: '',
-//     question: '',
-//   });
-
-//   function questionChecker(alienProp, checkFor) {
-//     if (chosenAlien[alienProp] === checkFor) {
-//       setAnswer(true);
-//     } else {
-//       setAnswer(false);
-//     }
-//   }
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     questionChecker(questionAsked.alienProp, questionAsked.checkFor);
-//   }
-
-
-//   return (
-//     <main>
-//       <form onSubmit={(e) => handleSubmit(e)}>
-//         <select
-//           id="question"
-//           onChange={(e) => {
-//             const parsed = JSON.parse(e.target.value);
-//             console.log(parsed);
-//             questionAsked.alienProp = parsed.alienProp;
-//             questionAsked.checkFor = parsed.checkFor;
-//             questionAsked.question = parsed.question;
-//             setQuestionAsked({ ...questionAsked });
-//           }}
-//         >
-//           {colourQuestion.map((q) => {
-//             return (
-//               <option key={q.checkFor} value={JSON.stringify(q)}>
-//                 {q.question}
-//               </option>
-//             );
-//           })}
-//         </select>
-//         <button id="submit">Submit Question</button>
-//       </form>
-//       <div id="answer">
-//         <p>{answer ? 'Yes' : 'No'}</p>
-//       </div>
-//     </main>
-//   );
-// }
