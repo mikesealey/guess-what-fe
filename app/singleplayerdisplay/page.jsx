@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
+  
 
   return (
     <>

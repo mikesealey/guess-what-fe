@@ -156,8 +156,11 @@ body {
 }
 
 .opponentcard{
+    position: relative;
     grid-column: 2;
     border: 3px solid green;
+    
+
 }
 
 .two-player-opponentcard{
@@ -183,6 +186,8 @@ body {
 }
 
 .alien-planet{
+    top: 0;
+    left: 0;
     position: relative;
     height:100%;
     width: 100%;
