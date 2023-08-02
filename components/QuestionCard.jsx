@@ -19,9 +19,6 @@ export default function QuestionCard({alienObjects, setAlienObjects}) {
   }, [alienObjects])
 
   const chosenAlien = alienObjects[0]
-  console.log(chosenAlien)
-
-  console.log(validQuestions)
   if (isLoading) {
     return <h1>loading</h1>
   }
@@ -51,8 +48,9 @@ export default function QuestionCard({alienObjects, setAlienObjects}) {
 
   function submitGuess(e){
     e.preventDefault()
-    // console.log(guess)
-    guessChecker(guess, chosenAlien)
+    if (guess) {
+      guessChecker(guess, chosenAlien)
+    }
   }
 
   function guessChecker(guess, chosenAlien) {
@@ -77,9 +75,10 @@ export default function QuestionCard({alienObjects, setAlienObjects}) {
 
           <form onSubmit={(e)=>{submitGuess(e)}}>
             <select onChange={(e)=>{setGuess(e.target.value)}}>
+              <option key="blank_space"></option>
             {alienObjects.map((alien) => {
               if (alien.isActive) {
-                return <option value={alien._id}>{alien.name}</option>
+                return <option value={alien._id} key={alien.name}>{alien.name}</option>
               }
             })}
             </select>
