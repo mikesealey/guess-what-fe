@@ -24,16 +24,21 @@
 
 .logo{
     font-weight: bold;
+    color: white;
+    background-color: rgba(128, 128, 128, 0.517);
+    width: fit-content;
+    padding: 0 1rem;
+    border-radius: 1rem;
 }
 
 nav{
-    
+    background-color: rgba(0, 0, 0, 0.599);
+    color: white;
     display: flex;
     flex-direction: row;
     max-width:30vw;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0 auto;
-    border:1px solid black;
 }
 
 button{
@@ -43,6 +48,11 @@ button{
 }
 
 
+
+body {
+    /* background-image: url("../public/assets/realistic-galaxy-background_52683-12122.avif"); */
+    background-size: cover;
+}
 
 .game-wrapper{
     display: grid;
@@ -60,12 +70,15 @@ button{
 .gameboard{
     display:flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     height:75vh;
     max-width: 80vw;
-    border:1px solid red;
+    border:3px solid rgba(128, 128, 128, 0.499);
+    border-radius: 15px;
     aspect-ratio: 8/3;
     grid-row: 1/3;
     grid-column: 1;
+
 }
 
 .questioncard{
@@ -96,18 +109,23 @@ button{
     height:33%;
     width: 12%;
     padding: 0.1rem;
-    /* border: 2px solid black; */
+    border:3px solid rgba(128, 128, 128, 0.499);
+    border-radius: 15px;
 }
 
-/* img{
+.alien-planet{
+    position: relative;
     height:100%;
     width: 100%;
     object-fit: cover;  
     border-radius: 15px;
-} */
+    
+}
 
 .alien-body{
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     height:100%;
     width: 100%;
     object-fit: cover;  
@@ -159,6 +177,42 @@ button{
     
 }
 
+.alien-isActive {
+    
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    object-fit: cover;  
+    border-radius: 15px;
+    filter: grayscale(0)/* I want this to be in colour still */
+}
+
+.inactive {
+    position: relative;
+    height:33%;
+    width: 12%;
+    padding: 0.1rem;
+    filter: grayscale(100%) 
+}
+
+.alien-name-holder {
+    background-color: rgba(128, 128, 128, 0.486);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    border-radius: 0px 0px 15px 15px;
+    justify-content: center;
+}
+
+.alien-name {
+      color: white;
+}
 
 .user-stats {
     border: 2px solid black;
@@ -199,10 +253,3 @@ button{
     font-weight: 900;
 }
 
-.inactive {
-        position: relative;
-        height:33%;
-        width: 12%;
-        padding: 0.1rem;
-        filter: grayscale(100%)
-}
