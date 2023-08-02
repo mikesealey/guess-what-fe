@@ -327,3 +327,51 @@ body {
     font-weight: 900;
 }
 
+/* ----------------- QUESTION CARD ----------------- */
+.questioncard {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    font-size: 1.5rem;
+}
+
+.questioncard * {
+    margin: auto 1rem;
+}
+
+.question-btn {
+    padding: 5px;
+    font-weight: bold;
+}
+
+#guess-form {
+    grid-column: span 2;
+}
+
+#question-prompt-container {
+    display: flex;
+}
+#question-prompt-container * {
+    margin: auto 0.5rem;
+}
+
+#question-variable {
+    font-weight: bold;
+    white-space: nowrap;
+    margin: auto;
+    text-align: center;
+}
+
+#question-submit-btn {
+    margin: auto;
+}
+
+.correct-answer {
+    font-weight: bold;
+    color: green;
+}
+
+.wrong-answer {
+    font-weight: bold;
+    color: red
+}

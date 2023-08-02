@@ -1,42 +1,44 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
+  const [clicked, setClicked] = useState(false);
+  let locallyStoredAlienObjects = [...alienObjects];
 
-
-  const [clicked, setClicked] = useState(false)
-  let locallyStoredAlienObjects = [...alienObjects]
-  console.log(alienObjects)
-
-  function adjusted(alienId){
-    locallyStoredAlienObjects.forEach((alien)=> {
+  function adjusted(alienId) {
+    locallyStoredAlienObjects.forEach((alien) => {
       if (alien._id === alienId && alien.isActive === true) {
-        alien.isActive = false
+        alien.isActive = false;
       } else if (alien._id === alienId && alien.isActive === false) {
-          alien.isActive = true
+        alien.isActive = true;
       }
-    })
-    setAlienObjects(locallyStoredAlienObjects)
-    console.log(alienObjects)
+    });
+    setAlienObjects(locallyStoredAlienObjects);
   }
 
-  let activeAlienCounter = alienObjects.filter((alien)=> {
-    return alien.isActive === true
-  }) // This piece of code is likely going to go in "opponent card"
- 
+  let activeAlienCounter = alienObjects.filter((alien) => {
+    return alien.isActive === true;
+  }); // This piece of code is likely going to go in "opponent card"
+
   const handleClickFn = () => {
     if (!clicked) {
-      setClicked(true)
+      setClicked(true);
     } else {
-      setClicked(false)
+      setClicked(false);
     }
-    adjusted(alien._id)
-  }
-  
-
+    adjusted(alien._id);
+  };
 
   return (
-    <div className={clicked ? "inactive" : "aliencard"} onClick={()=>{handleClickFn()}}>
-      <img className="alien-planet" src={`assets/alien-layers/planet-${alien.planet}.png`} />
+    <div
+      className={clicked ? 'inactive' : 'aliencard'}
+      onClick={() => {
+        handleClickFn();
+      }}
+    >
+      <img
+        className="alien-planet"
+        src={`assets/alien-layers/planet-${alien.planet}.png`}
+      />
       <img
         className="alien-body"
         src={`assets/alien-layers/body-${alien.skinColour}-${alien.skinTexture}.png`}
@@ -51,21 +53,23 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
           alien.isFriendly ? 'friendly' : 'unfriendly-a'
         }.png`}
       />
-      {alien.horns ? <img
-        className="alien-horns"
-        src={`assets/alien-layers/horns-${alien.horns}.png`}
-      /> : null}
+      {alien.horns ? (
+        <img
+          className="alien-horns"
+          src={`assets/alien-layers/horns-${alien.horns}.png`}
+        />
+      ) : null}
       {alien.hasAntenna ? (
         <img
           className="alien-antenna"
           src={'assets/alien-layers/antenna.png'}
         />
       ) : null}
-      {!alien.isActive ? (<img className="alien-isActive" src={`assets/alien-layers/redX.png`} />  ): null}
+      {!alien.isActive ? (
+        <img className="alien-isActive" src={`assets/alien-layers/redX.png`} />
+      ) : null}
       <div className="alien-name-holder">
-        <div className="alien-name">
-          {alien._id.substring(18)}
-        </div>
+        <div className="alien-name">{alien.name}</div>
       </div>
 
       <h2>{activeAlienCounter.length}</h2>

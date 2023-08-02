@@ -11,8 +11,8 @@ export const OpponentResponse = ({ answer }) => {
   const responseDiv = useRef()
 
   if (answer === null) {
-    
   }
+    
 
   return (
     <div className="opponent-response">
@@ -20,6 +20,8 @@ export const OpponentResponse = ({ answer }) => {
       <div ref={responseDiv}>
 
       </div>
+      <img src="./assets/transparent-speech-bubble.png" className="w-40" />
+      <div ref={responseDiv}></div>
       {answer && (
         <p>
           {

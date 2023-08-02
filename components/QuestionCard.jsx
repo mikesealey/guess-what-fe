@@ -1,14 +1,19 @@
-"use client";
-import { useEffect, useState } from "react";
-import generateQuestions from "../app/utils/GenerateQuestions";
-import { OpponentResponse } from "./OpponentResponse";
+'use client';
+import { useEffect, useState } from 'react';
+import generateQuestions from '../app/utils/GenerateQuestions';
+
+import { OpponentContext } from '@/contexts/OpponentObject';
+import { useContext } from 'react';
+import { OpponentResponse } from './OpponentResponse';
 
 export default function QuestionCard({ alienObjects, setAlienObjects }) {
+  const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
-  const [guess, setGuess] = useState();
+  const [guess, setGuess] = useState(null);
+  const [hasWon, setHasWon] = useState(null);
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -18,9 +23,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   }, [alienObjects]);
 
   const chosenAlien = alienObjects[0];
-  console.log(chosenAlien);
-
-  console.log(validQuestions);
   if (isLoading) {
     return <h1>loading</h1>;
   }
@@ -33,6 +35,8 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
     } else {
       setIndexer(indexer + dir);
     }
+    setAnswer(null);
+    setHasWon(null);
   };
 
   function questionChecker(alienProp, checkFor) {
@@ -52,66 +56,83 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
 
   function submitGuess(e) {
     e.preventDefault();
-    // console.log(guess)
     guessChecker(guess, chosenAlien);
   }
 
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
-      console.log("Winner winner chicken dinner");
+      setHasWon(true);
     } else {
-      console.log("Nah,.");
+      setHasWon(false);
     }
   }
 
   if (validQuestions.length) {
     return (
       <div className="questioncard">
-        {/* {validQuestions.map((question) => {
-            return <h3>Does you alien have {question.question}?</h3>
-          })} */}
-        <button
-          onClick={() => {
-            indexIncrementer(-1);
-          }}
-        >
-          back
-        </button>
-        <h3>{validQuestions[indexer].question}</h3>
-        <button
-          onClick={() => {
-            indexIncrementer(+1);
-          }}
-        >
-          Forward
-        </button>
+        <div id="question-prompt-container">
+          <p id="question-prompt">Does your alien have... </p>
+          <button
+            onClick={() => {
+              indexIncrementer(-1);
+            }}
+            className="question-btn"
+          >
+            ←
+          </button>
+          <p id="question-variable">{validQuestions[indexer].question}</p>
+          <button
+            onClick={() => {
+              indexIncrementer(+1);
+            }}
+            className="question-btn"
+          >
+            →
+          </button>
+        </div>
         <button
           onClick={() => {
             handleSubmit();
           }}
+          id="question-submit-btn"
         >
           Submit
         </button>
-        <div>{answer ? "Yes" : "No"}</div>
+        {answer === null ? null : answer ? (
+          <p className="correct-answer">Yes</p>
+        ) : (
+          <p className="wrong-answer">No</p>
+        )}
 
         <form
+          id="guess-form"
           onSubmit={(e) => {
             submitGuess(e);
           }}
         >
           <select
             onChange={(e) => {
-              setGuess(e.target.value);
+              setGuess(e.target.value), setHasWon(null), setAnswer(null);
             }}
           >
+            <option>Take a guess</option>
             {alienObjects.map((alien) => {
               if (alien.isActive) {
-                return <option value={alien._id}>{alien._id}</option>;
+                return (
+                  <option value={alien._id} key={alien.name}>
+                    {alien.name}
+                  </option>
+                );
               }
             })}
           </select>
-          <button>Submit My Guess!</button>
+          {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
+        {hasWon === null ? null : hasWon ? (
+          <p className="correct-answer">YOU WIN!</p>
+        ) : (
+          <p className="wrong-answer">Nope....</p>
+        )}
         <OpponentResponse answer={answer} />
       </div>
     );
