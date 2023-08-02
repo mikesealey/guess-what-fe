@@ -1,39 +1,31 @@
-import { useState } from "react";
+// import { useState } from "react";
+
+import { OpponentContext } from "@/contexts/OpponentObject";
+import { useContext } from "react";
 
 export default function OpponentCard() {
-  const [opponentObject, setOpponentObject] = useState({});
-
-  opponentObject.planet = "";
-
-  opponentObject.body = ""
-
-  opponentObject.isFriendly = ""
-
-  opponentObject.horns = ""
-
-  opponentObject.hasAntenna = ""
-
-  opponentObject.eyeColour = "" 
- 
+  const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  console.log(opponentObject.isFriendly, "<<<<<<<>>><<");
 
   return (
     <div className="opponentcard">
-    
-
-      <img className="alien-planet"
-       src={`assets/alien-layers/planet-${opponentObject.planet}.png`}
-     />
-      <img className="alien-body"
+      <img
+        className="alien-planet"
+        src={`assets/alien-layers/planet-${opponentObject.planet}.png`}
+      />
+      <img
+        className="alien-body"
         src={`assets/alien-layers/${opponentObject.body}.png`}
       />
-     <img
+      <img
         className="alien-eyes"
         src={`assets/alien-layers/eyes-${opponentObject.eyeColour}.png`}
       />
-     <img
+
+      <img
         className="alien-mouth"
         src={`assets/alien-layers/mouth-${
-          opponentObject.isFriendly ? "friendly" : "unfriendly-a"
+          opponentObject.isFriendly ? "friendly" : "unfriendly"
         }.png`}
       />
       {opponentObject.horns ? (
@@ -47,9 +39,9 @@ export default function OpponentCard() {
           className="alien-antenna"
           src={"assets/alien-layers/antenna.png"}
         />
-      ) : null}  
+      ) : null}
 
-{/* <UserStats activeAlienCounter={activeAlienCounter}/> */}
+      {/* <UserStats activeAlienCounter={activeAlienCounter}/> */}
     </div>
   );
 }
