@@ -2,7 +2,7 @@ import { getAliens } from '@/app/utils/getAliens';
 import AlienCard from './AlienCard';
 import { useEffect, useState } from 'react';
 
-export default function Gameboard() {
+export default function Gameboard(  ) {
   const [alienObjects, setAlienObjects] = useState([]);
 
   useEffect(() => {
@@ -10,6 +10,7 @@ export default function Gameboard() {
       setAlienObjects(res);
     });
   }, []);
+  console.log(alienObjects)
 
   return (
     <div className="gameboard">
