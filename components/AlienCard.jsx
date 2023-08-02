@@ -5,7 +5,6 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
 
   const [clicked, setClicked] = useState(false)
   let locallyStoredAlienObjects = [...alienObjects]
-  console.log(alienObjects)
 
   function adjusted(alienId){
     locallyStoredAlienObjects.forEach((alien)=> {
