@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 main{
-    background-image: url("../public/assets/realistic-galaxy-background_52683-12122.avif");
+    background-image: url("../public/assets/alt-background.jpg");
+    /* Image by Freepik */
     background-attachment:fixed;
-    
+    background-size: cover;
     background-repeat: no-repeat;
-    
     height:100vh;
 }
 
@@ -72,8 +72,21 @@ main{
 .sign-in-form button{
     margin-top: 1.5rem;
     padding: 0.5rem;
-    
+    width:20vw;
+    background: linear-gradient(30deg,rgb(163, 64, 249) 5%, rgb(230, 208, 251) );
+    border-radius: 5px;
 }
+
+
+.sign-in-form button:hover{
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    width:20vw;
+    background: linear-gradient(30deg,rgb(163, 64, 249) 5%, rgb(244, 48, 48) );
+    border-radius: 5px;
+    color:white;
+}
+
 
 .logo{
     font-weight: bold;
@@ -97,11 +110,7 @@ nav{
     
 }
 
-button{
-    border: 1px solid red;
-    width:20vw;
-    
-}
+
 
 
 
