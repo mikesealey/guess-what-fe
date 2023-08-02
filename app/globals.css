@@ -2,10 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
+main{
+    background-image: url("../public/assets/realistic-galaxy-background_52683-12122.avif");
+    background-attachment:fixed;
+    
+    background-repeat: no-repeat;
+    
+    height:100vh;
+}
 
 .landingcard{
     border:1px solid black;
+    
+}
+
+.landing-text-box {
+    width: 50vw;
+    height: 50vh;
+    min-width:400px;
+    min-height:460px;
+    background-color: rgba(255, 255, 255, 0.85);
+    margin-top: 10%;
+    margin-left:25%;
+    border-radius: 15px;
+    padding: 25px;
+    border: 2px solid black;
+    
+}
+
+
+.landing-text-box h2{
+    font-size: 2rem;
+}
+
+.landing-text-box p{
+    padding-top: 1rem;
 }
 
 .sign-in-form{
@@ -13,13 +44,35 @@
     display: flex;
     flex-direction: column;
     max-width:30vw;
-    margin: 0 auto;    
-    
+    min-width:250px;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    padding-left:2rem;
+    padding-right:2rem;
+    padding-bottom: 2rem;
+    border-radius: 5px;
+}
+
+
+.input-boxes{
+    margin: 0 auto;
+}
+
+.sign-in-form p{
+    padding-top: 0.5;
+    padding-bottom: 0.5rem;
 }
 
 .sign-in-form input{
     border: 1px solid gray;
 
+}
+
+
+.sign-in-form button{
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    
 }
 
 .logo{
@@ -36,9 +89,12 @@ nav{
     color: white;
     display: flex;
     flex-direction: row;
-    max-width:30vw;
+    min-width:30vw;
     justify-content: space-around;
-    margin: 0 auto;
+    position: absolute;
+    bottom:0;
+    margin-left: 35%;
+    
 }
 
 button{
