@@ -8,25 +8,32 @@ export const OpponentResponse = ({ answer }) => {
     "Correct!",
   ];
   const negativeResponse = ["Nope!", "No they don't", "False", "Wrong"];
-  const responseDiv = useRef()
+  const responseDiv = useRef();
+
+  let checked;
 
   if (answer === null) {
   }
-    
 
   return (
     <div className="opponent-response">
-      <img src="./assets/transparent-speech-bubbles-20.png" className="w-40" />
-      <div ref={responseDiv}>
-
-      </div>
-      <img src="./assets/transparent-speech-bubble.png" className="w-40" />
-      <div ref={responseDiv}></div>
+      {answer !== null && (
+        <img src="./assets/transparent-speech-bubble.png" className="w-40" />
+      )}
       {answer && (
         <p>
           {
             positiveResponse[
               Math.floor(Math.random() * positiveResponse.length)
+            ]
+          }
+        </p>
+      )}
+      {answer !== null && !answer && (
+        <p>
+          {
+            negativeResponse[
+              Math.floor(Math.random() * negativeResponse.length)
             ]
           }
         </p>
