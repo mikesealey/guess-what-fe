@@ -79,7 +79,7 @@ export default function QuestionCard({alienObjects, setAlienObjects}) {
             <select onChange={(e)=>{setGuess(e.target.value)}}>
             {alienObjects.map((alien) => {
               if (alien.isActive) {
-                return <option value={alien._id}>{alien._id}</option>
+                return <option value={alien._id}>{alien.name}</option>
               }
             })}
             </select>
