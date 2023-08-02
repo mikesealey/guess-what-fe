@@ -27,11 +27,17 @@ export default function TwoPlayerDisplay() {
       <div className="two-player-game-wrapper">
         {/* <LobbyModal /> remove later */}
         {isGameFinished && <EndGameModal />}
-        <Gameboard alienObjects={alienObjects} setAlienObjects={setAlienObjects} className="two-player-gameboard" />
-        <QuestionCard alienObjects={alienObjects} setAlienObjects={setAlienObjects} />
+        <Gameboard
+          alienObjects={alienObjects}
+          setAlienObjects={setAlienObjects}
+          className="two-player-gameboard"
+        />
+        <QuestionCard
+          alienObjects={alienObjects}
+          setAlienObjects={setAlienObjects}
+        />
         <OpponentCard />
         <UsersCard />
-        <UserStats />
       </div>
       <Footer />
     </>

@@ -12,6 +12,7 @@ import { getAliens } from '../utils/getAliens';
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
+  
 
   const [alienObjects, setAlienObjects] = useState([]);
 
