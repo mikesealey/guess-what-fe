@@ -11,7 +11,7 @@ export default function OpponentCard() {
     <img
       className="alien-mouth"
       src={`assets/alien-layers/mouth-${
-        !opponentObject.isFriendly ? 'unfriendly-b' : 'friendly'
+        !opponentObject.isFriendly ? 'unfriendly-a' : 'friendly'
       }.png`}
     />
   );
@@ -39,13 +39,13 @@ export default function OpponentCard() {
           src={`assets/alien-layers/planet-${opponentObject.planet}.png`}
         />
       ) : null}
-      {opponentObject.body ? (
+      {(opponentObject.skinColour && opponentObject.skinTexture) ? (
         <img
           className="alien-body"
           src={`assets/alien-layers/body-${opponentObject.skinColour}-${opponentObject.skinTexture}.png`}
         />
       ) : null}
-      {opponentObject.eyes ? (
+      {(opponentObject.eyes && opponentObject.eyeColour) ? (
         <img
           className="alien-eyes"
           src={`assets/alien-layers/eyes-${opponentObject.eyeColour}-${opponentObject.eyes}.png`}
