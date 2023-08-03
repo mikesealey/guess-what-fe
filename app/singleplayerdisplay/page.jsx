@@ -9,18 +9,21 @@ import QuestionCard from "@/components/QuestionCard";
 import UserStats from "@/components/UserStats";
 import { useState, useEffect } from "react";
 import { getAliens } from "../utils/getAliens";
+import chooseSecretAlien from "../utils/chooseSecretAlien";
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
 
   const [alienObjects, setAlienObjects] = useState([]);
+  const [chosenAlien, setChosenAlien] = useState()
 
   useEffect(() => {
     getAliens().then((res) => {
-      setAlienObjects(res);
+      setAlienObjects(res)
+      setChosenAlien(chooseSecretAlien(res))
     });
   }, []);
-
+  
   return (
     <main>
       <Header />
@@ -33,6 +36,7 @@ export default function SinglePlayerDisplay() {
         <QuestionCard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
+          chosenAlien={chosenAlien}
         />
         <OpponentCard />
         <UserStats alienObjects={alienObjects} />

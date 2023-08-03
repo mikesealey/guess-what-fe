@@ -4,9 +4,8 @@ import generateQuestions from '../app/utils/GenerateQuestions';
 import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
-import chooseSecretAlien from '../app/utils/chooseSecretAlien'
 
-export default function QuestionCard({ alienObjects, setAlienObjects }) {
+export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlien }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -14,8 +13,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const [chosenAlien, setChosenAlien] = useState()
-
   
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -23,12 +20,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
       setIsLoading(false);
     });
   }, [alienObjects]);
-  
-  useEffect(() => {
-    const theChosenOne = chooseSecretAlien(alienObjects)
-    setChosenAlien(theChosenOne)
-  }, [])
-  
+
   if (isLoading) {
     return <h1>loading</h1>;
   }
@@ -73,7 +65,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
       setHasWon(true);
     } else {
       setHasWon(false);
-    }
+    } 
   }
 
   if (validQuestions.length) {
