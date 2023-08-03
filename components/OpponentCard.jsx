@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 export default function OpponentCard() {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
-  console.log(opponentObject.isFriendly, "<<<<<<<>>><<");
+  // console.log(opponentObject.isFriendly, "<<<<<<<>>><<");
 
   return (
     <div className="opponentcard">
@@ -15,11 +15,11 @@ export default function OpponentCard() {
       />
       <img
         className="alien-body"
-        src={`assets/alien-layers/${opponentObject.body}.png`}
+        src={`assets/alien-layers/body-${opponentObject.skinColour}-${opponentObject.skinTexture}.png`}
       />
       <img
         className="alien-eyes"
-        src={`assets/alien-layers/eyes-${opponentObject.eyeColour}.png`}
+        src={`assets/alien-layers/eyes-${opponentObject.eyeColour}-${opponentObject.eyes}.png`}
       />
 
       <img

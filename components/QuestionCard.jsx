@@ -42,6 +42,10 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   function questionChecker(alienProp, checkFor) {
     if (chosenAlien[alienProp].toString() === checkFor) {
       setAnswer(true);
+      const currentOpponent = {...opponentObject}
+      currentOpponent[alienProp] = checkFor
+      setOpponentObject(currentOpponent)
+      console.log(opponentObject, "<<<<<<<<< opponentObject")
     } else {
       setAnswer(false);
     }
