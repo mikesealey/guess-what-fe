@@ -340,6 +340,7 @@ body {
 
 #question-prompt-container {
   display: flex;
+  white-space: nowrap;
 }
 #question-prompt-container * {
   margin: auto 0.5rem;
