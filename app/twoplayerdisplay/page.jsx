@@ -14,10 +14,12 @@ import { getAliens } from '../utils/getAliens';
 export default function TwoPlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [alienObjects, setAlienObjects] = useState([]);
+  const [chosenAlien, setChosenAlien] = useState()
 
   useEffect(() => {
     getAliens().then((res) => {
       setAlienObjects(res);
+      setChosenAlien(chooseSecretAlien(res))
     });
   }, []);
 

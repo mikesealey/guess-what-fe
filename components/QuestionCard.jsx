@@ -4,9 +4,8 @@ import generateQuestions from '../app/utils/GenerateQuestions';
 import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
-import chooseSecretAlien from '../app/utils/chooseSecretAlien'
 
-export default function QuestionCard({ alienObjects, setAlienObjects }) {
+export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlien }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -14,9 +13,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const theChosenOne = chooseSecretAlien(alienObjects)
-  const [chosenAlien, setChosenAlien] = useState(theChosenOne)
-
+  
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
@@ -24,8 +21,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
     });
   }, [alienObjects]);
 
-  // const chosenAlien = alienObjects[0];
-  
   if (isLoading) {
     return <h1>loading</h1>;
   }
@@ -70,7 +65,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
       setHasWon(true);
     } else {
       setHasWon(false);
-    }
+    } 
   }
 
   if (validQuestions.length) {
@@ -104,11 +99,11 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
         >
           Submit
         </button>
-        {answer === null ? null : answer ? (
+        {/* {answer === null ? null : answer ? (
           <p className="correct-answer">Yes</p>
         ) : (
           <p className="wrong-answer">No</p>
-        )}
+        )} */}
 
         <form
           id="guess-form"
@@ -134,11 +129,11 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {hasWon === null ? null : hasWon ? (
+        {/* {hasWon === null ? null : hasWon ? (
           <p className="correct-answer">YOU WIN!</p>
         ) : (
           <p className="wrong-answer">Nope....</p>
-        )}
+        )} */}
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
