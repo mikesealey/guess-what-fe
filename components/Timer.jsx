@@ -35,21 +35,21 @@ export default function Timer() {
   };
 
   return (
-    <div>
+    <div className="timer">
       <h1>Timer</h1>
-      <h1>
+      <h2>
         {String(minutes).length < 2 && 0}
         {minutes}:{String(seconds).length < 2 && 0}
         {seconds}
-      </h1>
-      <button className="stopstart" onClick={handletimer}>
+      </h2>
+      {/* <button className="stopstart" onClick={handletimer}>
         {" "}
         Pause{" "}
       </button>
 
       <button className="stopstart" onClick={restart}>
         Restart
-      </button>
+      </button> */}
     </div>
   );
 }

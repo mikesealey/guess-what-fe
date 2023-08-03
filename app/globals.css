@@ -295,12 +295,47 @@ body {
 .alien-name {
       color: white;
 }
-
+/* ---------------------------User Stats---------------------- */
 .user-stats {
     border: 2px solid black;
     grid-row: 3;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
+    padding: 1rem;
+}
+.timer {
+
+    
+    color: rgb(213, 192, 213);
+    background: rgb(95, 16, 137);
+    border-radius: 10px;
+    padding: 5px;
+    width:auto;
+    display: flex;
+    justify-content:space-between;
+    margin-left: 120px;
+    margin-right: 120px;
+
+}
+
+.alien-stats {
+    box-sizing: border-box;
+    border: 2px solid   rgb(213, 192, 213); ;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    color: rgb(213, 192, 213);
+    margin-top: 20px;
+    background: rgb(95, 16, 137);
+    border-radius: 10px;
+}
+.timer h1 {
+    font-weight: 700;
+}
+
+.timer h1, h2 {
+    display: inline;
+
 }
 
 .longer {
@@ -390,6 +425,6 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     text-align: center;
-    color: white;
+    color: rgb(14, 41, 137);
     font-size: 100px;
 }
