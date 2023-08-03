@@ -116,8 +116,6 @@ nav{
     font-weight: 500;
 }
 
-
-
 body {
     /* background-image: url("../public/assets/realistic-galaxy-background_52683-12122.avif"); */
     background-size: cover;
@@ -219,7 +217,6 @@ body {
     width: 100%;
     object-fit: cover;  
     border-radius: 15px;
-    
 }
 
 .alien-mouth{
@@ -230,7 +227,6 @@ body {
     width: 100%;
     object-fit: cover;  
     border-radius: 15px;
-    
 }
 
 .alien-horns{
@@ -241,7 +237,6 @@ body {
     width: 100%;
     object-fit: cover;  
     border-radius: 15px;
-    
 }
 
 .alien-antenna{
@@ -252,11 +247,9 @@ body {
     width: 100%;
     object-fit: cover;  
     border-radius: 15px;
-    
 }
 
 .alien-isActive {
-    
     position: absolute;
     top:0;
     left:0;
@@ -381,3 +374,46 @@ body {
     font-weight: bold;
     color: red
 }
+
+.loading-state-container {
+    z-index: 9;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px black;
+
+}
+
+
+.loading-state {
+    all: revert;
+    z-index: 10;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    color: black;
+    font-size: 2em;
+    max-height: inherit;
+    text-shadow: 0px 0px 5px white, 0px 0px 10px white, 0px 0px 15px white;
+    display: flex;
+    width: 20%;
+    max-width: 200px;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid white; */
+
+}
+
+#flying-saucer {
+    /* border: 1px solid white; */
+    max-width: 100%;
+    filter: drop-shadow(0px 0px 10px white);
+}
+
+
+
+
+
