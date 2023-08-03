@@ -367,31 +367,36 @@ body {
  
 }
 
+
+
+
 .response-div {
   visibility: hidden;
   position: absolute;
   top: 128px;
-  right: 220px;
+  right: -10px;
   z-index: 2;
   width: 300px;
 }
 
+@-webkit-keyframes moveout {
+  from {right:220px}
+  to{right:0px}
+}
+
+@keyframes moveout {
+  from {right:220px}
+  to{right:0px}
+}
+
 @-webkit-keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
 .response-div-show {
@@ -402,12 +407,14 @@ body {
   z-index: 2;
   width: 300px;
   
-  -webkit-animation-name: fadeout;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-delay: 2s;
+  -webkit-animation-name: fadeout, moveout;
+  -webkit-animation-duration: 1s, 0.1s;
+  -webkit-animation-delay: 1s, 4.1s;
   -webkit-animation-fill-mode: forwards;
-  animation-name: fadeout;
-  animation-duration: 0.5s;
+  animation-name: fadeout, moveout;
+  animation-duration: 1s, 0.1s;
+
+
 }
 
 .response-div-show img {
