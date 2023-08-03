@@ -18,11 +18,12 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
 
-  console.log(answer, "<<<< answer")
+  console.log(answer)
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
+      if (indexer >= validQuestions.length) setIndexer(validQuestions.length - 1)
       setIsLoading(false);
     });
   }, [alienObjects]);
@@ -32,8 +33,8 @@ export default function QuestionCard({
   }
 
   const indexIncrementer = (dir) => {
-    if (dir === +1 && indexer === validQuestions.length - 1) {
-      setIndexer(indexer - (validQuestions.length - 1));
+    if (dir && indexer === validQuestions.length - 1) {
+      setIndexer(0);
     } else if (dir === -1 && indexer === 0) {
       setIndexer(validQuestions.length - 1);
     } else {
