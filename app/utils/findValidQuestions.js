@@ -4,10 +4,10 @@ const findValidQuestions = (remainingAttributes, allQuestions) => {
         remainingAttributes[attribute].forEach(variation => {
             const question = allQuestions.filter(question => question.checkFor === variation.toString() && question.alienProp === attribute.toString())
             remainingQuestions.push(question[0])
-            
         })
     }
-    return remainingQuestions
+    // shuffle question order
+    return remainingQuestions.sort((a, b) => 0.5 - Math.random());
 }
 
 export default findValidQuestions

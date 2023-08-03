@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import generateQuestions from '../app/utils/GenerateQuestions';
-
 import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
+import chooseSecretAlien from '../app/utils/chooseSecretAlien'
 
 export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
@@ -14,6 +14,10 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
+  const theChosenOne = chooseSecretAlien(alienObjects)
+  const [chosenAlien, setChosenAlien] = useState(theChosenOne)
+
+  console.log(validQuestions)
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -22,7 +26,8 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
     });
   }, [alienObjects]);
 
-  const chosenAlien = alienObjects[0];
+  // const chosenAlien = alienObjects[0];
+  
   if (isLoading) {
     return <h1>loading</h1>;
   }
@@ -40,6 +45,8 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   };
 
   function questionChecker(alienProp, checkFor) {
+    console.log(alienProp, checkFor, "<<<<< questionChecker params")
+    console.log(chosenAlien, "<<<<< chosenAlien")
     if (chosenAlien[alienProp].toString() === checkFor) {
       setAnswer(true);
       const currentOpponent = {...opponentObject}
