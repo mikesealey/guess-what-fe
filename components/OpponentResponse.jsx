@@ -9,7 +9,7 @@ export const OpponentResponse = ({ answer, hasWon }) => {
     "You're right!",
     'Correct!',
   ];
-  const negativeResponse = ['Nope!', "No they don't", 'False', 'Wrong'];
+  const negativeResponse = ['Nope!', 'No...sorry!', 'False', 'Wrong'];
   const responseDiv = useRef();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const OpponentResponse = ({ answer, hasWon }) => {
   const guessResponse = () => {
     if (hasWon === null) {
     } else if (hasWon) {
-      return <p>Correct!</p>;
+      return <p>YOU WIN!</p>;
     } else if (!hasWon) {
       return <p>Nope!</p>;
     }
