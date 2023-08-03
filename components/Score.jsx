@@ -18,9 +18,9 @@ export const Score = () => {
   }
 
   return (
-    <>
+    <div className="score">
       <p>Score: {score}</p>
-      <button onClick={handleScore} disabled={hasGuessed}>
+      {/* <button onClick={handleScore} disabled={hasGuessed}>
         Test
       </button>
       <button
@@ -29,7 +29,7 @@ export const Score = () => {
         }}
       >
         Reset
-      </button>
-    </>
+      </button> */}
+    </div>
   );
 };

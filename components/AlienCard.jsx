@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
   const [clicked, setClicked] = useState(false);
@@ -15,10 +15,6 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
     setAlienObjects(locallyStoredAlienObjects);
   }
 
-  let activeAlienCounter = alienObjects.filter((alien) => {
-    return alien.isActive === true;
-  }); // This piece of code is likely going to go in "opponent card"
-
   const handleClickFn = () => {
     if (!clicked) {
       setClicked(true);
@@ -30,7 +26,7 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
 
   return (
     <div
-      className={clicked ? 'inactive' : 'aliencard'}
+      className={clicked ? "inactive" : "aliencard"}
       onClick={() => {
         handleClickFn();
       }}
@@ -50,7 +46,7 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
       <img
         className="alien-mouth"
         src={`assets/alien-layers/mouth-${
-          alien.isFriendly ? 'friendly' : 'unfriendly-a'
+          alien.isFriendly ? "friendly" : "unfriendly-a"
         }.png`}
       />
       {alien.horns ? (
@@ -62,7 +58,7 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
       {alien.hasAntenna ? (
         <img
           className="alien-antenna"
-          src={'assets/alien-layers/antenna.png'}
+          src={"assets/alien-layers/antenna.png"}
         />
       ) : null}
       {!alien.isActive ? (
@@ -71,8 +67,6 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
       <div className="alien-name-holder">
         <div className="alien-name">{alien.name}</div>
       </div>
-
-      <h2>{activeAlienCounter.length}</h2>
     </div>
   );
 }
