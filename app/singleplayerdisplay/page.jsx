@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import EndGameModal from '@/components/EndGameModal';
-import { Footer } from '@/components/Footer';
-import Gameboard from '@/components/Gameboard';
-import { Header } from '@/components/Header';
-import OpponentCard from '@/components/OpponentCard';
-import QuestionCard from '@/components/QuestionCard';
-import UserStats from '@/components/UserStats';
-import { useState, useEffect } from 'react';
-import { getAliens } from '../utils/getAliens';
+import EndGameModal from "@/components/EndGameModal";
+import { Footer } from "@/components/Footer";
+import Gameboard from "@/components/Gameboard";
+import { Header } from "@/components/Header";
+import OpponentCard from "@/components/OpponentCard";
+import QuestionCard from "@/components/QuestionCard";
+import UserStats from "@/components/UserStats";
+import { useState, useEffect } from "react";
+import { getAliens } from "../utils/getAliens";
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
@@ -35,7 +35,7 @@ export default function SinglePlayerDisplay() {
           setAlienObjects={setAlienObjects}
         />
         <OpponentCard />
-        <UserStats />
+        <UserStats alienObjects={alienObjects} />
       </div>
       <Footer />
     </main>
