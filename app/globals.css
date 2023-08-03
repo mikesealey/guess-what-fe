@@ -145,6 +145,8 @@ body {
   border-radius: 15px;
 }
 
+/* ------------------ OPPONENT CARD ----------------------*/
+
 .opponentcard{
     display: flex;
     justify-content: center;
@@ -154,13 +156,16 @@ body {
     align-items: center;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
-
 }
 
 .two-player-opponentcard {
   grid-column: 5;
   grid-row: 1;
   border: 3px solid green;
+}
+
+.grayscale {
+  filter: grayscale(100%)
 }
 
 .two-player-usercard {
