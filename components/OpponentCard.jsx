@@ -11,7 +11,7 @@ export default function OpponentCard() {
     <img
       className="alien-mouth"
       src={`assets/alien-layers/mouth-${
-        !opponentObject.isFriendly ? 'unfriendly-b' : 'friendly'
+        !opponentObject.isFriendly ? 'unfriendly-a' : 'friendly'
       }.png`}
     />
   );

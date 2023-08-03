@@ -18,6 +18,8 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
 
+  console.log(answer, "<<<< answer")
+
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
@@ -42,6 +44,7 @@ export default function QuestionCard({
   };
 
   function questionChecker(alienProp, checkFor) {
+    if (!chosenAlien) return console.log("chosen alien undefined")
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
       const currentOpponent = { ...opponentObject };
@@ -67,6 +70,7 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
+      setOpponentObject(chosenAlien)
     } else {
       setHasWon(false);
     }
