@@ -156,9 +156,14 @@ body {
 }
 
 .opponentcard{
+    display: flex;
+    justify-content: center;
     position: relative;
     grid-column: 2;
     border: 3px solid green;
+    background-color: black;
+    align-items: center;
+    /* background-image: url('../public/assets/skynight.png') */
     
 
 }
@@ -374,4 +379,12 @@ body {
 .wrong-answer {
     font-weight: bold;
     color: red
+}
+.question-mark{
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    color: white;
+    font-size: 100px;
 }
