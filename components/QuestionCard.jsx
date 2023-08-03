@@ -139,7 +139,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
         ) : (
           <p className="wrong-answer">Nope....</p>
         )}
-        <OpponentResponse answer={answer} />
+        <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
   }
