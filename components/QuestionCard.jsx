@@ -23,7 +23,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   }, [alienObjects]);
 
   const chosenAlien = alienObjects[0];
-
   if (isLoading) {
     return <h1>loading</h1>;
   }
