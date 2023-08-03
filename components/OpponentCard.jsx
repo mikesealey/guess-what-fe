@@ -42,7 +42,7 @@ export default function OpponentCard() {
       {opponentObject.skinColour || opponentObject.skinTexture ? (
         <img
           className={`alien-body ${opponentObject.skinColour ? "" : "grayscale"}`}
-          src={`assets/alien-layers/body-${opponentObject.skinColour ? opponentObject.skinColour : "green"}-${opponentObject.skinTexture ? opponentObject.skinTexture : "smooth"}.png`}
+          src={`assets/alien-layers/body-${opponentObject.skinColour ? opponentObject.skinColour : "green"}-${opponentObject.skinTexture ? opponentObject.skinTexture : "normal"}.png`}
         />
       ) : null}
       {opponentObject.eyes ? (
