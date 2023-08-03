@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "@/contexts/User";
 
-export const OpponentResponse = ({ answer }) => {
+export const OpponentResponse = ({ answer, hasWon }) => {
   const { userOne, setUserOne } = useContext(UserContext);
   const positiveResponse = [
     "Yes!",
@@ -18,14 +18,19 @@ export const OpponentResponse = ({ answer }) => {
     } else {
       responseDiv.current.className = "response-div-show";
     }
-  }, [answer]);
+
+    if (hasWon !== null) {
+      responseDiv.current.className = "response-div-show";
+    }
+  }, [answer, hasWon]);
 
   return (
     <div className="opponent-response">
       <div className="response-div" ref={responseDiv}>
         <img src="./assets/speech-bubble-w.png" className="w-40" />
         <div className="response-text">
-          {answer === null && <p>Welcome {`${userOne}`}</p>}
+          {/* {answer === null && <p>Welcome {`${userOne}`}</p>} */}
+          {hasWon ? <p>You Won!</p> : <p>Incorrect!</p>}
           {answer && (
             <p>
               {
