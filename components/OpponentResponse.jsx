@@ -1,28 +1,37 @@
-import { useContext, useEffect, useRef } from "react";
-import { UserContext } from "@/contexts/User";
+import { useContext, useEffect, useRef } from 'react';
+import { UserContext } from '@/contexts/User';
 
 export const OpponentResponse = ({ answer, hasWon }) => {
   const { userOne, setUserOne } = useContext(UserContext);
   const positiveResponse = [
-    "Yes!",
-    "How did you know?",
+    'Yes!',
+    'How did you know?',
     "You're right!",
-    "Correct!",
+    'Correct!',
   ];
-  const negativeResponse = ["Nope!", "No they don't", "False", "Wrong"];
+  const negativeResponse = ['Nope!', "No they don't", 'False', 'Wrong'];
   const responseDiv = useRef();
 
   useEffect(() => {
     if (answer === null) {
-      responseDiv.current.className = "response-div";
+      responseDiv.current.className = 'response-div';
     } else {
-      responseDiv.current.className = "response-div-show";
+      responseDiv.current.className = 'response-div-show';
     }
 
     if (hasWon !== null) {
-      responseDiv.current.className = "response-div-show";
+      responseDiv.current.className = 'response-div-show';
     }
   }, [answer, hasWon]);
+
+  const guessResponse = () => {
+    if (hasWon === null) {
+    } else if (hasWon) {
+      return <p>Correct!</p>;
+    } else if (!hasWon) {
+      return <p>Nope!</p>;
+    }
+  };
 
   return (
     <div className="opponent-response">
@@ -30,7 +39,7 @@ export const OpponentResponse = ({ answer, hasWon }) => {
         <img src="./assets/speech-bubble-w.png" className="w-40" />
         <div className="response-text">
           {/* {answer === null && <p>Welcome {`${userOne}`}</p>} */}
-          {hasWon ? <p>You Won!</p> : <p>Incorrect!</p>}
+          {guessResponse()}
           {answer && (
             <p>
               {
