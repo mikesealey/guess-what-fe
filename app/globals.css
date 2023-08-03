@@ -485,7 +485,7 @@ body {
     all: revert;
     z-index: 10;
     position: absolute;
-    top: 45%;
+    top: 35%;
     left: 45%;
     color: black;
     font-size: 2em;

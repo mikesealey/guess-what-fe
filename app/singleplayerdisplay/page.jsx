@@ -13,13 +13,14 @@ import chooseSecretAlien from '../utils/chooseSecretAlien';
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [alienObjects, setAlienObjects] = useState([]);
   const [chosenAlien, setChosenAlien] = useState();
 
   useEffect(() => {
     getAliens().then((res) => {
       setAlienObjects(res);
+      setIsLoading(false);
       setChosenAlien(chooseSecretAlien(res));
     });
   }, []);
@@ -30,6 +31,7 @@ export default function SinglePlayerDisplay() {
       <div className="game-wrapper">
         {isGameFinished && <EndGameModal />}
         <Gameboard
+          isLoading={isLoading}
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
         />
