@@ -5,7 +5,11 @@ import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
 
-export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlien }) {
+export default function QuestionCard({
+  alienObjects,
+  setAlienObjects,
+  chosenAlien,
+}) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +17,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlie
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  
+
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
@@ -40,9 +44,9 @@ export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlie
   function questionChecker(alienProp, checkFor) {
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
-      const currentOpponent = {...opponentObject}
-      currentOpponent[alienProp] = checkFor
-      setOpponentObject(currentOpponent)
+      const currentOpponent = { ...opponentObject };
+      currentOpponent[alienProp] = checkFor;
+      setOpponentObject(currentOpponent);
     } else {
       setAnswer(false);
     }
@@ -65,7 +69,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects, chosenAlie
       setHasWon(true);
     } else {
       setHasWon(false);
-    } 
+    }
   }
 
   if (validQuestions.length) {
