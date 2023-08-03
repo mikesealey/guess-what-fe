@@ -12,7 +12,6 @@ import { getAliens } from '../utils/getAliens';
 
 export default function SinglePlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
-  
 
   const [alienObjects, setAlienObjects] = useState([]);
 
@@ -23,16 +22,22 @@ export default function SinglePlayerDisplay() {
   }, []);
 
   return (
-    <>
+    <main>
       <Header />
       <div className="game-wrapper">
         {isGameFinished && <EndGameModal />}
-        <Gameboard alienObjects={alienObjects} setAlienObjects={setAlienObjects}/>
-        <QuestionCard alienObjects={alienObjects} setAlienObjects={setAlienObjects} />
+        <Gameboard
+          alienObjects={alienObjects}
+          setAlienObjects={setAlienObjects}
+        />
+        <QuestionCard
+          alienObjects={alienObjects}
+          setAlienObjects={setAlienObjects}
+        />
         <OpponentCard />
         <UserStats />
       </div>
       <Footer />
-    </>
+    </main>
   );
 }
