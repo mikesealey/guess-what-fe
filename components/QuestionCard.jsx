@@ -14,8 +14,12 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const theChosenOne = chooseSecretAlien(alienObjects)
-  const [chosenAlien, setChosenAlien] = useState(theChosenOne)
+  const [chosenAlien, setChosenAlien] = useState()
+
+  useEffect(() => {
+    const theChosenOne = chooseSecretAlien(alienObjects)
+    setChosenAlien(theChosenOne)
+  }, [])
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -23,8 +27,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
       setIsLoading(false);
     });
   }, [alienObjects]);
-
-  // const chosenAlien = alienObjects[0];
   
   if (isLoading) {
     return <h1>loading</h1>;
