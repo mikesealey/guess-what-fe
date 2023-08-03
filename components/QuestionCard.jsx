@@ -106,11 +106,11 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
         >
           Submit
         </button>
-        {answer === null ? null : answer ? (
+        {/* {answer === null ? null : answer ? (
           <p className="correct-answer">Yes</p>
         ) : (
           <p className="wrong-answer">No</p>
-        )}
+        )} */}
 
         <form
           id="guess-form"
@@ -136,11 +136,11 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {hasWon === null ? null : hasWon ? (
+        {/* {hasWon === null ? null : hasWon ? (
           <p className="correct-answer">YOU WIN!</p>
         ) : (
           <p className="wrong-answer">Nope....</p>
-        )}
+        )} */}
         <OpponentResponse answer={answer} />
       </div>
     );
