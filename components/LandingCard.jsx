@@ -1,17 +1,19 @@
-'use client';
+"use client";
 
-import { UserContext } from '@/contexts/User';
-import { useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import { UserContext } from "@/contexts/User";
+import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const LandingCard = () => {
   const { userOne, setUserOne } = useContext(UserContext);
+  const [clicked, setClicked] = useState(false);
 
   const router = useRouter();
 
   function handleSinglePlayerClick(e) {
-    setUserOne(e.target.value);
-    router.push('/singleplayerdisplay');
+    e.preventDefault();
+    setClicked(true);
+    router.push("/singleplayerdisplay");
   }
 
   return (
@@ -23,7 +25,13 @@ export const LandingCard = () => {
         opponent has chosen
       </p>
 
-      <form className="sign-in-form" id="sign-in">
+      <form
+        className="sign-in-form"
+        id="sign-in"
+        onSubmit={(e) => {
+          handleSinglePlayerClick(e);
+        }}
+      >
         <div className="input-boxes">
           <p>Please enter your name</p>
           <div className="flex flex-col">
@@ -47,9 +55,8 @@ export const LandingCard = () => {
         <div className="flex gap-4">
           <button
             id="singleplayer-btn"
-            onClick={(e) => {
-              handleSinglePlayerClick(e);
-            }}
+            disabled={clicked || userOne === ""}
+            type="submit"
           >
             1 player
           </button>

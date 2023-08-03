@@ -16,17 +16,18 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const [hasWon, setHasWon] = useState(null);
   const [chosenAlien, setChosenAlien] = useState()
 
-  useEffect(() => {
-    const theChosenOne = chooseSecretAlien(alienObjects)
-    setChosenAlien(theChosenOne)
-  }, [])
-
+  
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
       setIsLoading(false);
     });
   }, [alienObjects]);
+  
+  useEffect(() => {
+    const theChosenOne = chooseSecretAlien(alienObjects)
+    setChosenAlien(theChosenOne)
+  }, [])
   
   if (isLoading) {
     return <h1>loading</h1>;
@@ -141,7 +142,7 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
         ) : (
           <p className="wrong-answer">Nope....</p>
         )} */}
-        <OpponentResponse answer={answer} />
+        <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
   }
