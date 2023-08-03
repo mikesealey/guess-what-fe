@@ -17,8 +17,6 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   const theChosenOne = chooseSecretAlien(alienObjects)
   const [chosenAlien, setChosenAlien] = useState(theChosenOne)
 
-  console.log(validQuestions)
-
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       setValidQuestions(questions);
@@ -45,14 +43,11 @@ export default function QuestionCard({ alienObjects, setAlienObjects }) {
   };
 
   function questionChecker(alienProp, checkFor) {
-    console.log(alienProp, checkFor, "<<<<< questionChecker params")
-    console.log(chosenAlien, "<<<<< chosenAlien")
-    if (chosenAlien[alienProp].toString() === checkFor) {
+    if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
       const currentOpponent = {...opponentObject}
       currentOpponent[alienProp] = checkFor
       setOpponentObject(currentOpponent)
-      console.log(opponentObject, "<<<<<<<<< opponentObject")
     } else {
       setAnswer(false);
     }
