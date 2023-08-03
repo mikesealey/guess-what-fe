@@ -1,16 +1,17 @@
 // import { useState } from "react";
 
-import { OpponentContext } from "@/contexts/OpponentObject";
-import { useContext } from "react";
+import { OpponentContext } from '@/contexts/OpponentObject';
+import { useContext } from 'react';
 
 export default function OpponentCard() {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  // console.log(opponentObject.isFriendly, "<<<<<<<>>><<");
 
   const mouth = (
     <img
       className="alien-mouth"
       src={`assets/alien-layers/mouth-${
-        !opponentObject.isFriendly ? "unfriendly-b" : "friendly"
+        !opponentObject.isFriendly ? 'unfriendly-b' : 'friendly'
       }.png`}
     />
   );
@@ -41,13 +42,13 @@ export default function OpponentCard() {
       {opponentObject.body ? (
         <img
           className="alien-body"
-          src={`assets/alien-layers/${opponentObject.body}.png`}
+          src={`assets/alien-layers/body-${opponentObject.skinColour}-${opponentObject.skinTexture}.png`}
         />
       ) : null}
       {opponentObject.eyes ? (
         <img
           className="alien-eyes"
-          src={`assets/alien-layers/eyes-${opponentObject.eyes}.png`}
+          src={`assets/alien-layers/eyes-${opponentObject.eyeColour}-${opponentObject.eyes}.png`}
         />
       ) : null}
       {mouthRendering(opponentObject.isFriendly, mouth)}
@@ -61,7 +62,7 @@ export default function OpponentCard() {
       {opponentObject.hasAntenna ? (
         <img
           className="alien-antenna"
-          src={"assets/alien-layers/antenna.png"}
+          src={'assets/alien-layers/antenna.png'}
         />
       ) : null}
 
