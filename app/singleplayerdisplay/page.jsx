@@ -25,7 +25,7 @@ export default function SinglePlayerDisplay() {
     <main>
       <Header />
       <div className="game-wrapper">
-        {isGameFinished && <EndGameModal />}
+        {isGameFinished && <EndGameModal alienObjects={alienObjects} />}
         <Gameboard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
@@ -33,6 +33,7 @@ export default function SinglePlayerDisplay() {
         <QuestionCard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
+          setIsGameFinished={setIsGameFinished}
         />
         <OpponentCard />
         <UserStats alienObjects={alienObjects} />
