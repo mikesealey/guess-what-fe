@@ -9,7 +9,7 @@ export default function Gameboard({ alienObjects, setAlienObjects }) {
 
   return (
     <div className="gameboard">
-      {isLoading ? <LoadingState /> : null }
+      {/* {isLoading ? <LoadingState /> : null } */}
       {alienObjects.map((alien) => {
         alien.name = alienNames[alienObjects.indexOf(alien)]
         return (
