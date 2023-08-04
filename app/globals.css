@@ -114,13 +114,13 @@ body {
 
 .game-wrapper {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 2fr 1fr;
 }
 
 .two-player-game-wrapper {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr auto;
 }
 
@@ -134,144 +134,97 @@ body {
   border-radius: 15px;
   aspect-ratio: 8/3;
   grid-row: 1/3;
-  grid-column: 1;
+  grid-column: 1/4;
 }
 
 .questioncard {
-  grid-row: 3;
+  grid-row: 3 ;
+  grid-column: 1/4;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
 }
 
+/* ------------------ OPPONENT CARD ----------------------*/
+
 .opponentcard{
     display: flex;
     justify-content: center;
     position: relative;
-    grid-column: 2;
-    background-color: black;
+    grid-column: 5;
+    border: 2px solid black;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
-
 }
 
 .two-player-opponentcard {
-  grid-column: 2;
+  grid-column: 5;
   grid-row: 1;
   border: 3px solid green;
 }
 
+.grayscale {
+  filter: grayscale(100%)
+}
+
 .two-player-usercard {
-  grid-column: 2;
+  grid-column: 5;
   grid-row: 2;
-  background-color: blue;
+  border: 2px solid black;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
 }
 
 .aliencard {
   position: relative;
-  height: 33%;
-  width: 12%;
+  height: 100%;
+  width: 100%;
   padding: 0.1rem;
   border: 3px solid rgba(128, 128, 128, 0.499);
   border-radius: 15px;
 }
 
+/* ------------------------ ALIEN CARD --------------------------- */
+
+.aliencard-container {
+ height: 33%;
+ width: 12%;
+ position: relative;
+}
+
+.alien-planet, .alien-body, .alien-eyes, .alien-mouth, .alien-horns, .alien-antenna {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
 .alien-planet {
-  top: 0;
-  left: 0;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
+  position: relative !important;
 }
-
-.alien-body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.alien-eyes {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.alien-mouth {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.alien-horns {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.alien-antenna {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.alien-isActive {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-  filter: grayscale(0); /* I want this to be in colour still */
-}
-
-.two-player-opponentcard{
-    grid-column: 2;
-    grid-row: 1;
-    border: 3px solid green;
-
-}
-
-.two-player-usercard{
-    grid-column: 2;
-    grid-row: 2;
-    background-color: blue;
-}
-
 
 .inactive {
   position: relative;
-  height: 33%;
-  width: 12%;
+  height: 100%;
+  width: 100%;
   padding: 0.1rem;
   filter: grayscale(100%);
 }
 
+.eliminate {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%
+}
+
 .alien-name-holder {
-  background-color: rgba(128, 128, 128, 0.486);
+  background-color: rgba(76, 76, 76, 0.486);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -285,19 +238,21 @@ body {
 
 .alien-name {
   color: white;
+  font-weight: 600;
 }
+
 /* ---------------------------User Stats---------------------- */
 .user-stats {
   
     border: 2px solid black;
     grid-row: 3;
+
+    grid-column: 4;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
     padding: 1rem;
 }
 .timer {
-
-    
     color: rgb(213, 192, 213);
     background: rgb(95, 16, 137);
     border-radius: 10px;
@@ -307,12 +262,11 @@ body {
     justify-content:space-between;
     margin-left: 120px;
     margin-right: 120px;
-
 }
 
 .alien-stats {
     box-sizing: border-box;
-    border: 2px solid   rgb(213, 192, 213); ;
+    border: 2px solid   rgb(213, 192, 213); 
     display: flex;
     justify-content: space-between;
     padding: 5px;
@@ -365,18 +319,19 @@ body {
 /* ----------------- QUESTION CARD ----------------- */
 .questioncard {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr;
   font-size: 1.5rem;
 }
 
 .questioncard * {
-  margin: auto 1rem;
+  margin: auto 5%;
 }
 
 .question-btn {
   padding: 5px;
   font-weight: bold;
+  margin: 0 auto;
 }
 
 #guess-form {
@@ -385,6 +340,7 @@ body {
 
 #question-prompt-container {
   display: flex;
+  white-space: nowrap;
 }
 #question-prompt-container * {
   margin: auto 0.5rem;
@@ -412,46 +368,54 @@ body {
  
 }
 
+
+
+
 .response-div {
   visibility: hidden;
   position: absolute;
-  top: 50px;
-  right: 200px;
+  top: 128px;
+  right: -10px;
   z-index: 2;
   width: 300px;
 }
 
+@-webkit-keyframes moveout {
+  from {right:220px}
+  to{right:0px}
+}
+
+@keyframes moveout {
+  from {right:220px}
+  to{right:0px}
+}
+
 @-webkit-keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
 .response-div-show {
   visibility: visible;
   position: absolute;
-  top: 50px;
-  right: 200px;
+  top: 128px;
+  right: 220px;
   z-index: 2;
   width: 300px;
-  -webkit-animation-name: fadeout;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-delay: 2s;
+  
+  -webkit-animation-name: fadeout, moveout;
+  -webkit-animation-duration: 1s, 0.1s;
+  -webkit-animation-delay: 1s, 4.1s;
   -webkit-animation-fill-mode: forwards;
-  animation-name: fadeout;
-  animation-duration: 0.5s;
+  animation-name: fadeout, moveout;
+  animation-duration: 1s, 0.1s;
+
+
 }
 
 .response-div-show img {
@@ -462,11 +426,17 @@ body {
 
 .response-text {
   position: absolute;
-  top: 35%;
-  left: 15%;
-  max-width: 200px;
+
+  top: 12%;
+  left: 21%;
+  display: flex;
+  width: 150px;
+  height:150px;
+
+  font-weight: 600;
   text-align: center;
-   
+  justify-content: center;
+  /* background-color: aquamarine; */
 }
 
 .loading-state-container {
@@ -485,7 +455,7 @@ body {
     all: revert;
     z-index: 10;
     position: absolute;
-    top: 45%;
+    top: 35%;
     left: 45%;
     color: black;
     font-size: 2em;

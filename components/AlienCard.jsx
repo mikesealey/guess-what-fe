@@ -26,44 +26,45 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
 
   return (
     <div
-      className={clicked ? "inactive" : "aliencard"}
+      className="aliencard-container"
       onClick={() => {
         handleClickFn();
       }}
     >
-      <img
-        className="alien-planet"
-        src={`assets/alien-layers/planet-${alien.planet}.png`}
-      />
-      <img
-        className="alien-body"
-        src={`assets/alien-layers/body-${alien.skinColour}-${alien.skinTexture}.png`}
-      />
-      <img
-        className="alien-eyes"
-        src={`assets/alien-layers/eyes-${alien.eyeColour}-${alien.eyes}.png`}
-      />
-      <img
-        className="alien-mouth"
-        src={`assets/alien-layers/mouth-${
-          alien.isFriendly ? "friendly" : "unfriendly-a"
-        }.png`}
-      />
-      {alien.horns ? (
+      {clicked ? <img className="eliminate" src="assets/alien-layers/eliminate.png"></img> : null}
+      <div
+        className={clicked ? "inactive" : "aliencard"}
+      >
         <img
-          className="alien-horns"
-          src={`assets/alien-layers/horns-${alien.horns}.png`}
+          className="alien-planet"
+          src={`assets/alien-layers/planet-${alien.planet}.png`}
         />
-      ) : null}
-      {alien.hasAntenna ? (
         <img
-          className="alien-antenna"
-          src={"assets/alien-layers/antenna.png"}
+          className="alien-body"
+          src={`assets/alien-layers/body-${alien.skinColour}-${alien.skinTexture}.png`}
         />
-      ) : null}
-      {!alien.isActive ? (
-        <img className="alien-isActive" src={`assets/alien-layers/redX.png`} />
-      ) : null}
+        <img
+          className="alien-eyes"
+          src={`assets/alien-layers/eyes-${alien.eyeColour}-${alien.eyes}.png`}
+        />
+        <img
+          className="alien-mouth"
+          src={`assets/alien-layers/mouth-${alien.isFriendly ? "friendly" : "unfriendly-a"
+            }.png`}
+        />
+        {alien.horns ? (
+          <img
+            className="alien-horns"
+            src={`assets/alien-layers/horns-${alien.horns}.png`}
+          />
+        ) : null}
+        {alien.hasAntenna ? (
+          <img
+            className="alien-antenna"
+            src={"assets/alien-layers/antenna.png"}
+          />
+        ) : null}
+      </div>
       <div className="alien-name-holder">
         <div className="alien-name">{alien.name}</div>
       </div>

@@ -4,7 +4,7 @@ import { Score } from "./Score";
 import Timer from "./Timer";
 
 export default function UserStats({ alienObjects }) {
-  console.log(alienObjects, "<<<<<<<");
+  // console.log(alienObjects, "<<<<<<<");
   let activeAlienCounter = alienObjects.filter((alien) => {
     return alien.isActive === true;
   });

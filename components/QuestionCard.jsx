@@ -1,15 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
-import generateQuestions from "../app/utils/GenerateQuestions";
-import { OpponentContext } from "@/contexts/OpponentObject";
-import { useContext } from "react";
-import { OpponentResponse } from "./OpponentResponse";
-import chooseSecretAlien from "../app/utils/chooseSecretAlien";
+'use client';
+import { useEffect, useState } from 'react';
+import generateQuestions from '../app/utils/GenerateQuestions';
+import { OpponentContext } from '@/contexts/OpponentObject';
+import { useContext } from 'react';
+import { OpponentResponse } from './OpponentResponse';
 
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
   setAlienObjects,
+  chosenAlien,
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
@@ -18,30 +18,24 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const theChosenOne = chooseSecretAlien(alienObjects);
-  //const [chosenAlien, setChosenAlien] = useState(theChosenOne)
+  
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
+      if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
       setValidQuestions(questions);
       setIsLoading(false);
     });
   }, [alienObjects]);
 
-  const chosenAlien = alienObjects[0];
+  
 
   if (isLoading) {
     return <h1>loading</h1>;
   }
 
   const indexIncrementer = (dir) => {
-    if (dir === +1 && indexer === validQuestions.length - 1) {
-      setIndexer(indexer - (validQuestions.length - 1));
-    } else if (dir === -1 && indexer === 0) {
-      setIndexer(validQuestions.length - 1);
-    } else {
-      setIndexer(indexer + dir);
-    }
+    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length)
     setAnswer(null);
     setHasWon(null);
   };
@@ -72,6 +66,7 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
+      setOpponentObject(chosenAlien)
     } else {
       setHasWon(false);
     }
@@ -108,11 +103,11 @@ export default function QuestionCard({
         >
           Submit
         </button>
-        {answer === null ? null : answer ? (
+        {/* {answer === null ? null : answer ? (
           <p className="correct-answer">Yes</p>
         ) : (
           <p className="wrong-answer">No</p>
-        )}
+        )} */}
 
         <form
           id="guess-form"
@@ -139,10 +134,8 @@ export default function QuestionCard({
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
         {hasWon === null ? null : hasWon ? (
-          setIsGameFinished(true)
-        ) : (
-          <p className="wrong-answer">Nope....</p>
-        )}
+          setIsGameFinished(true)) : null}
+        
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );

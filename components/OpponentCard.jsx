@@ -11,7 +11,7 @@ export default function OpponentCard() {
     <img
       className="alien-mouth"
       src={`assets/alien-layers/mouth-${
-        !opponentObject.isFriendly ? 'unfriendly-b' : 'friendly'
+        !opponentObject.isFriendly ? 'unfriendly-a' : 'friendly'
       }.png`}
     />
   );
@@ -39,16 +39,16 @@ export default function OpponentCard() {
           src={`assets/alien-layers/planet-${opponentObject.planet}.png`}
         />
       ) : null}
-      {opponentObject.body ? (
+      {opponentObject.skinColour || opponentObject.skinTexture ? (
         <img
-          className="alien-body"
-          src={`assets/alien-layers/body-${opponentObject.skinColour}-${opponentObject.skinTexture}.png`}
+          className={`alien-body ${opponentObject.skinColour ? "" : "grayscale"}`}
+          src={`assets/alien-layers/body-${opponentObject.skinColour ? opponentObject.skinColour : "green"}-${opponentObject.skinTexture ? opponentObject.skinTexture : "normal"}.png`}
         />
       ) : null}
       {opponentObject.eyes ? (
         <img
-          className="alien-eyes"
-          src={`assets/alien-layers/eyes-${opponentObject.eyeColour}-${opponentObject.eyes}.png`}
+        className={`alien-body ${opponentObject.eyeColour ? "" : "grayscale"}`}
+          src={`assets/alien-layers/eyes-${opponentObject.eyeColour ? opponentObject.eyeColour : "red"}-${opponentObject.eyes}.png`}
         />
       ) : null}
       {mouthRendering(opponentObject.isFriendly, mouth)}
