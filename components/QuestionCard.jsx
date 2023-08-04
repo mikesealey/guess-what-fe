@@ -18,10 +18,13 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
 
-  console.log(answer, "<<<< answer")
+  // console.log(answer)
+  // console.log(validQuestions.length, "<<<<< valid questions length")
+  // console.log(indexer, "<<<<< indexer")
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
+      if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
       setValidQuestions(questions);
       setIsLoading(false);
     });
@@ -32,19 +35,12 @@ export default function QuestionCard({
   }
 
   const indexIncrementer = (dir) => {
-    if (dir === +1 && indexer === validQuestions.length - 1) {
-      setIndexer(indexer - (validQuestions.length - 1));
-    } else if (dir === -1 && indexer === 0) {
-      setIndexer(validQuestions.length - 1);
-    } else {
-      setIndexer(indexer + dir);
-    }
+    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length)
     setAnswer(null);
     setHasWon(null);
   };
 
   function questionChecker(alienProp, checkFor) {
-    if (!chosenAlien) return console.log("chosen alien undefined")
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
       const currentOpponent = { ...opponentObject };
