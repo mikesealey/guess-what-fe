@@ -246,7 +246,6 @@ body {
   
     border: 2px solid black;
     grid-row: 3;
-    border: 5px solid lime;
     grid-column: 4;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
