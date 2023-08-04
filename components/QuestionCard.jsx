@@ -5,6 +5,7 @@ import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
 
+
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
@@ -18,7 +19,18 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  
+  const [possibilities, setPosibilities] = useState(
+    {
+      skinColour: ["purple", "blue", "green"],
+      skinTexture: ["normal", "scaly", "furry"],
+      eyes: [1, 2, 3, 4, 5],
+      eyeColour: ["orange", "yellow", "red"],
+      horns: [0, 2, 4],
+      isFriendly: [true, false],
+      planet: ["desert", "lava", "ice"]
+    }
+    )
+
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -28,6 +40,7 @@ export default function QuestionCard({
     });
   }, [alienObjects]);
 
+  console.log(chosenAlien)
   
 
   if (isLoading) {
@@ -41,15 +54,32 @@ export default function QuestionCard({
   };
 
   function questionChecker(alienProp, checkFor) {
+    console.log({alienProp, checkFor})
+
+    console.log(possibilities)
+    let possPlaceholder = {...possibilities} // Does this need to be here?
+    console.log(possPlaceholder)
+
+    const currentOpponent = { ...opponentObject };
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
-      const currentOpponent = { ...opponentObject };
       currentOpponent[alienProp] = checkFor;
       setOpponentObject(currentOpponent);
+      console.log(possPlaceholder[alienProp], "<<<<<<<<<<<<")
+      possPlaceholder[alienProp] = [checkFor]
+      setPosibilities(possPlaceholder)
     } else {
       setAnswer(false);
+      console.log(possPlaceholder.alienProp, "<<")
+      possPlaceholder[alienProp].splice(possPlaceholder[alienProp].indexOf(checkFor), 1)
+      if (possPlaceholder[alienProp].length === 1) {
+        currentOpponent[alienProp] = possPlaceholder[alienProp][0];
+        setOpponentObject(currentOpponent)
+      }
+      setPosibilities(possPlaceholder)
     }
   }
+  console.log(" possibilities", possibilities) // when to check this value
 
   function handleSubmit() {
     questionChecker(
