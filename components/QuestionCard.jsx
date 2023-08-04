@@ -1,9 +1,9 @@
-'use client';
-import { useEffect, useState } from 'react';
-import generateQuestions from '../app/utils/GenerateQuestions';
-import { OpponentContext } from '@/contexts/OpponentObject';
-import { useContext } from 'react';
-import { OpponentResponse } from './OpponentResponse';
+"use client";
+import { useEffect, useState } from "react";
+import generateQuestions from "../app/utils/GenerateQuestions";
+import { OpponentContext } from "@/contexts/OpponentObject";
+import { useContext } from "react";
+import { OpponentResponse } from "./OpponentResponse";
 
 export default function QuestionCard({
   setIsGameFinished,
@@ -18,24 +18,23 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  
+  console.log(chosenAlien, "<<<<<");
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
-      if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
+      if (questions.length && indexer >= questions.length)
+        setIndexer(questions.length - 1);
       setValidQuestions(questions);
       setIsLoading(false);
     });
   }, [alienObjects]);
-
-  
 
   if (isLoading) {
     return <h1>loading</h1>;
   }
 
   const indexIncrementer = (dir) => {
-    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length)
+    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length);
     setAnswer(null);
     setHasWon(null);
   };
@@ -66,7 +65,7 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
-      setOpponentObject(chosenAlien)
+      setOpponentObject(chosenAlien);
     } else {
       setHasWon(false);
     }
@@ -133,9 +132,8 @@ export default function QuestionCard({
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {hasWon === null ? null : hasWon ? (
-          setIsGameFinished(true)) : null}
-        
+        {hasWon === null ? null : hasWon ? setIsGameFinished(true) : null}
+
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );

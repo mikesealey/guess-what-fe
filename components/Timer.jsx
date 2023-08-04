@@ -21,6 +21,7 @@ export default function Timer() {
 
     return () => clearInterval(timer);
   });
+
   function handletimer() {
     if (isPlaying) {
       setIsPlaying(false);

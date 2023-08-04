@@ -297,6 +297,11 @@ body {
   width: 100vw;
   height: 100vh;
 }
+.hidden-modal {
+  display: none !important;
+  transform: translate(99999);
+  position: absolute;
+}
 
 .text-box {
   width: 50vw;
@@ -486,12 +491,14 @@ body {
     font-size: 100px;
 }
 .winner-card{
-    width: 400px;
+    width: 200px;
     height: auto;
+    margin: 0 auto;
+
 }
 .text-box{
-    width: max-content;
-    height: max-content;
+    width: 500px;
+    height: 500px;
 }
 .text-box h1{
   font-size: 30px;

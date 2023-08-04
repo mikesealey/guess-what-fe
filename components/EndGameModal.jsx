@@ -1,18 +1,28 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import chooseSecretAlien from "../app/utils/chooseSecretAlien";
 
-
-export default function EndGameModal({ alienObjects }) {
+export default function EndGameModal({
+  alienObjects,
+  chosenAlien,
+  setAlienObjects,
+  setChosenAlien,
+  setIsGameFinished,
+  isGameFinished,
+}) {
   const [clicked, setClicked] = useState(false);
+  const [displayModal, setDisplayModal] = useState(true);
 
-  const winnerAlien = alienObjects[0];
+  const winnerAlien = chosenAlien;
 
   const router = useRouter();
 
   function handlePlayAgain(e) {
     e.preventDefault();
+    setIsGameFinished(false);
     setClicked(true);
-    router.push("/singleplayerdisplay");
+
+    // router.push("/singleplayerdisplay");
   }
 
   function handleHome(e) {
@@ -22,7 +32,7 @@ export default function EndGameModal({ alienObjects }) {
   }
 
   return (
-    <div className="modal">
+    <div className={isGameFinished ? "modal" : "hidden-modal"}>
       <div className="text-box">
         <h1>The winner is {}</h1>
         <div className="aliencard winner-card">
@@ -57,13 +67,18 @@ export default function EndGameModal({ alienObjects }) {
             />
           ) : null}
         </div>
+        <div></div>
+
         <button
           onClick={(e) => {
             handlePlayAgain(e);
+
+            setDisplayModal(false);
           }}
         >
           Play again
         </button>
+        <br />
         {/* <Link href='/singleplayerdisplay' >Play again</Link> */}
 
         <button
