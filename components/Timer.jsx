@@ -1,14 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserStatsContext } from "@/contexts/UserStats";
 
-export default function Timer() {
+export default function Timer({ isGameFinished }) {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
   let timer;
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isGameFinished) {
+      clearInterval(timer)
+      console.log("Game finished at", minutes, seconds)
+      const currentStats = { ...statsObject }
+      currentStats.minutes = minutes
+      currentStats.seconds = seconds
+      setStatsObject(currentStats)
+    } else {
+      setSeconds(0);
+      setMinutes(0);
+    }
+  }, [isGameFinished])
+
+  useEffect(() => {
+    if (!isGameFinished) {
       timer = setInterval(() => {
         setSeconds(seconds + 1);
 
@@ -18,9 +34,9 @@ export default function Timer() {
         }
       }, 1000);
     }
-
     return () => clearInterval(timer);
-  });
+  }, [seconds]);
+
 
   function handletimer() {
     if (isPlaying) {

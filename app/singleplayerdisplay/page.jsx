@@ -53,7 +53,7 @@ export default function SinglePlayerDisplay() {
           setHasWon={setHasWon}
         />
         <OpponentCard />
-        <UserStats alienObjects={alienObjects} />
+        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished}/>
       </div>
       <Footer />
     </main>

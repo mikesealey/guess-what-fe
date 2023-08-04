@@ -4,6 +4,7 @@ import generateQuestions from "../app/utils/GenerateQuestions";
 import { OpponentContext } from "@/contexts/OpponentObject";
 import { useContext } from "react";
 import { OpponentResponse } from "./OpponentResponse";
+import { UserStatsContext } from "@/contexts/UserStats";
 
 export default function QuestionCard({
   setIsGameFinished,
@@ -14,6 +15,7 @@ export default function QuestionCard({
   hasWon
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
@@ -21,6 +23,7 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
   // const [hasWon, setHasWon] = useState(null);
   console.log(chosenAlien, "<<<<<");
+  console.log(statsObject.score)
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -57,11 +60,19 @@ export default function QuestionCard({
       validQuestions[indexer].alienProp,
       validQuestions[indexer].checkFor
     );
+    updateScore()
   }
 
   function submitGuess(e) {
     e.preventDefault();
     guessChecker(guess, chosenAlien);
+    updateScore()
+  }
+
+  function updateScore() {
+    const currentStats = { ...statsObject }
+    currentStats.score +=1
+    setStatsObject(currentStats)
   }
 
   function guessChecker(guess, chosenAlien) {
@@ -104,12 +115,6 @@ export default function QuestionCard({
           Submit
         </button>
           </div>
-        {/* {answer === null ? null : answer ? (
-          <p className="correct-answer">Yes</p>
-        ) : (
-          <p className="wrong-answer">No</p>
-        )} */}
-
         <form
           id="guess-form"
           onSubmit={(e) => {
