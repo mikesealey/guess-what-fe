@@ -262,14 +262,13 @@ body {
     padding: 0.3rem;
     padding-left:1rem;
     padding-right: 1rem;
-    width: auto;
-    min-width: 20%;
-    max-width: 80%;
+    
+    min-width: 30%;
+    max-width: 50%;
     justify-items: center;
     display: flex;
     justify-content:space-between;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 0 auto;
 }
 
 .alien-stats {
