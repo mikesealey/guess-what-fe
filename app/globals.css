@@ -116,6 +116,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 20%;
   grid-template-rows: 2fr 1fr;
+  justify-items: start;
 }
 
 .two-player-game-wrapper {
@@ -130,6 +131,7 @@ body {
   justify-content: space-between;
   height: 75vh;
   max-width: 80vw;
+  min-width:145%;
   border: 3px solid rgba(128, 128, 128, 0.499);
   border-radius: 15px;
   aspect-ratio: 8/3;
@@ -137,13 +139,14 @@ body {
   grid-column: 1/4;
 }
 
-.questioncard {
+/* .questioncard {
   grid-row: 3 ;
   grid-column: 1/4;
+  min-width:800px;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
-}
+} */
 
 /* ------------------ OPPONENT CARD ----------------------*/
 
@@ -153,9 +156,9 @@ body {
     position: relative;
     grid-column: 5;
     border: 2px solid black;
-    
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
+    width:100%;
 }
 
 .two-player-opponentcard {
@@ -250,6 +253,7 @@ body {
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
     padding: 1rem;
+    
 }
 .timer {
     color: rgb(213, 192, 213);
@@ -320,13 +324,21 @@ body {
 .questioncard {
   display: flex;
   flex-wrap: wrap;
-  /* grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 1fr; */
-  justify-content: space-between;
   font-size: 1.5rem;
+  min-width: 1000px;
+  grid-row: 3 ;
+  grid-column: 1/4;
+  padding:15px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
 }
 #question-variable {
   width: 20vw;
+  min-width: 300px;
+  background-color: white;
+  height:3rem;
+  padding-top: 8px;
 }
 
 .questioncard * {
@@ -334,13 +346,39 @@ body {
 }
 
 .question-btn {
-  padding: 5px;
+  padding: 0.5rem;
+  padding-left:1rem;
+  padding-right:1rem;
   font-weight: bold;
   margin: 0 auto;
+  background-color: rgb(95, 16, 137);
+  color:rgb(213, 192, 213);
+  border-radius: 15px;
+}
+
+.question-btn:hover {
+  padding: 0.5rem;
+  padding-left:1rem;
+  padding-right:1rem;
+  font-weight: bold;
+  margin: 0 auto;
+  background-color: linear-gradient(30deg, rgb(95, 16, 137) 5%, rgb(244, 48, 48));
+  color:white;
+  text-shadow: 0px 0px 3px white;
+  border-radius: 15px;
 }
 
 #guess-form {
-  grid-column: span 2;
+  display: flex;
+  grid-column: 3;
+    height:63px;
+    padding-right: 1rem;
+    
+    color: black;
+    
+    
+    border-radius: 15px;
+  
 }
 
 #question-prompt-container {
@@ -352,6 +390,11 @@ body {
   margin: auto 0.5rem;
 }
 
+#question-prompt{
+  font-weight: 500;
+  padding-top: 0.5rem;
+}
+
 #question-variable {
   font-weight: bold;
   white-space: nowrap;
@@ -361,9 +404,51 @@ body {
 
 #question-submit-btn {
   margin: auto;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width:auto;
+  color: rgb(213, 192, 213);
+  background:  rgb(95, 16, 137);
+  border-radius: 15px;
 }
 
-.correct-answer {
+
+#question-submit-btn:hover {
+  margin:auto;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: auto;
+  background: linear-gradient(30deg, rgb(95, 16, 137) 5%, rgb(244, 48, 48));
+  border-radius: 15px;
+  color: white;
+}
+
+.guess-btn {
+  margin: auto;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width:auto;
+  color: rgb(213, 192, 213);
+  background:  rgb(95, 16, 137);
+  border-radius: 15px;
+}
+
+
+.guess-btn:hover {
+  margin:auto;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: auto;
+  background: linear-gradient(30deg, rgb(95, 16, 137) 5%, rgb(244, 48, 48));
+  border-radius: 15px;
+  color: white;
+}
+
+/* .correct-answer {
   font-weight: bold;
   color: green;
 }
@@ -372,7 +457,7 @@ body {
   font-weight: bold;
   color: red;
  
-}
+} */
 
 
 

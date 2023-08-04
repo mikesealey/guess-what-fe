@@ -130,7 +130,11 @@ export default function QuestionCard({
               }
             })}
           </select>
-          {guess ? <button id="guess-btn">Guess</button> : null}
+          {guess ? (
+            <button className="guess-btn" id="guess-btn">
+              Guess
+            </button>
+          ) : null}
         </form>
         {hasWon === null ? null : hasWon ? setIsGameFinished(true) : null}
 
