@@ -382,12 +382,12 @@ body {
 
 @-webkit-keyframes moveout {
   from {right:220px}
-  to{right:0px}
+  to{right:-200px}
 }
 
 @keyframes moveout {
   from {right:220px}
-  to{right:0px}
+  to{right:-200px}
 }
 
 @-webkit-keyframes fadeout {
@@ -403,8 +403,8 @@ body {
 .response-div-show {
   visibility: visible;
   position: absolute;
-  top: 128px;
-  right: 220px;
+  top: 13%;
+  right: 8%;
   z-index: 2;
   width: 300px;
   
