@@ -10,6 +10,8 @@ export default function QuestionCard({
   alienObjects,
   setAlienObjects,
   chosenAlien,
+  setHasWon,
+  hasWon
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [validQuestions, setValidQuestions] = useState({});
@@ -17,7 +19,7 @@ export default function QuestionCard({
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
-  const [hasWon, setHasWon] = useState(null);
+  // const [hasWon, setHasWon] = useState(null);
   console.log(chosenAlien, "<<<<<");
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function QuestionCard({
       setValidQuestions(questions);
       setIsLoading(false);
     });
-  }, [alienObjects]);
+  }, [alienObjects, hasWon]);
 
   if (isLoading) {
     return <h1>loading</h1>;
