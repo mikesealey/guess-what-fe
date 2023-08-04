@@ -18,24 +18,23 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
-      if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
+      if (questions.length && indexer >= questions.length)
+        setIndexer(questions.length - 1);
       setValidQuestions(questions);
       setIsLoading(false);
+      setAnswer(null);
     });
   }, [alienObjects]);
-
-  
 
   if (isLoading) {
     return <h1>loading</h1>;
   }
 
   const indexIncrementer = (dir) => {
-    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length)
+    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length);
     setAnswer(null);
     setHasWon(null);
   };
@@ -66,7 +65,7 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
-      setOpponentObject(chosenAlien)
+      setOpponentObject(chosenAlien);
     } else {
       setHasWon(false);
     }
@@ -94,15 +93,15 @@ export default function QuestionCard({
           >
             →
           </button>
-        <button
-          onClick={() => {
-            handleSubmit();
-          }}
-          id="question-submit-btn"
+          <button
+            onClick={() => {
+              handleSubmit();
+            }}
+            id="question-submit-btn"
           >
-          Submit
-        </button>
-          </div>
+            Submit
+          </button>
+        </div>
         {/* {answer === null ? null : answer ? (
           <p className="correct-answer">Yes</p>
         ) : (
@@ -133,9 +132,8 @@ export default function QuestionCard({
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {hasWon === null ? null : hasWon ? (
-          setIsGameFinished(true)) : null}
-        
+        {hasWon === null ? null : hasWon ? setIsGameFinished(true) : null}
+
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
