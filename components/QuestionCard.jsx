@@ -95,15 +95,15 @@ export default function QuestionCard({
           >
             →
           </button>
-        </div>
         <button
           onClick={() => {
             handleSubmit();
           }}
           id="question-submit-btn"
-        >
+          >
           Submit
         </button>
+          </div>
         {/* {answer === null ? null : answer ? (
           <p className="correct-answer">Yes</p>
         ) : (
