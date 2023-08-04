@@ -29,7 +29,7 @@ export default function SinglePlayerDisplay() {
     <main>
       <Header />
       <div className="game-wrapper">
-        {isGameFinished && <EndGameModal />}
+        {isGameFinished && <EndGameModal alienObjects={alienObjects} />}
         <Gameboard
           isLoading={isLoading}
           alienObjects={alienObjects}
@@ -38,6 +38,7 @@ export default function SinglePlayerDisplay() {
         <QuestionCard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
+          setIsGameFinished={setIsGameFinished}
           chosenAlien={chosenAlien}
         />
         <OpponentCard />

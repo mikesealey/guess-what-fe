@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
 
 export default function QuestionCard({
+  setIsGameFinished,
   alienObjects,
   setAlienObjects,
   chosenAlien,
@@ -17,10 +18,7 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-
-  // console.log(answer)
-  // console.log(validQuestions.length, "<<<<< valid questions length")
-  // console.log(indexer, "<<<<< indexer")
+  
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -29,6 +27,8 @@ export default function QuestionCard({
       setIsLoading(false);
     });
   }, [alienObjects]);
+
+  
 
   if (isLoading) {
     return <h1>loading</h1>;
@@ -133,11 +133,9 @@ export default function QuestionCard({
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {/* {hasWon === null ? null : hasWon ? (
-          <p className="correct-answer">YOU WIN!</p>
-        ) : (
-          <p className="wrong-answer">Nope....</p>
-        )} */}
+        {hasWon === null ? null : hasWon ? (
+          setIsGameFinished(true)) : null}
+        
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
