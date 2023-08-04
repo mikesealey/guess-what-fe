@@ -1,3 +1,4 @@
+"use client"
 import { UserStatsContext } from "@/contexts/UserStats";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
@@ -83,8 +84,6 @@ export default function EndGameModal({
           Play again
         </button>
         <br />
-        {/* <Link href='/singleplayerdisplay' >Play again</Link> */}
-
         <button
           onClick={(e) => {
             handleHome(e);

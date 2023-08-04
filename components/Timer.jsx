@@ -4,7 +4,6 @@ import { UserStatsContext } from "@/contexts/UserStats";
 export default function Timer({ isGameFinished }) {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
   let timer;
@@ -37,20 +36,6 @@ export default function Timer({ isGameFinished }) {
     return () => clearInterval(timer);
   }, [seconds]);
 
-
-  function handletimer() {
-    if (isPlaying) {
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-    }
-  }
-
-  const restart = () => {
-    setSeconds(0);
-    setMinutes(0);
-  };
-
   return (
     <div className="timer">
       <h1>Timer</h1>
@@ -59,14 +44,6 @@ export default function Timer({ isGameFinished }) {
         {minutes}:{String(seconds).length < 2 && 0}
         {seconds}
       </h2>
-      {/* <button className="stopstart" onClick={handletimer}>
-        {" "}
-        Pause{" "}
-      </button>
-
-      <button className="stopstart" onClick={restart}>
-        Restart
-      </button> */}
     </div>
   );
 }

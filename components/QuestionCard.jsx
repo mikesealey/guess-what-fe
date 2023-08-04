@@ -9,7 +9,6 @@ import { UserStatsContext } from "@/contexts/UserStats";
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
-  setAlienObjects,
   chosenAlien,
   setHasWon,
   hasWon
@@ -21,9 +20,8 @@ export default function QuestionCard({
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
-  // const [hasWon, setHasWon] = useState(null);
-  console.log(chosenAlien, "<<<<<");
-  console.log(statsObject.score)
+
+  console.log(chosenAlien)
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {

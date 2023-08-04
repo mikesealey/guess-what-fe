@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { UserStatsContext } from "@/contexts/UserStats";
 
 export const Score = () => {
