@@ -21,8 +21,6 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
 
-  console.log(chosenAlien)
-
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
       if (questions.length && indexer >= questions.length)
@@ -30,6 +28,7 @@ export default function QuestionCard({
       setValidQuestions(questions);
       setIsLoading(false);
     });
+    if (hasWon) setIsGameFinished(true)
   }, [alienObjects, hasWon]);
 
   if (isLoading) {
@@ -137,8 +136,6 @@ export default function QuestionCard({
           </select>
           {guess ? <button id="guess-btn">Guess</button> : null}
         </form>
-        {hasWon === null ? null : hasWon ? setIsGameFinished(true) : null}
-
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
