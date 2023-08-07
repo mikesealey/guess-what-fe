@@ -5,7 +5,6 @@ import { useContext } from 'react';
 
 export default function OpponentCard() {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
-  // console.log(opponentObject.isFriendly, "<<<<<<<>>><<");
 
   const mouth = (
     <img

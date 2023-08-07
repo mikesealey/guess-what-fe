@@ -4,22 +4,24 @@ import generateQuestions from '../app/utils/GenerateQuestions';
 import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
-
+import { UserStatsContext } from '@/contexts/UserStats';
 
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
-  setAlienObjects,
   chosenAlien,
+  setHasWon,
+  hasWon,
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const emptyAlienObject =     {
+  const emptyAlienObject = {
     _id: [],
     skinColour: [],
     skinTexture: [],
@@ -31,51 +33,43 @@ export default function QuestionCard({
     planet: [],
     isActive: [],
     __v: [],
-    name: []
+    name: [],
+  };
+  const [possibilities, setPosibilities] = useState(emptyAlienObject);
+
+  let possPlaceholder = { ...possibilities }; // Does this need to be here?
+  function reduceRemainingPossibilities() {
+    let remainingAliens = alienObjects.filter((alien) => {
+      return alien.isActive;
+    });
+    remainingAliens.forEach((alien) => {
+      possPlaceholder = emptyAlienObject;
+      Object.keys(alien).forEach((attribute) => {
+        if (!possPlaceholder[attribute].includes(alien[attribute])) {
+          possPlaceholder[attribute].push(alien[attribute]);
+        }
+      });
+    });
+    setPosibilities(possPlaceholder);
   }
-  const [possibilities, setPosibilities] = useState(emptyAlienObject)
 
-// Possibilities Object Arrays should be initialized as empty
-// Then filter over alienObjects to find isActive aliens
-// Then cycle through alienObjects to obtain their attributes, and
-// if those attributes are not present in possibilities array, add them
-
-// Sunday night, pull from main and re-assert this logic
-
-let possPlaceholder = {...possibilities} // Does this need to be here?
-function reduceRemainingPossibilities() {
-  let remainingAliens = alienObjects.filter((alien)=>{
-    return alien.isActive
-  })
-  remainingAliens.forEach((alien) => {
-    possPlaceholder = emptyAlienObject
-    Object.keys(alien).forEach((attribute) => {
-      if (!possPlaceholder[attribute].includes(alien[attribute])) {
-        possPlaceholder[attribute].push(alien[attribute])
-      }
-    })
-  })
-  setPosibilities(possPlaceholder)
-}
-
-
-useEffect(() => {
-  generateQuestions(alienObjects).then((questions) => {
-    if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
-    setValidQuestions(questions);
-  reduceRemainingPossibilities()
-  setIsLoading(false);
-});
-}, [alienObjects]);
-
-
+  useEffect(() => {
+    generateQuestions(alienObjects).then((questions) => {
+      if (questions.length && indexer >= questions.length)
+        setIndexer(questions.length - 1);
+      setValidQuestions(questions);
+      setIsLoading(false);
+      setAnswer(null);
+    });
+    if (hasWon) setIsGameFinished(true);
+  }, [alienObjects, hasWon]);
 
   if (isLoading) {
     return <h1>loading</h1>;
   }
 
   const indexIncrementer = (dir) => {
-    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length)
+    setIndexer((indexer + dir + validQuestions.length) % validQuestions.length);
     setAnswer(null);
     setHasWon(null);
   };
@@ -86,16 +80,19 @@ useEffect(() => {
       setAnswer(true);
       currentOpponent[alienProp] = checkFor;
       setOpponentObject(currentOpponent);
-      possPlaceholder[alienProp] = [checkFor]
-      setPosibilities(possPlaceholder)
+      possPlaceholder[alienProp] = [checkFor];
+      setPosibilities(possPlaceholder);
     } else {
       setAnswer(false);
-      possPlaceholder[alienProp].splice(possPlaceholder[alienProp].indexOf(checkFor), 1)
+      possPlaceholder[alienProp].splice(
+        possPlaceholder[alienProp].indexOf(checkFor),
+        1
+      );
       if (possPlaceholder[alienProp].length === 1) {
         currentOpponent[alienProp] = possPlaceholder[alienProp][0];
-        setOpponentObject(currentOpponent)
+        setOpponentObject(currentOpponent);
       }
-      setPosibilities(possPlaceholder)
+      setPosibilities(possPlaceholder);
     }
   }
 
@@ -104,17 +101,25 @@ useEffect(() => {
       validQuestions[indexer].alienProp,
       validQuestions[indexer].checkFor
     );
+    updateScore();
   }
 
   function submitGuess(e) {
     e.preventDefault();
     guessChecker(guess, chosenAlien);
+    updateScore();
+  }
+
+  function updateScore() {
+    const currentStats = { ...statsObject };
+    currentStats.score += 1;
+    setStatsObject(currentStats);
   }
 
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
-      setOpponentObject(chosenAlien)
+      setOpponentObject(chosenAlien);
     } else {
       setHasWon(false);
     }
@@ -142,21 +147,15 @@ useEffect(() => {
           >
             →
           </button>
-        <button
-          onClick={() => {
-            handleSubmit();
-          }}
-          id="question-submit-btn"
+          <button
+            onClick={() => {
+              handleSubmit();
+            }}
+            id="question-submit-btn"
           >
-          Submit
-        </button>
-          </div>
-        {/* {answer === null ? null : answer ? (
-          <p className="correct-answer">Yes</p>
-        ) : (
-          <p className="wrong-answer">No</p>
-        )} */}
-
+            Submit
+          </button>
+        </div>
         <form
           id="guess-form"
           onSubmit={(e) => {
@@ -179,11 +178,12 @@ useEffect(() => {
               }
             })}
           </select>
-          {guess ? <button id="guess-btn">Guess</button> : null}
+          {guess ? (
+            <button className="guess-btn" id="guess-btn">
+              Guess
+            </button>
+          ) : null}
         </form>
-        {hasWon === null ? null : hasWon ? (
-          setIsGameFinished(true)) : null}
-        
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
