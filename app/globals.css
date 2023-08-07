@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+img {
+  -webkit-user-drag: none;
+}
+
 main {
   background-image: url("../public/assets/alt-background.jpg");
   /* Image by Freepik */
