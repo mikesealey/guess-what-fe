@@ -2,8 +2,6 @@ export default function ScoreTwoPlayer() {
     const placeholderObject = {
         player1: {score: 0, name: "Mike"},
         player2: {score: 0, name: "Connor"}
-
-
     }
 
 
