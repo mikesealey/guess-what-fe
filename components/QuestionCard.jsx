@@ -1,25 +1,57 @@
-"use client";
-import { useEffect, useState } from "react";
-import generateQuestions from "../app/utils/GenerateQuestions";
-import { OpponentContext } from "@/contexts/OpponentObject";
-import { useContext } from "react";
-import { OpponentResponse } from "./OpponentResponse";
-import { UserStatsContext } from "@/contexts/UserStats";
+'use client';
+import { useEffect, useState } from 'react';
+import generateQuestions from '../app/utils/GenerateQuestions';
+import { OpponentContext } from '@/contexts/OpponentObject';
+import { useContext } from 'react';
+import { OpponentResponse } from './OpponentResponse';
+import { UserStatsContext } from '@/contexts/UserStats';
 
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
   chosenAlien,
   setHasWon,
-  hasWon
+  hasWon,
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
-  const { statsObject, setStatsObject } = useContext(UserStatsContext)
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
+  const [hasWon, setHasWon] = useState(null);
+  const emptyAlienObject = {
+    _id: [],
+    skinColour: [],
+    skinTexture: [],
+    eyes: [],
+    horns: [],
+    eyeColour: [],
+    isFriendly: [],
+    hasAntenna: [],
+    planet: [],
+    isActive: [],
+    __v: [],
+    name: [],
+  };
+  const [possibilities, setPosibilities] = useState(emptyAlienObject);
+
+  let possPlaceholder = { ...possibilities }; // Does this need to be here?
+  function reduceRemainingPossibilities() {
+    let remainingAliens = alienObjects.filter((alien) => {
+      return alien.isActive;
+    });
+    remainingAliens.forEach((alien) => {
+      possPlaceholder = emptyAlienObject;
+      Object.keys(alien).forEach((attribute) => {
+        if (!possPlaceholder[attribute].includes(alien[attribute])) {
+          possPlaceholder[attribute].push(alien[attribute]);
+        }
+      });
+    });
+    setPosibilities(possPlaceholder);
+  }
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -29,7 +61,7 @@ export default function QuestionCard({
       setIsLoading(false);
       setAnswer(null);
     });
-    if (hasWon) setIsGameFinished(true)
+    if (hasWon) setIsGameFinished(true);
   }, [alienObjects, hasWon]);
 
   if (isLoading) {
@@ -43,13 +75,24 @@ export default function QuestionCard({
   };
 
   function questionChecker(alienProp, checkFor) {
+    const currentOpponent = { ...opponentObject };
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
-      const currentOpponent = { ...opponentObject };
       currentOpponent[alienProp] = checkFor;
       setOpponentObject(currentOpponent);
+      possPlaceholder[alienProp] = [checkFor];
+      setPosibilities(possPlaceholder);
     } else {
       setAnswer(false);
+      possPlaceholder[alienProp].splice(
+        possPlaceholder[alienProp].indexOf(checkFor),
+        1
+      );
+      if (possPlaceholder[alienProp].length === 1) {
+        currentOpponent[alienProp] = possPlaceholder[alienProp][0];
+        setOpponentObject(currentOpponent);
+      }
+      setPosibilities(possPlaceholder);
     }
   }
 
@@ -58,19 +101,19 @@ export default function QuestionCard({
       validQuestions[indexer].alienProp,
       validQuestions[indexer].checkFor
     );
-    updateScore()
+    updateScore();
   }
 
   function submitGuess(e) {
     e.preventDefault();
     guessChecker(guess, chosenAlien);
-    updateScore()
+    updateScore();
   }
 
   function updateScore() {
-    const currentStats = { ...statsObject }
-    currentStats.score +=1
-    setStatsObject(currentStats)
+    const currentStats = { ...statsObject };
+    currentStats.score += 1;
+    setStatsObject(currentStats);
   }
 
   function guessChecker(guess, chosenAlien) {
@@ -110,9 +153,9 @@ export default function QuestionCard({
             }}
             id="question-submit-btn"
           >
-          Submit
-        </button>
-          </div>
+            Submit
+          </button>
+        </div>
         <form
           id="guess-form"
           onSubmit={(e) => {
