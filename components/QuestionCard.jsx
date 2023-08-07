@@ -56,7 +56,6 @@ function reduceRemainingPossibilities() {
     })
   })
   setPosibilities(possPlaceholder)
-  console.log({possPlaceholder})
 }
 
 
@@ -69,7 +68,6 @@ useEffect(() => {
 });
 }, [alienObjects]);
 
-console.log(chosenAlien)
 
 
   if (isLoading) {
@@ -83,34 +81,23 @@ console.log(chosenAlien)
   };
 
   function questionChecker(alienProp, checkFor) {
-    console.log({alienProp, checkFor, possibilities})
-
     const currentOpponent = { ...opponentObject };
     if (chosenAlien[alienProp] === checkFor) {
       setAnswer(true);
       currentOpponent[alienProp] = checkFor;
       setOpponentObject(currentOpponent);
-      console.log(possPlaceholder[alienProp], "<<<<<<<<<<<<")
       possPlaceholder[alienProp] = [checkFor]
       setPosibilities(possPlaceholder)
     } else {
       setAnswer(false);
-      // console.log(possPlaceholder.alienProp, "<<")
       possPlaceholder[alienProp].splice(possPlaceholder[alienProp].indexOf(checkFor), 1)
       if (possPlaceholder[alienProp].length === 1) {
         currentOpponent[alienProp] = possPlaceholder[alienProp][0];
         setOpponentObject(currentOpponent)
       }
-        // Object.keys(possPlaceholder).forEach((alienProp)=> {
-        //   if (alienProp.length === 1) {
-        //     currentOpponent[alienProp] = possPlaceholder[alienProp][0];
-        //    setOpponentObject(currentOpponent)
-        //   }
-        // })
       setPosibilities(possPlaceholder)
     }
   }
-  console.log(" possibilities", possibilities) // when to check this value
 
   function handleSubmit() {
     questionChecker(
