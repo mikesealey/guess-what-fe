@@ -2,12 +2,14 @@
 import { UserStatsContext } from "@/contexts/UserStats";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import { OpponentContext } from '@/contexts/OpponentObject';
 
 export default function EndGameModal({
   chosenAlien,
   setIsGameFinished,
   setHasWon
 }) {
+  const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [clicked, setClicked] = useState(false);
   const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
@@ -23,6 +25,7 @@ export default function EndGameModal({
     const currentStats = { ...statsObject }
     currentStats.score = 0
     setStatsObject(currentStats)
+    setOpponentObject({})
   }
 
   function handleHome(e) {
