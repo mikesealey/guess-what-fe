@@ -27,6 +27,7 @@ export default function QuestionCard({
         setIndexer(questions.length - 1);
       setValidQuestions(questions);
       setIsLoading(false);
+      setAnswer(null);
     });
     if (hasWon) setIsGameFinished(true)
   }, [alienObjects, hasWon]);
@@ -103,11 +104,11 @@ export default function QuestionCard({
           >
             →
           </button>
-        <button
-          onClick={() => {
-            handleSubmit();
-          }}
-          id="question-submit-btn"
+          <button
+            onClick={() => {
+              handleSubmit();
+            }}
+            id="question-submit-btn"
           >
           Submit
         </button>
@@ -134,7 +135,11 @@ export default function QuestionCard({
               }
             })}
           </select>
-          {guess ? <button id="guess-btn">Guess</button> : null}
+          {guess ? (
+            <button className="guess-btn" id="guess-btn">
+              Guess
+            </button>
+          ) : null}
         </form>
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
