@@ -11,7 +11,6 @@ export default function Timer({ isGameFinished }) {
   useEffect(() => {
     if (isGameFinished) {
       clearInterval(timer)
-      console.log("Game finished at", minutes, seconds)
       const currentStats = { ...statsObject }
       currentStats.minutes = minutes
       currentStats.seconds = seconds
