@@ -20,7 +20,7 @@ export default function QuestionCard({
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
-  const [hasWon, setHasWon] = useState(null);
+
   const emptyAlienObject = {
     _id: [],
     skinColour: [],
@@ -58,6 +58,7 @@ export default function QuestionCard({
       if (questions.length && indexer >= questions.length)
         setIndexer(questions.length - 1);
       setValidQuestions(questions);
+      reduceRemainingPossibilities();
       setIsLoading(false);
       setAnswer(null);
     });
