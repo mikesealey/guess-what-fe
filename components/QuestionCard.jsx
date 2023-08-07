@@ -35,7 +35,7 @@ export default function QuestionCard({
     __v: [],
     name: [],
   };
-  const [possibilities, setPosibilities] = useState(emptyAlienObject);
+  const [possibilities, setPossibilities] = useState(emptyAlienObject);
 
   let possPlaceholder = { ...possibilities }; // Does this need to be here?
   function reduceRemainingPossibilities() {
@@ -50,7 +50,7 @@ export default function QuestionCard({
         }
       });
     });
-    setPosibilities(possPlaceholder);
+    setPossibilities(possPlaceholder);
   }
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function QuestionCard({
       currentOpponent[alienProp] = checkFor;
       setOpponentObject(currentOpponent);
       possPlaceholder[alienProp] = [checkFor];
-      setPosibilities(possPlaceholder);
+      setPossibilities(possPlaceholder);
     } else {
       setAnswer(false);
       possPlaceholder[alienProp].splice(
@@ -93,7 +93,7 @@ export default function QuestionCard({
         currentOpponent[alienProp] = possPlaceholder[alienProp][0];
         setOpponentObject(currentOpponent);
       }
-      setPosibilities(possPlaceholder);
+      setPossibilities(possPlaceholder);
     }
   }
 
