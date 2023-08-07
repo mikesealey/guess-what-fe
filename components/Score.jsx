@@ -1,35 +1,12 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { UserStatsContext } from "@/contexts/UserStats";
 
 export const Score = () => {
-  const [score, setScore] = useState(0);
-  const [hasGuessed, setHasGuessed] = useState(false);
-
-  function handleScore() {
-    setScore(score + 1);
-    setHasGuessed(true);
-  }
-
-  function reset(val) {
-    if (val) {
-      setHasGuessed(false);
-    } else {
-      setHasGuessed(true);
-    }
-  }
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
   return (
     <div className="score">
-      <p>Score: {score}</p>
-      {/* <button onClick={handleScore} disabled={hasGuessed}>
-        Test
-      </button>
-      <button
-        onClick={() => {
-          reset(hasGuessed);
-        }}
-      >
-        Reset
-      </button> */}
+      <p>Score: {statsObject.score}</p>
     </div>
   );
 };

@@ -1,18 +1,28 @@
+"use client"
+import { UserStatsContext } from "@/contexts/UserStats";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-
-export default function EndGameModal({ alienObjects }) {
+export default function EndGameModal({
+  chosenAlien,
+  setIsGameFinished,
+  setHasWon
+}) {
   const [clicked, setClicked] = useState(false);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
-  const winnerAlien = alienObjects[0];
+  const winnerAlien = chosenAlien;
 
   const router = useRouter();
 
   function handlePlayAgain(e) {
     e.preventDefault();
+    setIsGameFinished(false);
     setClicked(true);
-    router.push("/singleplayerdisplay");
+    setHasWon(null)
+    const currentStats = { ...statsObject }
+    currentStats.score = 0
+    setStatsObject(currentStats)
   }
 
   function handleHome(e) {
@@ -21,10 +31,11 @@ export default function EndGameModal({ alienObjects }) {
     router.push("/");
   }
 
+
   return (
     <div className="modal">
       <div className="text-box">
-        <h1>The winner is {}</h1>
+        <h1>The winner is { }</h1>
         <div className="aliencard winner-card">
           <img
             className="alien-planet"
@@ -40,9 +51,8 @@ export default function EndGameModal({ alienObjects }) {
           />
           <img
             className="alien-mouth"
-            src={`assets/alien-layers/mouth-${
-              winnerAlien.isFriendly ? "friendly" : "unfriendly-a"
-            }.png`}
+            src={`assets/alien-layers/mouth-${winnerAlien.isFriendly ? "friendly" : "unfriendly-a"
+              }.png`}
           />
           {winnerAlien.horns ? (
             <img
@@ -57,6 +67,15 @@ export default function EndGameModal({ alienObjects }) {
             />
           ) : null}
         </div>
+        <div id="stats-container">
+          <p>Score {statsObject.score}</p>
+          <p>Time</p>
+          <p>
+            {String(statsObject.minutes).length < 2 && 0}
+            {statsObject.minutes}:{String(statsObject.seconds).length < 2 && 0}
+            {statsObject.seconds}
+          </p>
+        </div>
         <button
           onClick={(e) => {
             handlePlayAgain(e);
@@ -64,8 +83,7 @@ export default function EndGameModal({ alienObjects }) {
         >
           Play again
         </button>
-        {/* <Link href='/singleplayerdisplay' >Play again</Link> */}
-
+        <br />
         <button
           onClick={(e) => {
             handleHome(e);

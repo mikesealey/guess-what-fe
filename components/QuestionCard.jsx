@@ -1,23 +1,25 @@
-'use client';
-import { useEffect, useState } from 'react';
-import generateQuestions from '../app/utils/GenerateQuestions';
-import { OpponentContext } from '@/contexts/OpponentObject';
-import { useContext } from 'react';
-import { OpponentResponse } from './OpponentResponse';
+"use client";
+import { useEffect, useState } from "react";
+import generateQuestions from "../app/utils/GenerateQuestions";
+import { OpponentContext } from "@/contexts/OpponentObject";
+import { useContext } from "react";
+import { OpponentResponse } from "./OpponentResponse";
+import { UserStatsContext } from "@/contexts/UserStats";
 
 export default function QuestionCard({
   setIsGameFinished,
   alienObjects,
-  setAlienObjects,
   chosenAlien,
+  setHasWon,
+  hasWon
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
-  const [hasWon, setHasWon] = useState(null);
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -27,7 +29,8 @@ export default function QuestionCard({
       setIsLoading(false);
       setAnswer(null);
     });
-  }, [alienObjects]);
+    if (hasWon) setIsGameFinished(true)
+  }, [alienObjects, hasWon]);
 
   if (isLoading) {
     return <h1>loading</h1>;
@@ -55,11 +58,19 @@ export default function QuestionCard({
       validQuestions[indexer].alienProp,
       validQuestions[indexer].checkFor
     );
+    updateScore()
   }
 
   function submitGuess(e) {
     e.preventDefault();
     guessChecker(guess, chosenAlien);
+    updateScore()
+  }
+
+  function updateScore() {
+    const currentStats = { ...statsObject }
+    currentStats.score +=1
+    setStatsObject(currentStats)
   }
 
   function guessChecker(guess, chosenAlien) {
@@ -99,15 +110,9 @@ export default function QuestionCard({
             }}
             id="question-submit-btn"
           >
-            Submit
-          </button>
-        </div>
-        {/* {answer === null ? null : answer ? (
-          <p className="correct-answer">Yes</p>
-        ) : (
-          <p className="wrong-answer">No</p>
-        )} */}
-
+          Submit
+        </button>
+          </div>
         <form
           id="guess-form"
           onSubmit={(e) => {
@@ -136,8 +141,6 @@ export default function QuestionCard({
             </button>
           ) : null}
         </form>
-        {hasWon === null ? null : hasWon ? setIsGameFinished(true) : null}
-
         <OpponentResponse answer={answer} hasWon={hasWon} />
       </div>
     );
