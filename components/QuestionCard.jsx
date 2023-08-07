@@ -19,29 +19,58 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
   const [hasWon, setHasWon] = useState(null);
-  const [possibilities, setPosibilities] = useState(
-    {
-      skinColour: ["purple", "blue", "green"],
-      skinTexture: ["normal", "scaly", "furry"],
-      eyes: [1, 2, 3, 4, 5],
-      eyeColour: ["orange", "yellow", "red"],
-      horns: [0, 2, 4],
-      isFriendly: [true, false],
-      planet: ["desert", "lava", "ice"]
-    }
-    )
+  const emptyAlienObject =     {
+    _id: [],
+    skinColour: [],
+    skinTexture: [],
+    eyes: [],
+    horns: [],
+    eyeColour: [],
+    isFriendly: [],
+    hasAntenna: [],
+    planet: [],
+    isActive: [],
+    __v: [],
+    name: []
+  }
+  const [possibilities, setPosibilities] = useState(emptyAlienObject)
+
+// Possibilities Object Arrays should be initialized as empty
+// Then filter over alienObjects to find isActive aliens
+// Then cycle through alienObjects to obtain their attributes, and
+// if those attributes are not present in possibilities array, add them
+
+// Sunday night, pull from main and re-assert this logic
+
+let possPlaceholder = {...possibilities} // Does this need to be here?
+function reduceRemainingPossibilities() {
+  let remainingAliens = alienObjects.filter((alien)=>{
+    return alien.isActive
+  })
+  remainingAliens.forEach((alien) => {
+    possPlaceholder = emptyAlienObject
+    Object.keys(alien).forEach((attribute) => {
+      if (!possPlaceholder[attribute].includes(alien[attribute])) {
+        possPlaceholder[attribute].push(alien[attribute])
+      }
+    })
+  })
+  setPosibilities(possPlaceholder)
+  console.log({possPlaceholder})
+}
 
 
-  useEffect(() => {
-    generateQuestions(alienObjects).then((questions) => {
-      if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
-      setValidQuestions(questions);
-      setIsLoading(false);
-    });
-  }, [alienObjects]);
+useEffect(() => {
+  generateQuestions(alienObjects).then((questions) => {
+    if (questions.length && indexer >= questions.length) setIndexer(questions.length - 1)
+    setValidQuestions(questions);
+  reduceRemainingPossibilities()
+  setIsLoading(false);
+});
+}, [alienObjects]);
 
-  console.log(chosenAlien)
-  
+console.log(chosenAlien)
+
 
   if (isLoading) {
     return <h1>loading</h1>;
@@ -57,8 +86,8 @@ export default function QuestionCard({
     console.log({alienProp, checkFor})
 
     console.log(possibilities)
-    let possPlaceholder = {...possibilities} // Does this need to be here?
-    console.log(possPlaceholder)
+    
+    // console.log(possPlaceholder)
 
     const currentOpponent = { ...opponentObject };
     if (chosenAlien[alienProp] === checkFor) {
@@ -70,7 +99,7 @@ export default function QuestionCard({
       setPosibilities(possPlaceholder)
     } else {
       setAnswer(false);
-      console.log(possPlaceholder.alienProp, "<<")
+      // console.log(possPlaceholder.alienProp, "<<")
       possPlaceholder[alienProp].splice(possPlaceholder[alienProp].indexOf(checkFor), 1)
       if (possPlaceholder[alienProp].length === 1) {
         currentOpponent[alienProp] = possPlaceholder[alienProp][0];
