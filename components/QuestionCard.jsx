@@ -83,11 +83,7 @@ console.log(chosenAlien)
   };
 
   function questionChecker(alienProp, checkFor) {
-    console.log({alienProp, checkFor})
-
-    console.log(possibilities)
-    
-    // console.log(possPlaceholder)
+    console.log({alienProp, checkFor, possibilities})
 
     const currentOpponent = { ...opponentObject };
     if (chosenAlien[alienProp] === checkFor) {
@@ -105,6 +101,12 @@ console.log(chosenAlien)
         currentOpponent[alienProp] = possPlaceholder[alienProp][0];
         setOpponentObject(currentOpponent)
       }
+        // Object.keys(possPlaceholder).forEach((alienProp)=> {
+        //   if (alienProp.length === 1) {
+        //     currentOpponent[alienProp] = possPlaceholder[alienProp][0];
+        //    setOpponentObject(currentOpponent)
+        //   }
+        // })
       setPosibilities(possPlaceholder)
     }
   }
