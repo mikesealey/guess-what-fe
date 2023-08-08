@@ -13,9 +13,16 @@ export default function LeaderBoardModal() {
     <div className="modal">
       <div className="leaderboard-text-box">
         <h1>Leaderboard modal</h1>
+        <div className="result-row">
+          <h2>Ranking:</h2>
+          <h2>Name:</h2>
+          <h2>Time:</h2>
+          <h2>Score:</h2>
+        </div>
         {placeholderResults.map((result) => {
           return (
             <div className="result-row">
+              <div>{placeholderResults.indexOf(result) + 1}</div>
               <div>{result.name}</div>
               <div>{result.time}</div>
               <div>{result.score}</div>
