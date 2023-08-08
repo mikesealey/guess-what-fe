@@ -16,6 +16,5 @@ export const getLeaderboard = (sort_by, timePeriod, page) => {
   if (timePeriod) {
     params.period = timePeriod;
   }
-  console.log(params);
-  return api.get(`/users`, { params }).then(({ data }) => data.users);
+  return api.get(`/users`, { params }).then(({ data }) => data);
 };
