@@ -71,6 +71,7 @@ export default function EndGameModal({
           ) : null}
         </div>
         <div id="stats-container">
+          <p>Congratulations {statsObject.username}, you win!</p>
           <p>Score {statsObject.score}</p>
           <p>Time</p>
           <p>
