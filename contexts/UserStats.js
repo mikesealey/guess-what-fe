@@ -5,6 +5,7 @@ export const UserStatsContext = createContext(null)
 
 export default function UserStatsProvider({ children }) {
     const [statsObject, setStatsObject] = useState({
+        username: "",
         minutes: 0,
         seconds: 0,
         score: 0

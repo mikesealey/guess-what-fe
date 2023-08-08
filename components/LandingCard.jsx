@@ -1,6 +1,7 @@
 'use client';
 
 import { UsersContext } from '@/contexts/User';
+import { UserStatsContext } from '../contexts/UserStats'
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SocketContext } from '@/contexts/Socket';
@@ -10,6 +11,7 @@ const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
   const [clicked, setClicked] = useState(false);
   const [userName, setUserName] = useState('');
@@ -59,6 +61,9 @@ export const LandingCard = () => {
               value={userName}
               onChange={(e) => {
                 setUserName(e.target.value);
+                const currentUserStats = {...statsObject}
+                currentUserStats.username = e.target.value 
+                setStatsObject(currentUserStats)
               }}
               required
             />

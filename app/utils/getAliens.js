@@ -8,5 +8,14 @@ export const getAliens = () => {
 };
 
 export const getQuestions = () => {
-  return api.get('/questions').then(({data}) => data.questions)
+  return api.get('/questions').then(({ data }) => data.questions)
+}
+
+export const postUser = (username, score, minutes, seconds) => {
+  return api.post('/users', {
+    username: username,
+    score: score,
+    minutes: minutes,
+    seconds: seconds
+  })
 }
