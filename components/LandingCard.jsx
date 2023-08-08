@@ -1,42 +1,27 @@
-'use client';
+"use client";
 
-import { UsersContext } from '@/contexts/User';
-import { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { SocketContext } from '@/contexts/Socket';
-const { io } = require('socket.io-client');
+import { UsersContext } from "@/contexts/User";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ThisUserContext } from "@/contexts/ThisUser";
 
-const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
-  const { users, setUsers } = useContext(UsersContext);
-  const { yourSocket, setYourSocket } = useContext(SocketContext);
-
   const [clicked, setClicked] = useState(false);
-  const [userName, setUserName] = useState('');
+
+  const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
 
   function handleSinglePlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    router.push('/singleplayerdisplay');
+    router.push("/singleplayerdisplay");
   }
 
   function handleTwoPlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    socket.emit('find', { name: userName });
-    socket.on('your-socketid', (id) => {
-      setYourSocket(id);
-    });
-    socket.on('find', (e) => {
-      let obj = { ...users };
-      obj.p1.p1name = e.allPlayers[0].p1.p1name;
-      obj.p2.p2name = e.allPlayers[0].p2.p2name;
-      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
-      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
-      setUsers(obj);
-    });
-    router.push('/lobby');
+
+    router.push("/twoplayerdisplay");
   }
 
   return (
@@ -56,9 +41,11 @@ export const LandingCard = () => {
             <input
               type="text"
               id="username"
-              value={userName}
+              value={thisUser.name}
               onChange={(e) => {
-                setUserName(e.target.value);
+                let obj = { ...thisUser };
+                obj.name = e.target.value;
+                setThisUser(obj);
               }}
               required
             />

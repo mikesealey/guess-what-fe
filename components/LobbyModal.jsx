@@ -1,23 +1,46 @@
-'use client';
+"use client";
 
-import { SocketContext } from '@/contexts/Socket';
-import { UsersContext } from '@/contexts/User';
-import { useRouter } from 'next/navigation';
-import { useContext, useEffect, useState } from 'react';
-const { io } = require('socket.io-client');
+import { getAliens } from "@/app/utils/getAliens";
+import { SocketContext } from "@/contexts/Socket";
+import { ThisUserContext } from "@/contexts/ThisUser";
+import { UsersContext } from "@/contexts/User";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
-const socket = io('https://guess-what-api.onrender.com/');
-export default function LobbyModal() {
+export default function LobbyModal({
+  socket,
+  io,
+  setAlienObjects,
+  setChosenAlien,
+  chooseSecretAlien,
+  setDisplayLobby,
+}) {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
   const [waitingPlayerTwo, setWaitingPlayerTwo] = useState(true);
+  const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
-  const alien1 = {
-    name: 'Klagnor',
-  };
-  const alien2 = {
-    name: 'Jeremy',
-  };
+  // const alien1 = {
+  //   name: "Klagnor",
+  // };
+  // const alien2 = {
+  //   name: "Jeremy",
+  // };
+
+  useEffect(() => {
+    socket.emit("find", { name: thisUser.name });
+    socket.on("your-socketid", (id) => {
+      setYourSocket(id);
+    });
+    socket.on("find", (e) => {
+      let obj = { ...users };
+      obj.p1.p1name = e.allPlayers[0].p1.p1name;
+      obj.p2.p2name = e.allPlayers[0].p2.p2name;
+      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
+      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+      setUsers(obj);
+    });
+  }, []);
 
   useEffect(() => {
     if (users.p1.p1name && users.p2.p2name) {
@@ -25,23 +48,28 @@ export default function LobbyModal() {
     }
   }, [users]);
 
-  useEffect(() => {
-    if (users.p1.p1name && users.p2.p2name) {
-      let obj = { ...users };
-      obj.p1.p1alien = alien1;
-      obj.p2.p2alien = alien2;
-      setUsers(obj);
-    }
-  }, [waitingPlayerTwo]);
+  // useEffect(() => {
+  //   if (users.p1.p1name && users.p2.p2name) {
+  // getAliens().then((res) => {
+  //   console.log(res, "<<<<<<res");
+  //   setAlienObjects(res);
+  // setChosenAlien(chooseSecretAlien(res));
+  // let obj = { ...users };
+  // obj.p1.p1alien = chooseSecretAlien(res);
+  // obj.p2.p2alien = chooseSecretAlien(res);
+  // obj.allAliens = res;
+  // setUsers(obj);
+  //     });
+  //   }
+  // }, [waitingPlayerTwo]);
+
   function handleClick() {
-    socket.emit('start-game');
+    socket.emit("start-game");
   }
 
-  socket.on('proceed', () => {
-    router.push('/twoplayerdisplay');
+  socket.on("proceed", () => {
+    setDisplayLobby(false);
   });
-
-  //   let displayLobbyModal = true;
 
   return (
     <div className="modal">
