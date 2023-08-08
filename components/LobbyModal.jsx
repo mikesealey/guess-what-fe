@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 export default function LobbyModal({
   socket,
   io,
+  alienObjects,
   setAlienObjects,
   setChosenAlien,
   chooseSecretAlien,
@@ -28,7 +29,11 @@ export default function LobbyModal({
   // };
 
   useEffect(() => {
+    console.log("useEffect for socketids and stuff")
     socket.emit("find", { name: thisUser.name });
+    let tempThisUser = {...thisUser}
+    tempThisUser.name = ""
+    setThisUser(tempThisUser)
     socket.on("your-socketid", (id) => {
       setYourSocket(id);
     });
@@ -55,7 +60,7 @@ export default function LobbyModal({
   //   setAlienObjects(res);
   // setChosenAlien(chooseSecretAlien(res));
   // let obj = { ...users };
-  // obj.p1.p1alien = chooseSecretAlien(res);
+  // obj.lien = chooseSecretAlien(res);
   // obj.p2.p2alien = chooseSecretAlien(res);
   // obj.allAliens = res;
   // setUsers(obj);
@@ -63,12 +68,32 @@ export default function LobbyModal({
   //   }
   // }, [waitingPlayerTwo]);
 
+  useEffect(()=> {
+    console.log(users)
+    console.log(users.p1.p1socketId)
+    console.log(users.p2.p2socketId)
+    console.log(yourSocket)
+    if (yourSocket === users.p1.p1socketId) {
+      getAliens().then((res)=>{
+        let obj = {...users}
+        obj.allAliens = res
+
+        setUsers(obj)
+    })}
+    
+
+    setAlienObjects(users.allAliens)
+
+  }, [])
+
+
   function handleClick() {
     socket.emit("start-game");
   }
 
   socket.on("proceed", () => {
     setDisplayLobby(false);
+    setAlienObjects(users.allAliens)
   });
 
   return (
@@ -85,7 +110,7 @@ export default function LobbyModal({
           </>
         )}
         {!waitingPlayerTwo ? (
-          <button onClick={handleClick}>start game</button>
+          <button onClick={()=>{handleClick()}}>start game</button>
         ) : null}
       </div>
     </div>

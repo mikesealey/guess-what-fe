@@ -4,6 +4,7 @@ const api = axios.create({
 });
 
 export const getAliens = () => {
+  console.log("Get Aliens Function Called")
   return api.get('/aliens').then(({ data }) => data.aliens);
 };
 

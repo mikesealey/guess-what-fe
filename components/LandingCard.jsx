@@ -4,10 +4,11 @@ import { UsersContext } from "@/contexts/User";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ThisUserContext } from "@/contexts/ThisUser";
+import { getAliens } from "@/app/utils/getAliens";
 
 export const LandingCard = () => {
   const [clicked, setClicked] = useState(false);
-
+  const {users, setUsers} = useContext(UsersContext)
   const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
 
@@ -23,6 +24,10 @@ export const LandingCard = () => {
 
     router.push("/twoplayerdisplay");
   }
+
+
+  
+
 
   return (
     <div className="landing-text-box">

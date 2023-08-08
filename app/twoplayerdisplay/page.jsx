@@ -28,24 +28,11 @@ export default function TwoPlayerDisplay() {
   const [displayLobby, setDisplayLobby] = useState(true);
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
-  // console.log(yourSocket, "<--- unique socket id");
-  console.log(users, "<--- users state");
 
-  useEffect(() => {
-    getAliens().then((res) => {
-      setAlienObjects(res);
-      setChosenAlien(chooseSecretAlien(res));
-
-      let obj = { ...users };
-      if (users.p2.p2name) {
-        setAlienObjects(users.allAliens);
-      }
-      obj.p1.p1alien = chooseSecretAlien(res);
-      obj.p2.p2alien = chooseSecretAlien(res);
-      obj.allAliens = res;
-      setUsers(obj);
-    });
-  }, [displayLobby]);
+  // useEffect(()=> {
+  //   setAlienObjects([...users.allAliens])
+  //   console.log(users.allAliens)
+  // }, [])
 
   return (
     <main>
@@ -55,6 +42,7 @@ export default function TwoPlayerDisplay() {
           <LobbyModal
             socket={socket}
             io={io}
+            alienObjects={alienObjects}
             setAlienObjects={setAlienObjects}
             setChosenAlien={setChosenAlien}
             chooseSecretAlien={chooseSecretAlien}
