@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import { getAliens } from "@/app/utils/getAliens";
-import { SocketContext } from "@/contexts/Socket";
-import { ThisUserContext } from "@/contexts/ThisUser";
-import { UsersContext } from "@/contexts/User";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { getAliens } from '@/app/utils/getAliens';
+import { SocketContext } from '@/contexts/Socket';
+import { ThisUserContext } from '@/contexts/ThisUser';
+import { UsersContext } from '@/contexts/User';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
 
 export default function LobbyModal({
+  setIsLoading,
   socket,
   io,
   alienObjects,
@@ -21,32 +22,25 @@ export default function LobbyModal({
   const [waitingPlayerTwo, setWaitingPlayerTwo] = useState(true);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
-  // const alien1 = {
-  //   name: "Klagnor",
-  // };
-  // const alien2 = {
-  //   name: "Jeremy",
-  // };
 
   useEffect(() => {
-    console.log("useEffect for socketids and stuff")
-    socket.emit("find", { name: thisUser.name });
-    let tempThisUser = {...thisUser}
-    tempThisUser.name = ""
-    setThisUser(tempThisUser)
-    socket.on("your-socketid", (id) => {
+    socket.emit('find', { name: thisUser.name, aliens: users.allAliens });
+    let tempThisUser = { ...thisUser };
+    tempThisUser.name = '';
+    setThisUser(tempThisUser);
+    socket.on('your-socketid', (id) => {
       setYourSocket(id);
     });
-    socket.on("find", (e) => {
+    socket.on('find', (e) => {
       let obj = { ...users };
       obj.p1.p1name = e.allPlayers[0].p1.p1name;
       obj.p2.p2name = e.allPlayers[0].p2.p2name;
       obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
       obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+      obj.allAliens = e.allPlayers[0].allAliens;
       setUsers(obj);
     });
   }, []);
-
   useEffect(() => {
     if (users.p1.p1name && users.p2.p2name) {
       setWaitingPlayerTwo(false);
@@ -68,32 +62,28 @@ export default function LobbyModal({
   //   }
   // }, [waitingPlayerTwo]);
 
-  useEffect(()=> {
-    console.log(users)
-    console.log(users.p1.p1socketId)
-    console.log(users.p2.p2socketId)
-    console.log(yourSocket)
-    if (yourSocket === users.p1.p1socketId) {
-      getAliens().then((res)=>{
-        let obj = {...users}
-        obj.allAliens = res
+  // useEffect(()=> {
 
-        setUsers(obj)
-    })}
-    
+  //   if (yourSocket === users.p1.p1socketId) {
+  //     getAliens().then((res)=>{
+  //       let obj = {...users}
+  //       obj.allAliens = res
 
-    setAlienObjects(users.allAliens)
+  //       setUsers(obj)
+  //   })}
 
-  }, [])
+  //   setAlienObjects(users.allAliens)
 
+  // }, [])
 
   function handleClick() {
-    socket.emit("start-game");
+    socket.emit('start-game');
   }
 
-  socket.on("proceed", () => {
+  socket.on('proceed', () => {
+    setAlienObjects(users.allAliens);
     setDisplayLobby(false);
-    setAlienObjects(users.allAliens)
+    setIsLoading(false);
   });
 
   return (
@@ -110,7 +100,13 @@ export default function LobbyModal({
           </>
         )}
         {!waitingPlayerTwo ? (
-          <button onClick={()=>{handleClick()}}>start game</button>
+          <button
+            onClick={() => {
+              handleClick();
+            }}
+          >
+            start game
+          </button>
         ) : null}
       </div>
     </div>

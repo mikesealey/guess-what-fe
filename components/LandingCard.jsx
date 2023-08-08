@@ -1,33 +1,37 @@
-"use client";
+'use client';
 
-import { UsersContext } from "@/contexts/User";
-import { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { ThisUserContext } from "@/contexts/ThisUser";
-import { getAliens } from "@/app/utils/getAliens";
+import { UsersContext } from '@/contexts/User';
+import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ThisUserContext } from '@/contexts/ThisUser';
+import { getAliens } from '@/app/utils/getAliens';
 
 export const LandingCard = () => {
   const [clicked, setClicked] = useState(false);
-  const {users, setUsers} = useContext(UsersContext)
+  const { users, setUsers } = useContext(UsersContext);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
+
+  useEffect(() => {
+    getAliens().then((res) => {
+      let obj = { ...users };
+      obj.allAliens = res;
+      setUsers(obj);
+    });
+  }, []);
 
   function handleSinglePlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    router.push("/singleplayerdisplay");
+    router.push('/singleplayerdisplay');
   }
 
   function handleTwoPlayerClick(e) {
     e.preventDefault();
     setClicked(true);
 
-    router.push("/twoplayerdisplay");
+    router.push('/twoplayerdisplay');
   }
-
-
-  
-
 
   return (
     <div className="landing-text-box">
