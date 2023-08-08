@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 const { io } = require('socket.io-client');
 
-const socket = io('http://localhost:8081/');
+const socket = io('https://guess-what-api.onrender.com/');
 export default function LobbyModal() {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);

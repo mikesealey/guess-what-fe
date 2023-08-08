@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { SocketContext } from '@/contexts/Socket';
 const { io } = require('socket.io-client');
 
-const socket = io('http://localhost:8081/');
+const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
