@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@font-face {
+  font-family: "Audiowide";
+  src: url("../public/assets/Audiowide-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
 main {
   background-image: url("../public/assets/alt-background.jpg");
   /* Image by Freepik */
@@ -85,12 +91,38 @@ main {
 }
 
 .logo {
+  letter-spacing: 5px;
+ 
+  font-size: 50px;
+  text-align: center;
+  font-family: Audiowide, sans-serif;
+  border: 2px solid rgb(130, 4, 4);
   font-weight: bold;
-  color: white;
-  background-color: rgba(128, 128, 128, 0.517);
-  width: fit-content;
+  margin: 1rem;
+
+  background: linear-gradient(
+    90deg,
+    rgb(47, 14, 168) 0%,
+    rgba(109, 9, 121, 1) 35%,
+    rgb(231, 184, 241)100%
+  );
+  color: #52065f;
+  text-shadow: #161515;
+  background-color: rgba(67, 12, 12, 0.517);
+  width: 79vw;
   padding: 0 1rem;
   border-radius: 1rem;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+.header {
+  font-family: Audiowide, sans-serif;
+  text-align: center;
+ 
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+  
 }
 
 nav {
@@ -129,6 +161,8 @@ body {
 }
 
 .gameboard {
+  margin-bottom: 0.3rem;
+  padding: 0.3rem;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -138,25 +172,27 @@ body {
   min-width: 900px;
   /* aspect-ratio: 8/3; */
   grid-row: 1/3;
+  column-gap: 0.2rem;
+  row-gap: 0.3rem;
   grid-column: 1/5;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
 }
 
-
 /* ------------------ OPPONENT CARD ----------------------*/
 
-.opponentcard{
-    display: flex;
-    box-sizing: border-box;
-    justify-content: center;
-    position: relative;
-    grid-column: 5;
-    border: 2px solid black;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 15px;
-    width:100%;
+.opponentcard {
+  margin-left: 0.3rem;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  position: relative;
+  grid-column: 5;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  width: 100%;
 }
 
 .two-player-opponentcard {
@@ -166,36 +202,48 @@ body {
 }
 
 .grayscale {
-  filter: grayscale(100%)
+  filter: grayscale(100%);
 }
 
 .two-player-usercard {
   grid-column: 5;
   grid-row: 2;
   border: 2px solid black;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 15px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
 }
 
 .aliencard {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
-  border: 2px solid rgb(95, 16, 137);
   border-radius: 15px;
 }
 
 /* ------------------------ ALIEN CARD --------------------------- */
 
 .aliencard-container {
- height: 33%;
- width: 12%;
- position: relative;
+  height: 33%;
+  width: 12%;
+  position: relative;
+  border-radius: 15px;
+  border: 2px solid rgb(95, 16, 137);
+}
+.alien-img {
+  transition: transform 0.5s;
 }
 
-.alien-planet, .alien-body, .alien-eyes, .alien-mouth, .alien-horns, .alien-antenna {
+.alien-img:hover {
+  transform: scale(1.1);
+}
+
+.alien-planet,
+.alien-body,
+.alien-eyes,
+.alien-mouth,
+.alien-horns,
+.alien-antenna {
   position: absolute;
   top: 0;
   left: 0;
@@ -214,9 +262,9 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
   filter: grayscale(100%);
-  
+
+  border-radius: 15px;
 }
 
 .eliminate {
@@ -225,7 +273,6 @@ body {
   width: 100%;
   height: 100%;
   -webkit-user-drag: none;
-  
 }
 
 .alien-name-holder {
@@ -247,54 +294,53 @@ body {
 }
 
 /* ---------------------------User Stats---------------------- */
-.user-stats  {
+.user-stats {
+  margin-left: 0.3rem;
   box-sizing: border-box;
-    border: 2px solid black;
-    justify-self: stretch;
-    grid-row: 3;
-    grid-column: 3/5 ;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 15px;
-    padding: 0.5rem;
-   
-    
+  border: 2px solid black;
+  justify-self: stretch;
+  grid-row: 3;
+  grid-column: 3/5;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  padding: 0.5rem;
 }
 .timer {
-    color: rgb(213, 192, 213);
-    background: rgb(95, 16, 137);
-    border-radius: 10px;
-    padding: 0.3rem;
-    padding-left:1rem;
-    padding-right: 1rem;
-    
-    min-width: 30%;
-    max-width: 50%;
-    justify-items: center;
-    display: flex;
-    justify-content:space-between;
-    margin: 0 auto;
+  color: rgb(213, 192, 213);
+  background: rgb(95, 16, 137);
+  border-radius: 10px;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  min-width: 30%;
+  max-width: 50%;
+  justify-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .alien-stats {
-    box-sizing: border-box;
-    border: 2px solid   rgb(213, 192, 213); 
-    display: flex;
-    justify-content: space-between;
-    padding: 0.3rem;
-    padding-left:1rem;
-    padding-right: 1rem;
-    color: rgb(213, 192, 213);
-    margin-top: 1rem;
-    background: rgb(95, 16, 137);
-    border-radius: 10px;
+  box-sizing: border-box;
+  border: 2px solid rgb(213, 192, 213);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: rgb(213, 192, 213);
+  margin-top: 1rem;
+  background: rgb(95, 16, 137);
+  border-radius: 10px;
 }
 .timer h1 {
-    font-weight: 700;
+  font-weight: 700;
 }
 
-.timer h1, h2 {
-    display: inline;
-
+.timer h1,
+h2 {
+  display: inline;
 }
 
 .longer {
@@ -340,11 +386,11 @@ body {
   flex-wrap: wrap;
   font-size: 1rem;
   box-sizing: border-box;
-  grid-row: 3 ;
+  grid-row: 3;
   grid-column: 1/3;
-  width:100%;
-  min-width:40rem;
-  padding:0.5rem;
+  width: 100%;
+  min-width: 40rem;
+  padding: 0.5rem;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
@@ -352,7 +398,7 @@ body {
 #question-variable {
   width: 15vw;
   background-color: white;
-  height:2.5rem;
+  height: 2.5rem;
   padding-top: 0.5rem;
 }
 
@@ -362,34 +408,37 @@ body {
 
 .question-btn {
   padding: 0.3rem;
-  padding-left:1rem;
-  padding-right:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   font-weight: bold;
- 
+
   background-color: rgb(95, 16, 137);
-  color:rgb(213, 192, 213);
+  color: rgb(213, 192, 213);
   border-radius: 10px;
 }
 
 .question-btn:hover {
   padding: 0.3rem;
-  padding-left:1rem;
-  padding-right:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   font-weight: bold;
- 
-  background-color: linear-gradient(30deg, rgb(95, 16, 137) 5%, rgb(244, 48, 48));
-  color:white;
+
+  background-color: linear-gradient(
+    30deg,
+    rgb(95, 16, 137) 5%,
+    rgb(244, 48, 48)
+  );
+  color: white;
   text-shadow: 0px 0px 3px white;
   border-radius: 10px;
 }
 
 #guess-form {
   display: flex;
-    
-    padding-right: 1rem;
-    color: black;
-    border-radius: 10px;
-  
+
+  padding-right: 1rem;
+  color: black;
+  border-radius: 10px;
 }
 
 #question-prompt-container {
@@ -401,7 +450,7 @@ body {
   margin: auto 0.5rem;
 }
 
-#question-prompt{
+#question-prompt {
   font-weight: 500;
   padding-top: 0.5rem;
 }
@@ -418,15 +467,14 @@ body {
   padding: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  width:auto;
+  width: auto;
   color: rgb(213, 192, 213);
-  background:  rgb(95, 16, 137);
+  background: rgb(95, 16, 137);
   border-radius: 10px;
 }
 
-
 #question-submit-btn:hover {
-  margin:auto;
+  margin: auto;
   padding: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -441,15 +489,14 @@ body {
   padding: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  width:auto;
+  width: auto;
   color: rgb(213, 192, 213);
-  background:  rgb(95, 16, 137);
+  background: rgb(95, 16, 137);
   border-radius: 10px;
 }
 
-
 .guess-btn:hover {
-  margin:auto;
+  margin: auto;
   padding: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -470,9 +517,6 @@ body {
  
 } */
 
-
-
-
 .response-div {
   visibility: hidden;
   position: absolute;
@@ -483,23 +527,39 @@ body {
 }
 
 @-webkit-keyframes moveout {
-  from {right:220px}
-  to{right:0px}
+  from {
+    right: 220px;
+  }
+  to {
+    right: 0px;
+  }
 }
 
 @keyframes moveout {
-  from {right:220px}
-  to{right:0px}
+  from {
+    right: 220px;
+  }
+  to {
+    right: 0px;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .response-div-show {
@@ -509,15 +569,13 @@ body {
   right: 8%;
   z-index: 2;
   width: 300px;
-  
+
   -webkit-animation-name: fadeout, moveout;
   -webkit-animation-duration: 1s, 0.1s;
   -webkit-animation-delay: 1s, 4.1s;
   -webkit-animation-fill-mode: forwards;
   animation-name: fadeout, moveout;
   animation-duration: 1s, 0.1s;
-
-
 }
 
 .response-div-show img {
@@ -533,7 +591,7 @@ body {
   left: 21%;
   display: flex;
   width: 150px;
-  height:150px;
+  height: 150px;
 
   font-weight: 600;
   text-align: center;
@@ -542,66 +600,62 @@ body {
 }
 
 .loading-state-container {
-    z-index: 9;
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 10px black;
-
+  z-index: 9;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px black;
 }
 
 .loading-state {
-    all: revert;
-    z-index: 10;
-    position: absolute;
-    top: 35%;
-    left: 45%;
-    color: black;
-    font-size: 2em;
-    max-height: inherit;
-    text-shadow: 0px 0px 5px white, 0px 0px 10px white, 0px 0px 15px white;
-    display: flex;
-    width: 20%;
-    max-width: 200px;
-    flex-direction: column;
-    align-items: center;
+  all: revert;
+  z-index: 10;
+  position: absolute;
+  top: 35%;
+  left: 45%;
+  color: black;
+  font-size: 2em;
+  max-height: inherit;
+  text-shadow: 0px 0px 5px white, 0px 0px 10px white, 0px 0px 15px white;
+  display: flex;
+  width: 20%;
+  max-width: 200px;
+  flex-direction: column;
+  align-items: center;
 }
 
 #flying-saucer {
-    max-width: 100%;
-    filter: drop-shadow(0px 0px 10px white);
+  max-width: 100%;
+  filter: drop-shadow(0px 0px 10px white);
 }
 
-
-
-
-
-.question-mark{
-    
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: center;
-    color: rgb(14, 41, 137);
-    font-size: 100px;
+.question-mark {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+  color: rgb(14, 41, 137);
+  font-size: 100px;
+  text-shadow: 2px 0 #0a0909, -2px 0  #4a3c3c, 0 2px #fff, 0 -2px #fff,
+  1px 1px #fff, -1px -1px #fff, 1px -1px #665757, -1px 1px #1a1818;
 }
-.winner-card{
-    width: 200px;
-    height: auto;
-    margin: 0 auto;
-    z-index: 100;
+.winner-card {
+  width: 200px;
+  height: auto;
+  margin: 0 auto;
+  z-index: 100;
 }
-.text-box{
-    width: 500px;
-    height: 500px;
+.text-box {
+  width: 500px;
+  height: 500px;
 }
-.text-box h1{
+.text-box h1 {
   font-size: 30px;
   font-weight: 900;
   color: rgb(45, 31, 174);
-} 
+}
 
 .two-player-score {
   box-sizing: border-box;
@@ -619,4 +673,8 @@ body {
 
 .scoreboard {
   display: flex;
+}
+
+.question-mark{
+  font-size: 300px;
 }
