@@ -17,7 +17,5 @@ export const postUser = (username, score, minutes, seconds) => {
     score: score,
     minutes: minutes,
     seconds: seconds
-  }).then(res => {
-    console.log(res, "<<<<<<<< POST RESPONSE")
   })
 }
