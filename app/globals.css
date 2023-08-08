@@ -203,6 +203,7 @@ body {
   width: 100%;
   object-fit: cover;
   border-radius: 15px;
+  -webkit-user-drag: none;
 }
 
 .alien-planet {
@@ -215,13 +216,19 @@ body {
   width: 100%;
   padding: 0.1rem;
   filter: grayscale(100%);
+  padding: 0.1rem;
+  border: 2px solid rgb(95, 16, 137);
+  border-radius: 15px;
+  
 }
 
 .eliminate {
   position: absolute;
   z-index: 1;
   width: 100%;
-  height: 100%
+  height: 100%;
+  -webkit-user-drag: none;
+  
 }
 
 .alien-name-holder {
@@ -243,7 +250,7 @@ body {
 }
 
 /* ---------------------------User Stats---------------------- */
-.user-stats {
+.user-stats  {
   box-sizing: border-box;
     border: 2px solid black;
     justify-self: stretch;
@@ -598,3 +605,21 @@ body {
   font-weight: 900;
   color: rgb(45, 31, 174);
 } 
+
+.two-player-score {
+  box-sizing: border-box;
+  border: 2px solid black;
+  justify-self: stretch;
+  grid-row: 3;
+  grid-column: 5;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard {
+  display: flex;
+}
