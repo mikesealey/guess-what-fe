@@ -643,15 +643,16 @@ h2 {
 
 .leaderboard-text-box {
   width: 50vw;
-  height: 50vh;
+  height: 80vh;
   background-color: rgba(255, 255, 255, 0.85);
   position: relative;
-  top: 25%;
+  top: 10%;
   left: 25%;
   z-index: 2;
   border-radius: 15px;
   padding: 25px;
   border: 2px solid black;
+  overflow: auto;
 }
 
 .result-row > * {
