@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserStatsContext } from "@/contexts/UserStats";
 import { postUser } from "../app/utils/getAliens"
 
-export default function Timer({ isGameFinished }) {
+export default function Timer({ isGameFinished, isLoading }) {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const { statsObject, setStatsObject } = useContext(UserStatsContext)
@@ -11,12 +11,12 @@ export default function Timer({ isGameFinished }) {
 
   useEffect(() => {
     if (isGameFinished) {
-      clearInterval(timer)
       const currentStats = { ...statsObject }
       currentStats.minutes = minutes
       currentStats.seconds = seconds
       setStatsObject(currentStats)
-    } else {
+    }
+    else {
       setSeconds(0);
       setMinutes(0);
     }
@@ -29,18 +29,19 @@ export default function Timer({ isGameFinished }) {
   }, [statsObject])
 
   useEffect(() => {
-    if (!isGameFinished) {
+    if (!isGameFinished && !isLoading) {
       timer = setInterval(() => {
         setSeconds(seconds + 1);
-
+        
         if (seconds === 59) {
           setMinutes(minutes + 1);
           setSeconds(0);
         }
       }, 1000);
     }
+  if(isGameFinished) clearInterval(timer)
     return () => clearInterval(timer);
-  }, [seconds]);
+  }, [seconds, isLoading, isGameFinished]);
 
   return (
     <div className="timer">
