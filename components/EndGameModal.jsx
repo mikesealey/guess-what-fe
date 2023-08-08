@@ -18,10 +18,6 @@ export default function EndGameModal({
 
   const router = useRouter();
 
-  useEffect(() => {
-    postUser(statsObject.username, statsObject.score, statsObject.minutes, statsObject.seconds)
-  }, [])
-
   function handlePlayAgain(e) {
     e.preventDefault();
     setIsGameFinished(false);

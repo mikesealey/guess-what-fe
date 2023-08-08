@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserStatsContext } from "@/contexts/UserStats";
+import { postUser } from "../app/utils/getAliens"
 
 export default function Timer({ isGameFinished }) {
   const [seconds, setSeconds] = useState(0);
@@ -20,6 +21,12 @@ export default function Timer({ isGameFinished }) {
       setMinutes(0);
     }
   }, [isGameFinished])
+
+  useEffect(() => {
+    if (isGameFinished) {
+      postUser(statsObject.username, statsObject.score, statsObject.minutes, statsObject.seconds)
+    }
+  }, [statsObject])
 
   useEffect(() => {
     if (!isGameFinished) {
