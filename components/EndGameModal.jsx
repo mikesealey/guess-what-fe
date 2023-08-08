@@ -1,8 +1,9 @@
 "use client"
 import { UserStatsContext } from "@/contexts/UserStats";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OpponentContext } from '@/contexts/OpponentObject';
+import { postUser } from "@/app/utils/getAliens";
 
 export default function EndGameModal({
   chosenAlien,
@@ -16,6 +17,10 @@ export default function EndGameModal({
   const winnerAlien = chosenAlien;
 
   const router = useRouter();
+
+  useEffect(() => {
+    postUser(statsObject.username, statsObject.score, statsObject.minutes, statsObject.seconds)
+  }, [])
 
   function handlePlayAgain(e) {
     e.preventDefault();
