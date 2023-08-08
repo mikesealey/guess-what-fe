@@ -4,6 +4,7 @@ import { UsersContext } from "@/contexts/User";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SocketContext } from "@/contexts/Socket";
+import Link from "next/link";
 const { io } = require("socket.io-client");
 
 const socket = io("https://guess-what-api.onrender.com/");

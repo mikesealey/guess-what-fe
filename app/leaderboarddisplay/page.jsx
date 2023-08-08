@@ -1,6 +1,6 @@
 "use client";
 
-import LeaderBoardModal from "@/components/LeaderBoardModal";
+import LeaderBoardModal from "@/components/LeaderboardModal";
 
 export default function LeaderBoardDisplay() {
   return (
