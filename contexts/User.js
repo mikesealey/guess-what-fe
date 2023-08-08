@@ -1,14 +1,17 @@
-"use client";
-import { createContext, useState } from "react";
+'use client';
+import { createContext, useState } from 'react';
 
-export const UserContext = createContext(null);
+export const UsersContext = createContext(null);
 
-export default function UserProvider({ children }) {
-  const [userOne, setUserOne] = useState("");
+export default function UsersProvider({ children }) {
+  const [users, setUsers] = useState({
+    p1: { p1name: '', p1socketId: '', p1alien: {} },
+    p2: { p2name: '', p2socketId: '', p2alien: {} },
+  });
 
   return (
-    <UserContext.Provider value={{ userOne, setUserOne }}>
+    <UsersContext.Provider value={{ users, setUsers }}>
       {children}
-    </UserContext.Provider>
+    </UsersContext.Provider>
   );
 }

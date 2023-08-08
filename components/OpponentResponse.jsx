@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef } from 'react';
-import { UserContext } from '@/contexts/User';
+import { UsersContext } from '@/contexts/User';
 
 export const OpponentResponse = ({ answer, hasWon }) => {
-  const { userOne, setUserOne } = useContext(UserContext);
+  const { users, setUsers } = useContext(UsersContext);
   const positiveResponse = [
     'Yes!',
     'How did you know?',

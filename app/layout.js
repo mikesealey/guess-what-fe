@@ -1,8 +1,10 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import UserProvider from '@/contexts/User';
+
 import OpponentProvider from '@/contexts/OpponentObject';
 import UserStatsProvider from '@/contexts/UserStats';
+import SocketProvider from '@/contexts/Socket';
+import UsersProvider from '@/contexts/User';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,13 +17,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <OpponentProvider>
-          <UserProvider>
-            <UserStatsProvider>
-              {children}
-            </UserStatsProvider>
-          </UserProvider>
-        </OpponentProvider>
+        <UsersProvider>
+          <SocketProvider>
+            <OpponentProvider>
+              <UserStatsProvider>{children}</UserStatsProvider>
+            </OpponentProvider>
+          </SocketProvider>
+        </UsersProvider>
       </body>
     </html>
   );
