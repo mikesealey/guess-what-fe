@@ -1,4 +1,4 @@
 export const Header = () => {
-  return <h1 className="logo">Guess What?!</h1>;
+  return <div className="header"><h1 className="logo">Guess What?! : Alien Edition</h1></div>;
   
 };

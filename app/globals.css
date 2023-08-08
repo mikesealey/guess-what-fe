@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@font-face {
+  font-family: "Audiowide";
+  src: url("../public/assets/Audiowide-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
 main {
   background-image: url("../public/assets/alt-background.jpg");
   /* Image by Freepik */
@@ -85,12 +91,38 @@ main {
 }
 
 .logo {
+  letter-spacing: 5px;
+ 
+  font-size: 50px;
+  text-align: center;
+  font-family: Audiowide, sans-serif;
+  border: 2px solid rgb(130, 4, 4);
   font-weight: bold;
-  color: white;
-  background-color: rgba(128, 128, 128, 0.517);
-  width: fit-content;
+  margin: 1rem;
+
+  background: linear-gradient(
+    90deg,
+    rgb(47, 14, 168) 0%,
+    rgba(109, 9, 121, 1) 35%,
+    rgb(231, 184, 241)100%
+  );
+  color: #52065f;
+  text-shadow: #161515;
+  background-color: rgba(67, 12, 12, 0.517);
+  width: 79vw;
   padding: 0 1rem;
   border-radius: 1rem;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+.header {
+  font-family: Audiowide, sans-serif;
+  text-align: center;
+ 
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+  
 }
 
 nav {
@@ -129,6 +161,8 @@ body {
 }
 
 .gameboard {
+  margin-bottom: 0.3rem;
+  padding: 0.3rem;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -138,6 +172,8 @@ body {
   min-width: 900px;
   /* aspect-ratio: 8/3; */
   grid-row: 1/3;
+  column-gap: 0.2rem;
+  row-gap: 0.3rem;
   grid-column: 1/5;
   border: 2px solid black;
   background-color: rgba(255, 255, 255, 0.85);
@@ -147,6 +183,7 @@ body {
 /* ------------------ OPPONENT CARD ----------------------*/
 
 .opponentcard {
+  margin-left: 0.3rem;
   display: flex;
   box-sizing: border-box;
   justify-content: center;
@@ -181,8 +218,6 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
-  border: 2px solid rgb(95, 16, 137);
   border-radius: 15px;
 }
 
@@ -192,6 +227,15 @@ body {
   height: 33%;
   width: 12%;
   position: relative;
+  border-radius: 15px;
+  border: 2px solid rgb(95, 16, 137);
+}
+.alien-img {
+  transition: transform 0.5s;
+}
+
+.alien-img:hover {
+  transform: scale(1.1);
 }
 
 .alien-planet,
@@ -218,8 +262,8 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
   filter: grayscale(100%);
+  border-radius: 15px;
 }
 
 .eliminate {
@@ -250,6 +294,7 @@ body {
 
 /* ---------------------------User Stats---------------------- */
 .user-stats {
+  margin-left: 0.3rem;
   box-sizing: border-box;
   border: 2px solid black;
   justify-self: stretch;
@@ -592,6 +637,8 @@ h2 {
   text-align: center;
   color: rgb(14, 41, 137);
   font-size: 100px;
+  text-shadow: 2px 0 #0a0909, -2px 0  #4a3c3c, 0 2px #fff, 0 -2px #fff,
+  1px 1px #fff, -1px -1px #fff, 1px -1px #665757, -1px 1px #1a1818;
 }
 .winner-card {
   width: 200px;
@@ -709,4 +756,7 @@ h2 {
 
 .play-again {
   margin: 0;
+}
+.question-mark{
+  font-size: 300px;
 }
