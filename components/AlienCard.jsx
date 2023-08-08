@@ -31,10 +31,12 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
         handleClickFn();
       }}
     >
+      
       {clicked ? <img className="eliminate" src="assets/alien-layers/eliminate.png"></img> : null}
       <div
         className={clicked ? "inactive" : "aliencard"}
       >
+        <div className="alien-img">
         <img
           className="alien-planet"
           src={`assets/alien-layers/planet-${alien.planet}.png`}
@@ -64,6 +66,7 @@ export default function AlienCard({ alien, alienObjects, setAlienObjects }) {
             src={"assets/alien-layers/antenna.png"}
           />
         ) : null}
+        </div>
       </div>
       <div className="alien-name-holder">
         <div className="alien-name">{alien.name}</div>
