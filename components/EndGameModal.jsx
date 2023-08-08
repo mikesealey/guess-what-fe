@@ -8,7 +8,8 @@ import { postUser } from "@/app/utils/getAliens";
 export default function EndGameModal({
   chosenAlien,
   setIsGameFinished,
-  setHasWon
+  setHasWon,
+  setIsLoading
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [clicked, setClicked] = useState(false);
@@ -20,6 +21,7 @@ export default function EndGameModal({
 
   function handlePlayAgain(e) {
     e.preventDefault();
+    setIsLoading(true)
     setIsGameFinished(false);
     setClicked(true);
     setHasWon(null)

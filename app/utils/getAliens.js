@@ -12,6 +12,7 @@ export const getQuestions = () => {
 }
 
 export const postUser = (username, score, minutes, seconds) => {
+  if (!username) return console.log("No username set")
   return api.post('/users', {
     username: username,
     score: score,
