@@ -1,16 +1,17 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
+import "./globals.css";
+import { Inter } from "next/font/google";
 
-import OpponentProvider from '@/contexts/OpponentObject';
-import UserStatsProvider from '@/contexts/UserStats';
-import SocketProvider from '@/contexts/Socket';
-import UsersProvider from '@/contexts/User';
+import OpponentProvider from "@/contexts/OpponentObject";
+import UserStatsProvider from "@/contexts/UserStats";
+import SocketProvider from "@/contexts/Socket";
+import UsersProvider from "@/contexts/User";
+import ThisUserProvider from "@/contexts/ThisUser";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Guess What?!',
-  description: 'A game built in one week by team Git Kermit',
+  title: "Guess What?!",
+  description: "A game built in one week by team Git Kermit",
 };
 
 export default function RootLayout({ children }) {
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
         <UsersProvider>
           <SocketProvider>
             <OpponentProvider>
-              <UserStatsProvider>{children}</UserStatsProvider>
+              <ThisUserProvider>
+                <UserStatsProvider>{children}</UserStatsProvider>
+              </ThisUserProvider>
             </OpponentProvider>
           </SocketProvider>
         </UsersProvider>

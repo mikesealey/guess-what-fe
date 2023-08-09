@@ -1,45 +1,42 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 import { UsersContext } from '@/contexts/User';
-import { UserStatsContext } from '../contexts/UserStats'
+import { UserStatsContext } from '../contexts/UserStats';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { SocketContext } from '@/contexts/Socket';
-const { io } = require('socket.io-client');
+import { ThisUserContext } from '@/contexts/ThisUser';
+import { getAliens } from '@/app/utils/getAliens';
 
-const socket = io("https://guess-what-api.onrender.com/");
+const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
-  const { statsObject, setStatsObject } = useContext(UserStatsContext)
-
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
+  const { thisUser, setThisUser } = useContext(ThisUserContext);
   const [clicked, setClicked] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    getAliens().then((res) => {
+      let obj = { ...users };
+      obj.allAliens = res;
+      setUsers(obj);
+    });
+  }, []);
 
   function handleSinglePlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    router.push("/singleplayerdisplay");
+    router.push('/singleplayerdisplay');
   }
 
   function handleTwoPlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    socket.emit("find", { name: userName });
-    socket.on("your-socketid", (id) => {
-      setYourSocket(id);
-    });
-    socket.on("find", (e) => {
-      let obj = { ...users };
-      obj.p1.p1name = e.allPlayers[0].p1.p1name;
-      obj.p2.p2name = e.allPlayers[0].p2.p2name;
-      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
-      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
-      setUsers(obj);
-    });
-    router.push("/lobby");
+
+    router.push('/twoplayerdisplay');
   }
 
   return (
@@ -59,12 +56,12 @@ export const LandingCard = () => {
             <input
               type="text"
               id="username"
-              value={userName}
+              value={thisUser.name}
               onChange={(e) => {
                 setUserName(e.target.value);
-                const currentUserStats = {...statsObject}
-                currentUserStats.username = e.target.value 
-                setStatsObject(currentUserStats)
+                const currentUserStats = { ...statsObject };
+                currentUserStats.username = e.target.value;
+                setStatsObject(currentUserStats);
               }}
               required
             />

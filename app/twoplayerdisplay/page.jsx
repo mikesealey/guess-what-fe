@@ -14,29 +14,38 @@ import chooseSecretAlien from '../utils/chooseSecretAlien';
 import ScoreTwoPlayer from '@/components/ScoreTwoPlayer';
 import { UsersContext } from '@/contexts/User';
 import { SocketContext } from '@/contexts/Socket';
+import { ThisUserContext } from '@/contexts/ThisUser';
+
+const { io } = require('socket.io-client');
+
+const socket = io('https://guess-what-api.onrender.com/');
 
 export default function TwoPlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [alienObjects, setAlienObjects] = useState([]);
   const [chosenAlien, setChosenAlien] = useState();
   const [hasWon, setHasWon] = useState(null);
+  const [displayLobby, setDisplayLobby] = useState(true);
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
-  console.log(yourSocket, '<--- unique socket id');
-  console.log(users, '<--- users state');
-
-  useEffect(() => {
-    getAliens().then((res) => {
-      setAlienObjects(res);
-      setChosenAlien(chooseSecretAlien(res));
-    });
-  }, []);
 
   return (
     <main>
       <Header />
       <div className="two-player-game-wrapper">
-        {/* <LobbyModal /> remove later */}
+        {displayLobby ? (
+          <LobbyModal
+            setIsLoading={setIsLoading}
+            socket={socket}
+            io={io}
+            alienObjects={alienObjects}
+            setAlienObjects={setAlienObjects}
+            setChosenAlien={setChosenAlien}
+            chooseSecretAlien={chooseSecretAlien}
+            setDisplayLobby={setDisplayLobby}
+          />
+        ) : null}
         {isGameFinished && (
           <EndGameModal
             chosenAlien={chosenAlien}
