@@ -152,7 +152,7 @@ export default function QuestionCard({
             onClick={() => {
               handleSubmit();
             }}
-            id="question-submit-btn"
+             className="question-btn question-submit-btn"
           >
             Submit
           </button>

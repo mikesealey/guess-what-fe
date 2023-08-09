@@ -70,7 +70,7 @@ export default function TwoPlayerDisplay() {
         <UsersCard />
         <ScoreTwoPlayer />
       </div>
-      <Footer />
+      <Footer className='footer'/>
     </main>
   );
 }
