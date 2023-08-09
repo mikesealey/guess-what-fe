@@ -30,6 +30,8 @@ export default function TwoPlayerDisplay() {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
 
+  console.log(chosenAlien, '<--- chosen alien');
+
   return (
     <main>
       <Header />
@@ -41,6 +43,7 @@ export default function TwoPlayerDisplay() {
             io={io}
             alienObjects={alienObjects}
             setAlienObjects={setAlienObjects}
+            chosenAlien={chosenAlien}
             setChosenAlien={setChosenAlien}
             chooseSecretAlien={chooseSecretAlien}
             setDisplayLobby={setDisplayLobby}
@@ -67,7 +70,7 @@ export default function TwoPlayerDisplay() {
           setHasWon={setHasWon}
         />
         <OpponentCard />
-        <UsersCard />
+        <UsersCard isLoading={isLoading} />
         <ScoreTwoPlayer />
       </div>
       <Footer />
