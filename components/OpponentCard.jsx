@@ -26,7 +26,7 @@ export default function OpponentCard() {
     }
   }
 
-  const img = <h1 className="question-mark">???</h1>;
+  const img = <h1 className="question-mark">?</h1>;
 
   return (
     <div className="opponentcard">

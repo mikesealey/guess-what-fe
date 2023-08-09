@@ -37,6 +37,7 @@ export default function SinglePlayerDisplay() {
             chosenAlien={chosenAlien}
             setIsGameFinished={setIsGameFinished}
             setHasWon={setHasWon}
+            setIsLoading={setIsLoading}
           />
         )}
         <Gameboard
@@ -53,7 +54,7 @@ export default function SinglePlayerDisplay() {
           setHasWon={setHasWon}
         />
         <OpponentCard />
-        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished}/>
+        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading}/>
       </div>
       <Footer />
     </main>

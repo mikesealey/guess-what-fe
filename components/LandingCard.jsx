@@ -1,15 +1,21 @@
 'use client';
 
+import Link from 'next/link';
 import { UsersContext } from '@/contexts/User';
+import { UserStatsContext } from '../contexts/UserStats';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ThisUserContext } from '@/contexts/ThisUser';
 import { getAliens } from '@/app/utils/getAliens';
 
+const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
-  const [clicked, setClicked] = useState(false);
   const { users, setUsers } = useContext(UsersContext);
+  const { yourSocket, setYourSocket } = useContext(SocketContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
+  const [clicked, setClicked] = useState(false);
+  const [userName, setUserName] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -52,9 +58,10 @@ export const LandingCard = () => {
               id="username"
               value={thisUser.name}
               onChange={(e) => {
-                let obj = { ...thisUser };
-                obj.name = e.target.value;
-                setThisUser(obj);
+                setUserName(e.target.value);
+                const currentUserStats = { ...statsObject };
+                currentUserStats.username = e.target.value;
+                setStatsObject(currentUserStats);
               }}
               required
             />
@@ -84,6 +91,9 @@ export const LandingCard = () => {
             2 player
           </button>
         </div>
+        <button>
+          <Link href="/leaderboarddisplay">View Leaderboard</Link>
+        </button>
       </form>
     </div>
   );
