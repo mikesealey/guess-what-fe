@@ -13,6 +13,7 @@ export default function LobbyModal({
   io,
   alienObjects,
   setAlienObjects,
+  chosenAlien,
   setChosenAlien,
   chooseSecretAlien,
   setDisplayLobby,
@@ -37,6 +38,8 @@ export default function LobbyModal({
       obj.p2.p2name = e.allPlayers[0].p2.p2name;
       obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
       obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+      obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
+      obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
       obj.allAliens = e.allPlayers[0].allAliens;
       setUsers(obj);
     });
@@ -46,6 +49,14 @@ export default function LobbyModal({
       setWaitingPlayerTwo(false);
     }
   }, [users]);
+
+  useEffect(() => {
+    if (yourSocket === users.p1.p1socketId) {
+      setChosenAlien(users.p2.p2alien);
+    } else {
+      setChosenAlien(users.p1.p1alien);
+    }
+  }, [waitingPlayerTwo]);
 
   // useEffect(() => {
   //   if (users.p1.p1name && users.p2.p2name) {
@@ -82,6 +93,7 @@ export default function LobbyModal({
 
   socket.on('proceed', () => {
     setAlienObjects(users.allAliens);
+
     setDisplayLobby(false);
     setIsLoading(false);
   });
