@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import { UserStatsContext } from "@/contexts/UserStats";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { OpponentContext } from '@/contexts/OpponentObject';
-import { postUser } from "@/app/utils/getAliens";
 
 export default function EndGameModal({
   chosenAlien,
@@ -13,7 +12,7 @@ export default function EndGameModal({
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [clicked, setClicked] = useState(false);
-  const { statsObject, setStatsObject } = useContext(UserStatsContext)
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
 
   const winnerAlien = chosenAlien;
 
@@ -24,11 +23,11 @@ export default function EndGameModal({
     setIsLoading(true)
     setIsGameFinished(false);
     setClicked(true);
-    setHasWon(null)
-    const currentStats = { ...statsObject }
-    currentStats.score = 0
-    setStatsObject(currentStats)
-    setOpponentObject({})
+    setHasWon(null);
+    const currentStats = { ...statsObject };
+    currentStats.score = 0;
+    setStatsObject(currentStats);
+    setOpponentObject({});
   }
 
   function handleHome(e) {
@@ -37,11 +36,14 @@ export default function EndGameModal({
     router.push("/");
   }
 
+  function handleLeaderboard(e) {
+    router.push("/leaderboarddisplay");
+  }
 
   return (
     <div className="modal">
       <div className="text-box">
-        <h1>The winner is { }</h1>
+        <h1>The winner is {}</h1>
         <div className="aliencard winner-card">
           <img
             className="alien-planet"
@@ -57,8 +59,9 @@ export default function EndGameModal({
           />
           <img
             className="alien-mouth"
-            src={`assets/alien-layers/mouth-${winnerAlien.isFriendly ? "friendly" : "unfriendly-a"
-              }.png`}
+            src={`assets/alien-layers/mouth-${
+              winnerAlien.isFriendly ? "friendly" : "unfriendly-a"
+            }.png`}
           />
           {winnerAlien.horns ? (
             <img
@@ -98,6 +101,7 @@ export default function EndGameModal({
         >
           Home
         </button>
+        <button onClick={handleLeaderboard}>Show Leaderboard</button>
       </div>
     </div>
   );

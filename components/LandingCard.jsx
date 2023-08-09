@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import Link from "next/link";
 import { UsersContext } from '@/contexts/User';
 import { UserStatsContext } from '../contexts/UserStats'
 import { useContext, useEffect, useState } from 'react';
@@ -7,30 +8,30 @@ import { useRouter } from 'next/navigation';
 import { SocketContext } from '@/contexts/Socket';
 const { io } = require('socket.io-client');
 
-const socket = io('https://guess-what-api.onrender.com/');
+const socket = io("https://guess-what-api.onrender.com/");
 export const LandingCard = () => {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
   const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
   const [clicked, setClicked] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
   const router = useRouter();
 
   function handleSinglePlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    router.push('/singleplayerdisplay');
+    router.push("/singleplayerdisplay");
   }
 
   function handleTwoPlayerClick(e) {
     e.preventDefault();
     setClicked(true);
-    socket.emit('find', { name: userName });
-    socket.on('your-socketid', (id) => {
+    socket.emit("find", { name: userName });
+    socket.on("your-socketid", (id) => {
       setYourSocket(id);
     });
-    socket.on('find', (e) => {
+    socket.on("find", (e) => {
       let obj = { ...users };
       obj.p1.p1name = e.allPlayers[0].p1.p1name;
       obj.p2.p2name = e.allPlayers[0].p2.p2name;
@@ -38,7 +39,7 @@ export const LandingCard = () => {
       obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
       setUsers(obj);
     });
-    router.push('/lobby');
+    router.push("/lobby");
   }
 
   return (
@@ -93,6 +94,9 @@ export const LandingCard = () => {
             2 player
           </button>
         </div>
+        <button>
+          <Link href="/leaderboarddisplay">View Leaderboard</Link>
+        </button>
       </form>
     </div>
   );

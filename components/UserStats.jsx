@@ -11,7 +11,7 @@ export default function UserStats({ alienObjects, isGameFinished, isLoading }) {
     <div className="user-stats">
       <Timer isGameFinished={isGameFinished} isLoading={isLoading} />
       <div className="alien-stats">
-        <Score />
+        <Score isGameFinished={isGameFinished} />
         <div className="aliens-left">
           <h1>Aliens left: {activeAlienCounter.length} </h1>
         </div>

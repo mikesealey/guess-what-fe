@@ -263,7 +263,6 @@ body {
   height: 100%;
   width: 100%;
   filter: grayscale(100%);
-
   border-radius: 15px;
 }
 
@@ -675,6 +674,89 @@ h2 {
   display: flex;
 }
 
+.leaderboard {
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 40rem;
+  padding: 0.5rem;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+}
+
+.leaderboard-text-box {
+  width: 50vw;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.85);
+  position: relative;
+  top: 10%;
+  left: 25%;
+  z-index: 2;
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.result-row > * {
+  min-width: 10vw;
+}
+
+.result-row {
+  display: flex;
+  flex-direction: row;
+  color: rgb(213, 192, 213);
+  background: rgb(95, 16, 137);
+  border-radius: 10px;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-width: 30%;
+  max-width: 80%;
+  justify-items: center;
+  display: flex;
+  margin: 1rem auto;
+}
+
+.leaderboard-buttons {
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  width: 10vw;
+  background: linear-gradient(30deg, rgb(163, 64, 249) 5%, rgb(230, 208, 251));
+  border-radius: 5px;
+}
+
+.leaderboard-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.change-page-buttons {
+  border: 2px solid rgb(163, 64, 249);
+  width: 30px;
+  border-radius: 5px;
+}
+
+.change-page-buttons:hover {
+  background-color: rgb(163, 64, 249);
+  color: #ffffff;
+}
+
+.leaderboard-title {
+  font-size: 2.5rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.play-again {
+  margin: 0;
+}
 .question-mark{
   font-size: 300px;
 }
