@@ -58,7 +58,9 @@ export const LandingCard = () => {
               id="username"
               value={thisUser.name}
               onChange={(e) => {
-                setUserName(e.target.value);
+                let obj = { ...thisUser };
+                obj.name = e.target.value;
+                setThisUser(obj);
                 const currentUserStats = { ...statsObject };
                 currentUserStats.username = e.target.value;
                 setStatsObject(currentUserStats);
