@@ -16,7 +16,7 @@ export default function UsersCard({ isLoading }) {
     }
   }, [isLoading]);
 
-  if (usersAlien) {
+  if (usersAlien._id) {
     return (
       <div className="two-player-usercard">
         <div className="alien-img">
