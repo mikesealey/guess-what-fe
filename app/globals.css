@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   overflow: hidden;
-}
+} */
 
 @font-face {
   font-family: "Audiowide";
@@ -159,7 +159,7 @@ body {
 
 .two-player-game-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 20%;
+  grid-template-columns: 20rem 20rem 1fr 1fr 20%;
   grid-template-rows: 1fr 1fr auto;
 }
 
