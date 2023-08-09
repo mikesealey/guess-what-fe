@@ -71,7 +71,7 @@ export default function TwoPlayerDisplay() {
         <UsersCard isLoading={isLoading} />
         <ScoreTwoPlayer />
       </div>
-      <Footer />
+      <Footer className='footer'/>
     </main>
   );
 }
