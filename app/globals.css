@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   overflow: hidden;
-}
+} */
 
 main {
   background-image: url("../public/assets/alt-background.jpg");
@@ -13,6 +13,13 @@ main {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+}
+
+header img{
+  width:100px;
+  margin-bottom: -1rem;
+  margin-top:-0.5rem;
+  transform:rotate(-10deg)
 }
 
 .landingcard {
