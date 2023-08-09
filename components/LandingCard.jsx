@@ -7,8 +7,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ThisUserContext } from '@/contexts/ThisUser';
 import { getAliens } from '@/app/utils/getAliens';
+import { SocketContext } from '@/contexts/Socket';
 
-const socket = io('https://guess-what-api.onrender.com/');
 export const LandingCard = () => {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
