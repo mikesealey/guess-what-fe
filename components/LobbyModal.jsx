@@ -6,11 +6,13 @@ import { ThisUserContext } from '@/contexts/ThisUser';
 import { UsersContext } from '@/contexts/User';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
+const { io } = require('socket.io-client');
+
+const socket = io('https://guess-what-api.onrender.com/');
 
 export default function LobbyModal({
   setIsLoading,
-  socket,
-  io,
+
   alienObjects,
   setAlienObjects,
   chosenAlien,

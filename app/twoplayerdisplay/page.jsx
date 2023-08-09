@@ -39,8 +39,6 @@ export default function TwoPlayerDisplay() {
         {displayLobby ? (
           <LobbyModal
             setIsLoading={setIsLoading}
-            socket={socket}
-            io={io}
             alienObjects={alienObjects}
             setAlienObjects={setAlienObjects}
             chosenAlien={chosenAlien}
