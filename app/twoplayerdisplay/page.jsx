@@ -92,10 +92,14 @@ export default function TwoPlayerDisplay() {
         />
         <OpponentCard />
         <UsersCard isLoading={isLoading} />
-        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading} />
+        <UserStats
+          alienObjects={alienObjects}
+          isGameFinished={isGameFinished}
+          isLoading={isLoading}
+        />
         <ScoreTwoPlayer />
       </div>
-      <Footer className='footer'/>
+      <Footer className="footer" />
     </main>
   );
 }

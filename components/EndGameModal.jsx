@@ -1,8 +1,9 @@
-"use client";
-import { UserStatsContext } from "@/contexts/UserStats";
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+'use client';
+import { UserStatsContext } from '@/contexts/UserStats';
+import { useRouter } from 'next/navigation';
+import { useContext, useState } from 'react';
 import { OpponentContext } from '@/contexts/OpponentObject';
+import { UsersContext } from '@/contexts/User';
 
 export default function EndGameModal({
   chosenAlien,
@@ -14,6 +15,7 @@ export default function EndGameModal({
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [clicked, setClicked] = useState(false);
   const { statsObject, setStatsObject } = useContext(UserStatsContext);
+  const { users, setUsers } = useContext(UsersContext);
 
 
 
@@ -23,7 +25,7 @@ export default function EndGameModal({
 
   function handlePlayAgain(e) {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     setIsGameFinished(false);
     setClicked(true);
     setHasWon(null);
@@ -36,11 +38,11 @@ export default function EndGameModal({
   function handleHome(e) {
     e.preventDefault();
     setClicked(true);
-    router.push("/");
+    router.push('/');
   }
 
   function handleLeaderboard(e) {
-    router.push("/leaderboarddisplay");
+    router.push('/leaderboarddisplay');
   }
 
   return (
@@ -63,7 +65,7 @@ export default function EndGameModal({
           <img
             className="alien-mouth"
             src={`assets/alien-layers/mouth-${
-              winnerAlien.isFriendly ? "friendly" : "unfriendly-a"
+              winnerAlien.isFriendly ? 'friendly' : 'unfriendly-a'
             }.png`}
           />
           {winnerAlien.horns ? (
@@ -75,36 +77,49 @@ export default function EndGameModal({
           {winnerAlien.hasAntenna ? (
             <img
               className="alien-antenna"
-              src={"assets/alien-layers/antenna.png"}
+              src={'assets/alien-layers/antenna.png'}
             />
           ) : null}
         </div>
-        <div id="stats-container">
+        <div className="stats-container">
+          <div id="stats-container">
           {hasWon ? <p>Congratulations {statsObject.username}, you win!</p> : <p>Sorry, {statsObject.username}, you lose!</p>}
-          <p>Score {statsObject.score}</p>
-          <p>Time</p>
-          <p>
-            {String(statsObject.minutes).length < 2 && 0}
-            {statsObject.minutes}:{String(statsObject.seconds).length < 2 && 0}
-            {statsObject.seconds}
-          </p>
+            <p>Score {statsObject.score}</p>
+            <p>
+              Time {String(statsObject.minutes).length < 2 && 0}
+              {statsObject.minutes}:
+              {String(statsObject.seconds).length < 2 && 0}
+              {statsObject.seconds}
+            </p>
+          </div>
         </div>
-        <button
-          onClick={(e) => {
-            handlePlayAgain(e);
-          }}
-        >
-          Play again
-        </button>
-        <br />
-        <button
-          onClick={(e) => {
-            handleHome(e);
-          }}
-        >
-          Home
-        </button>
-        <button onClick={handleLeaderboard}>Show Leaderboard</button>
+        <div className="end-modal-btns">
+          <div className="play-home">
+            <button
+              className="question-submit-btn"
+              onClick={(e) => {
+                handlePlayAgain(e);
+              }}
+            >
+              Play again
+            </button>
+
+            <button
+              className="question-submit-btn"
+              onClick={(e) => {
+                handleHome(e);
+              }}
+            >
+              Home
+            </button>
+          </div>
+          <button
+            className="question-submit-btn extended"
+            onClick={handleLeaderboard}
+          >
+            Show Leaderboard
+          </button>
+        </div>
       </div>
     </div>
   );
