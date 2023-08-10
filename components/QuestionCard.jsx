@@ -5,6 +5,12 @@ import { OpponentContext } from '@/contexts/OpponentObject';
 import { useContext } from 'react';
 import { OpponentResponse } from './OpponentResponse';
 import { UserStatsContext } from '@/contexts/UserStats';
+import { SocketContext } from '@/contexts/Socket';
+import { UsersContext } from '@/contexts/User';
+
+const { io } = require('socket.io-client');
+
+const socket = io('https://guess-what-copy.onrender.com/');
 
 export default function QuestionCard({
   setIsGameFinished,
@@ -12,14 +18,33 @@ export default function QuestionCard({
   chosenAlien,
   setHasWon,
   hasWon,
+  currentTurn,
+  setCurrentTurn,
+  isPlaying,
+  setIsPlaying
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const { statsObject, setStatsObject } = useContext(UserStatsContext);
+  const { yourSocket, setYourSocket } = useContext(SocketContext);
+  const { users, setUsers } = useContext(UsersContext);
   const [validQuestions, setValidQuestions] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [indexer, setIndexer] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
+
+  console.log(currentTurn, "<<<<<<< currentTurn")
+  console.log(isPlaying, "<<<<<< isPlaying")
+  console.log(yourSocket, "<<<<<< yourSocket")
+  console.log(users.p1.p1socketId, users.p2.p2socketId, "<<<<<< p1 and p2 socket IDs")
+
+  socket.on('turnIncreased', (nextTurn) => {
+    setCurrentTurn(nextTurn)
+  })
+
+  socket.on('endGame', () => {
+    setIsGameFinished(true)
+  })
 
   const emptyAlienObject = {
     _id: [],
@@ -52,6 +77,31 @@ export default function QuestionCard({
     });
     setPossibilities(possPlaceholder);
   }
+
+  useEffect(() => {
+    if (statsObject.score > 0) {
+      socket.emit('turnPlayed')
+      // socket.on('turnIncreased', (nextTurn) => {
+      //   setCurrentTurn(nextTurn)
+      // })
+    }
+  }, [statsObject])
+
+  // useEffect(() => {
+  //   if (yourSocket === users.p2.p2socketId) {
+  //     setIsPlaying(false)
+  //   }
+  // }, [])
+
+  useEffect(() => {
+    if (yourSocket === users.p1.p1socketId && currentTurn % 2 === 0) {
+      setIsPlaying(true)
+    } else if (yourSocket === users.p2.p2socketId && currentTurn % 2 !== 0) {
+      setIsPlaying(true)
+    } else {
+      setIsPlaying(false)
+    }
+  }, [currentTurn, isLoading])
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -120,13 +170,19 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
+      socket.emit("winner")
       setOpponentObject(chosenAlien);
+      const currentStats = {...statsObject}
+      currentStats.hasWon = true
+      currentStats.numberOfWins += 1
+      setStatsObject(currentStats)
     } else {
       setHasWon(false);
     }
   }
 
   if (validQuestions.length) {
+    if (isPlaying) {
     return (
       <div className="questioncard">
         <div id="question-prompt-container">
@@ -186,7 +242,12 @@ export default function QuestionCard({
           ) : null}
         </form>
         <OpponentResponse answer={answer} hasWon={hasWon} />
-      </div>
+        </div>
     );
+          } else {
+            return <div className="questioncard"> 
+            <p id="turn-placeholder">Opponent is taking their turn...</p>
+            </div>
+          }
   }
 }

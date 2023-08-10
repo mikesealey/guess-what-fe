@@ -32,6 +32,8 @@ export default function TwoPlayerDisplay() {
   const { yourSocket, setYourSocket } = useContext(SocketContext);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
   const { statsObject, setStatsObject } = useContext(UserStatsContext)
+  const [currentTurn, setCurrentTurn] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
 
   useEffect(() => {
     console.log("in local storage get")
@@ -61,6 +63,8 @@ export default function TwoPlayerDisplay() {
             setChosenAlien={setChosenAlien}
             chooseSecretAlien={chooseSecretAlien}
             setDisplayLobby={setDisplayLobby}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
           />
         ) : null}
         {isGameFinished && (
@@ -83,6 +87,10 @@ export default function TwoPlayerDisplay() {
           chosenAlien={chosenAlien}
           hasWon={hasWon}
           setHasWon={setHasWon}
+          currentTurn={currentTurn}
+          setCurrentTurn={setCurrentTurn}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
         />
         <OpponentCard />
         <UsersCard isLoading={isLoading} />

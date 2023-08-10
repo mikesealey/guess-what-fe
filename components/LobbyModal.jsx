@@ -8,17 +8,18 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 const { io } = require('socket.io-client');
 
-const socket = io('https://guess-what-api.onrender.com/');
+const socket = io('https://guess-what-copy.onrender.com/');
 
 export default function LobbyModal({
   setIsLoading,
-
   alienObjects,
   setAlienObjects,
   chosenAlien,
   setChosenAlien,
   chooseSecretAlien,
   setDisplayLobby,
+  isPlaying,
+  setIsPlaying
 }) {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
@@ -105,6 +106,10 @@ export default function LobbyModal({
 
     setDisplayLobby(false);
     setIsLoading(false);
+    if (yourSocket === users.p2.p2socketId) {
+      setIsPlaying(false)
+    }
+
   });
 
   return (
