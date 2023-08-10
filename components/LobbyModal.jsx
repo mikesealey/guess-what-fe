@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 const { io } = require('socket.io-client');
 
-const socket = io('http://localhost:8080');
+const socket = io('https://guess-what-be.onrender.com');
 
 export default function LobbyModal({
   setIsLoading,
