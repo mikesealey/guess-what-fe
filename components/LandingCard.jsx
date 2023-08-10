@@ -19,6 +19,23 @@ export const LandingCard = () => {
   const router = useRouter();
 
   useEffect(() => {
+    localStorage.setItem('thisUser', JSON.stringify(thisUser))
+  }, [thisUser, users, yourSocket]
+  )
+
+  useEffect(() => {
+    if (users.allAliens.length) {
+      console.log(users, "<<<<< users, setting")
+      localStorage.setItem('users', JSON.stringify(users))
+    }
+  }, [users])
+
+  useEffect(() => {
+    console.log(statsObject, "<<<<<< setting stats object")
+    localStorage.setItem('statsObject', JSON.stringify(statsObject))
+  }, [statsObject])
+
+  useEffect(() => {
     getAliens().then((res) => {
       let obj = { ...users };
       obj.allAliens = res;
