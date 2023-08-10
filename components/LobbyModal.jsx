@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 const { io } = require('socket.io-client');
 
-const socket = io('https://guess-what-be.onrender.com');
+const socket = io('https://guess-what-copy.onrender.com/');
 
 export default function LobbyModal({
   setIsLoading,
@@ -25,32 +25,36 @@ export default function LobbyModal({
   const [waitingPlayerTwo, setWaitingPlayerTwo] = useState(true);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
   const router = useRouter();
-  
+
   useEffect(() => {
-    console.log(thisUser.name, "<<<<< thisUser.name")
+    console.log(thisUser.name, '<<<<< thisUser.name');
     if (thisUser.name) {
-      console.log(thisUser.name, "<<<<< thisUser.name in if condition")
-    socket.emit('find', { name: thisUser.name, aliens: users.allAliens, test: "test" });
-    let tempThisUser = { ...thisUser };
-    tempThisUser.name = '';
-    setThisUser(tempThisUser);
-    socket.on('your-socketid', (id) => {
-      setYourSocket(id);
-    });
-    socket.on('find', (e) => {
-      let obj = { ...users };
-      obj.p1.p1name = e.allPlayers[0].p1.p1name;
-      obj.p2.p2name = e.allPlayers[0].p2.p2name;
-      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
-      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
-      obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
-      obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
-      obj.allAliens = e.allPlayers[0].allAliens;
-      setUsers(obj);
-      console.log(users, "<<<<< users, setting")
-      localStorage.setItem('users', JSON.stringify(users))
-    });
-  }
+      console.log(thisUser.name, '<<<<< thisUser.name in if condition');
+      socket.emit('find', {
+        name: thisUser.name,
+        aliens: users.allAliens,
+        test: 'test',
+      });
+      let tempThisUser = { ...thisUser };
+      tempThisUser.name = '';
+      setThisUser(tempThisUser);
+      socket.on('your-socketid', (id) => {
+        setYourSocket(id);
+      });
+      socket.on('find', (e) => {
+        let obj = { ...users };
+        obj.p1.p1name = e.allPlayers[0].p1.p1name;
+        obj.p2.p2name = e.allPlayers[0].p2.p2name;
+        obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
+        obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+        obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
+        obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
+        obj.allAliens = e.allPlayers[0].allAliens;
+        setUsers(obj);
+        console.log(users, '<<<<< users, setting');
+        localStorage.setItem('users', JSON.stringify(users));
+      });
+    }
   }, [thisUser, users]);
 
   useEffect(() => {
