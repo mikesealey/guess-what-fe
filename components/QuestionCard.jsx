@@ -13,6 +13,7 @@ const { io } = require('socket.io-client');
 const socket = io('https://guess-what-copy.onrender.com/');
 
 export default function QuestionCard({
+  isGameFinished,
   setIsGameFinished,
   alienObjects,
   chosenAlien,
@@ -33,11 +34,6 @@ export default function QuestionCard({
   const [answer, setAnswer] = useState(null);
   const [guess, setGuess] = useState(null);
 
-  console.log(currentTurn, "<<<<<<< currentTurn")
-  console.log(isPlaying, "<<<<<< isPlaying")
-  console.log(yourSocket, "<<<<<< yourSocket")
-  console.log(users.p1.p1socketId, users.p2.p2socketId, "<<<<<< p1 and p2 socket IDs")
-
   socket.on('turnIncreased', (nextTurn) => {
     setCurrentTurn(nextTurn)
   })
@@ -45,6 +41,14 @@ export default function QuestionCard({
   socket.on('endGame', () => {
     setIsGameFinished(true)
   })
+
+  useEffect(() => {
+    if (isGameFinished && !hasWon) {
+      const currentStats = {...statsObject}
+      currentStats.losses -= 1
+      setStatsObject(currentStats)
+    }
+  }, [isGameFinished])
 
   const emptyAlienObject = {
     _id: [],
@@ -81,17 +85,8 @@ export default function QuestionCard({
   useEffect(() => {
     if (statsObject.score > 0) {
       socket.emit('turnPlayed')
-      // socket.on('turnIncreased', (nextTurn) => {
-      //   setCurrentTurn(nextTurn)
-      // })
     }
   }, [statsObject])
-
-  // useEffect(() => {
-  //   if (yourSocket === users.p2.p2socketId) {
-  //     setIsPlaying(false)
-  //   }
-  // }, [])
 
   useEffect(() => {
     if (yourSocket === users.p1.p1socketId && currentTurn % 2 === 0) {
@@ -173,8 +168,7 @@ export default function QuestionCard({
       socket.emit("winner")
       setOpponentObject(chosenAlien);
       const currentStats = {...statsObject}
-      currentStats.hasWon = true
-      currentStats.numberOfWins += 1
+      currentStats.wins += 1
       setStatsObject(currentStats)
     } else {
       setHasWon(false);

@@ -1,13 +1,14 @@
-export default function ScoreTwoPlayer() {
-    const placeholderObject = {
-        player1: {score: 0, name: "Mike"},
-        player2: {score: 0, name: "Connor"}
-    }
+import { useContext } from 'react';
+import { UserStatsContext } from '@/contexts/UserStats';
+import { UsersContext } from '@/contexts/User';
 
+export default function ScoreTwoPlayer() {
+    const { statsObject, setStatsObject } = useContext(UserStatsContext);
+    const { users, setUsers } = useContext(UsersContext);
 
     return (
         <div className="two-player-score">
-            <p className="scoreboard">{placeholderObject.player1.name} {placeholderObject.player1.score} - {placeholderObject.player2.score} {placeholderObject.player2.name}</p>
+            <p className="scoreboard">{users.p1.p1name} {statsObject.username === users.p1.p1name ? statsObject.wins : statsObject.losses} - {statsObject.username === users.p2.p2name ? statsObject.wins : statsObject.losses} {users.p2.p2name}</p>
         </div>
     )
 }

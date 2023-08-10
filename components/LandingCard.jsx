@@ -25,13 +25,11 @@ export const LandingCard = () => {
 
   useEffect(() => {
     if (users.allAliens.length) {
-      console.log(users, "<<<<< users, setting")
       localStorage.setItem('users', JSON.stringify(users))
     }
   }, [users])
 
   useEffect(() => {
-    console.log(statsObject, "<<<<<< setting stats object")
     localStorage.setItem('statsObject', JSON.stringify(statsObject))
   }, [statsObject])
 

@@ -9,8 +9,8 @@ export default function UserStatsProvider({ children }) {
         minutes: 0,
         seconds: 0,
         score: 0,
-        hasWon: false,
-        numberOfWins: 0
+        wins: 0,
+        losses: 0
     })
 
     return (

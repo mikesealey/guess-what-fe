@@ -17,6 +17,8 @@ export default function SinglePlayerDisplay() {
   const [alienObjects, setAlienObjects] = useState([]);
   const [chosenAlien, setChosenAlien] = useState();
   const [hasWon, setHasWon] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [currentTurn, setCurrentTurn] = useState(0)
 
   useEffect(() => {
     if (!isGameFinished) {
@@ -37,6 +39,7 @@ export default function SinglePlayerDisplay() {
             chosenAlien={chosenAlien}
             setIsGameFinished={setIsGameFinished}
             setHasWon={setHasWon}
+            hasWon={hasWon}
             setIsLoading={setIsLoading}
           />
         )}
@@ -48,13 +51,18 @@ export default function SinglePlayerDisplay() {
         <QuestionCard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
+          isGameFinished={isGameFinished}
           setIsGameFinished={setIsGameFinished}
           chosenAlien={chosenAlien}
           hasWon={hasWon}
           setHasWon={setHasWon}
+          currentTurn={currentTurn}
+          setCurrentTurn={setCurrentTurn}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
         />
         <OpponentCard />
-        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading}/>
+        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading} />
       </div>
       <Footer />
     </main>

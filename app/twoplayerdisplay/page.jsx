@@ -36,16 +36,12 @@ export default function TwoPlayerDisplay() {
   const [isPlaying, setIsPlaying] = useState(true)
 
   useEffect(() => {
-    console.log("in local storage get")
     const storageUser = JSON.parse(localStorage.getItem('thisUser'));
     const storageUsers = JSON.parse(localStorage.getItem('users'));
     const storageStats = JSON.parse(localStorage.getItem('statsObject'))
-    console.log(users, "<<<<<<< storage users")
     setUsers(storageUsers)
-    console.log(storageStats, "<<<<<<<< storage stats")
     setStatsObject(storageStats)
     if (storageUser) {
-      console.log(storageUser, "<<<<<<< storage user")
       setThisUser(storageUser);
     }
   }, []);
@@ -72,6 +68,7 @@ export default function TwoPlayerDisplay() {
             chosenAlien={chosenAlien}
             setIsGameFinished={setIsGameFinished}
             setHasWon={setHasWon}
+            hasWon={hasWon}
             setIsLoading={setIsLoading}
           />
         )}
@@ -83,6 +80,7 @@ export default function TwoPlayerDisplay() {
         <QuestionCard
           alienObjects={alienObjects}
           setAlienObjects={setAlienObjects}
+          isGameFinished={isGameFinished}
           setIsGameFinished={setIsGameFinished}
           chosenAlien={chosenAlien}
           hasWon={hasWon}

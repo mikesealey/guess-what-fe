@@ -28,9 +28,7 @@ export default function LobbyModal({
   const router = useRouter();
   
   useEffect(() => {
-    console.log(thisUser.name, "<<<<< thisUser.name")
     if (thisUser.name) {
-      console.log(thisUser.name, "<<<<< thisUser.name in if condition")
     socket.emit('find', { name: thisUser.name, aliens: users.allAliens, test: "test" });
     let tempThisUser = { ...thisUser };
     tempThisUser.name = '';
@@ -48,7 +46,6 @@ export default function LobbyModal({
       obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
       obj.allAliens = e.allPlayers[0].allAliens;
       setUsers(obj);
-      console.log(users, "<<<<< users, setting")
       localStorage.setItem('users', JSON.stringify(users))
     });
   }
@@ -67,35 +64,6 @@ export default function LobbyModal({
       setChosenAlien(users.p1.p1alien);
     }
   }, [waitingPlayerTwo]);
-
-  // useEffect(() => {
-  //   if (users.p1.p1name && users.p2.p2name) {
-  // getAliens().then((res) => {
-  //   console.log(res, "<<<<<<res");
-  //   setAlienObjects(res);
-  // setChosenAlien(chooseSecretAlien(res));
-  // let obj = { ...users };
-  // obj.lien = chooseSecretAlien(res);
-  // obj.p2.p2alien = chooseSecretAlien(res);
-  // obj.allAliens = res;
-  // setUsers(obj);
-  //     });
-  //   }
-  // }, [waitingPlayerTwo]);
-
-  // useEffect(()=> {
-
-  //   if (yourSocket === users.p1.p1socketId) {
-  //     getAliens().then((res)=>{
-  //       let obj = {...users}
-  //       obj.allAliens = res
-
-  //       setUsers(obj)
-  //   })}
-
-  //   setAlienObjects(users.allAliens)
-
-  // }, [])
 
   function handleClick() {
     socket.emit('start-game');
