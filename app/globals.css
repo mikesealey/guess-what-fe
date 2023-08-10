@@ -427,7 +427,7 @@ body {
 .end-modal-btns{
   display: flex;
   flex-direction: column;
-  max-width: 65%;
+  width:300px;
   margin:0 auto;
   margin-top: 1rem;
   padding:0.5rem;
@@ -587,7 +587,8 @@ body {
 }
 
 .extended, .extended:hover{
-  width:92%;
+  width:90%;
+  margin:0 auto;
 }
 /* .correct-answer {
   font-weight: bold;

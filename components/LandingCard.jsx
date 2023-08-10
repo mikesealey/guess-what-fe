@@ -66,7 +66,6 @@ export const LandingCard = () => {
                 currentUserStats.username = e.target.value;
                 setStatsObject(currentUserStats);
               }}
-              required
             />
           </div>
         </div>
@@ -75,7 +74,7 @@ export const LandingCard = () => {
           <button
             className="lcbtn"
             id="singleplayer-btn"
-            // disabled={clicked || userName === ''}
+            disabled={clicked || thisUser.name === ''}
             onClick={(e) => {
               handleSinglePlayerClick(e);
             }}
@@ -85,6 +84,7 @@ export const LandingCard = () => {
           <button
             className="lcbtn"
             id="multiplayer-btn"
+            disabled={clicked || thisUser.name === ''}
             onClick={(e) => {
               handleTwoPlayerClick(e);
             }}
