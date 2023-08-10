@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* * {
+* {
   overflow: hidden;
-} */
+}
 
 main {
   background-image: url("../public/assets/alt-background.jpg");
@@ -63,6 +63,12 @@ header img{
 
 .input-boxes {
   margin: 0 auto;
+  
+}
+
+.name-input{
+  height:2.5rem;
+  font-size: 1.2rem;
 }
 
 .sign-in-form p {
@@ -74,18 +80,49 @@ header img{
   border: 1px solid gray;
 }
 
-.sign-in-form button {
+#multiplayer-btn, #singleplayer-btn {
   margin-top: 1.5rem;
   padding: 0.5rem;
   width: 20vw;
-  background: linear-gradient(30deg, rgb(163, 64, 249) 5%, rgb(230, 208, 251));
+  background: rgb(95, 16, 137);
   border-radius: 5px;
+color:rgb(213, 192, 213);
 }
 
-.sign-in-form button:hover {
+#multiplayer-btn:hover, #singleplayer-btn:hover {
   margin-top: 1.5rem;
   padding: 0.5rem;
   width: 20vw;
+  background: linear-gradient(30deg, rgb(163, 64, 249) 5%, rgb(244, 48, 48));
+  border-radius: 5px;
+  color: white;
+}
+
+.leaderboard-container{
+  display: flex !important;
+ 
+ text-align: center;
+
+
+}
+
+#leaderboard-btn { 
+  display: flex;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  width:100%;
+  justify-content: center;
+  background: rgb(95, 16, 137);
+  border-radius: 5px;
+  color: rgb(213, 192, 213);
+}
+
+#leaderboard-btn:hover { 
+display: flex;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  width:100%;
   background: linear-gradient(30deg, rgb(163, 64, 249) 5%, rgb(244, 48, 48));
   border-radius: 5px;
   color: white;
@@ -111,6 +148,7 @@ nav {
   position: absolute;
   bottom: 0;
   margin-left: 35%;
+
 }
 
 .nav-link:hover {
@@ -189,7 +227,6 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
   border: 2px solid rgb(95, 16, 137);
   border-radius: 15px;
 }
@@ -209,20 +246,23 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 13px;
   -webkit-user-drag: none;
 }
 
 .alien-planet {
   position: relative !important;
+  min-height:180px;
+  
 }
 
 .inactive {
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.1rem;
   filter: grayscale(100%);
+  border: 2px solid rgb(95, 16, 137);
+  border-radius: 15px;
   
 }
 
@@ -357,10 +397,20 @@ body {
   border-radius: 15px;
 }
 #question-variable {
-  width: 15vw;
-  background-color: white;
+  width: 140px;
+
+  /* background-color: white; */
   height:2.5rem;
   padding-top: 0.5rem;
+}
+
+
+
+#question-variable {
+  font-weight: bold;
+  white-space: nowrap;
+  margin: auto;
+  text-align: center;
 }
 
 .questioncard * {
@@ -401,26 +451,22 @@ body {
 
 #question-prompt-container {
   display: flex;
-  white-space: nowrap;
-  justify-content: space-between;
+
+  /* white-space: nowrap; */
+  /* justify-content: space-between; */
 }
 #question-prompt-container * {
   margin: auto 0.5rem;
 }
 
+
 #question-prompt{
   font-weight: 500;
+  min-width: 200px;
   padding-top: 0.5rem;
 }
 
-#question-variable {
-  font-weight: bold;
-  white-space: nowrap;
-  margin: auto;
-  text-align: center;
-}
-
-#question-submit-btn {
+.question-submit-btn {
   margin: auto;
   padding: 0.3rem;
   padding-left: 1rem;
@@ -432,7 +478,7 @@ body {
 }
 
 
-#question-submit-btn:hover {
+.question-submit-btn:hover {
   margin:auto;
   padding: 0.3rem;
   padding-left: 1rem;

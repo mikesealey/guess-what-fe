@@ -53,7 +53,8 @@ export const LandingCard = () => {
           <p>Please enter your name</p>
           <div className="flex flex-col">
             <label htmlFor="username"> </label>
-            <input className='name-input'
+            <input
+              className="name-input"
               type="text"
               id="username"
               value={thisUser.name}
@@ -68,11 +69,11 @@ export const LandingCard = () => {
               required
             />
           </div>
-          
         </div>
 
         <div className="flex gap-4">
-          <button className='lcbtn'
+          <button
+            className="lcbtn"
             id="singleplayer-btn"
             // disabled={clicked || userName === ''}
             onClick={(e) => {
@@ -81,7 +82,8 @@ export const LandingCard = () => {
           >
             1 player
           </button>
-          <button className='lcbtn'
+          <button
+            className="lcbtn"
             id="multiplayer-btn"
             onClick={(e) => {
               handleTwoPlayerClick(e);
@@ -90,9 +92,11 @@ export const LandingCard = () => {
             2 player
           </button>
         </div>
-        <button  className='lcbtn'>
-          <Link href="/leaderboarddisplay">View Leaderboard</Link>
-        </button>
+        <div className="leaderboard-container">
+          <button className="lcbtn" id="leaderboard-btn">
+            <Link href="/leaderboarddisplay">View Leaderboard</Link>
+          </button>
+        </div>
       </form>
     </div>
   );
