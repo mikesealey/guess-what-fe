@@ -9,12 +9,15 @@ export default function EndGameModal({
   chosenAlien,
   setIsGameFinished,
   setHasWon,
-  setIsLoading,
+  hasWon,
+  setIsLoading
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const [clicked, setClicked] = useState(false);
   const { statsObject, setStatsObject } = useContext(UserStatsContext);
   const { users, setUsers } = useContext(UsersContext);
+
+
 
   const winnerAlien = chosenAlien;
 
@@ -45,7 +48,7 @@ export default function EndGameModal({
   return (
     <div className="modal">
       <div className="text-box">
-        {users.p2.p2name ? <h2>The winner is {/*insert winner*/}</h2> : null}
+        <h1>You {hasWon ? "Win" : "Lose"}!</h1>
         <div className="aliencard winner-card">
           <img
             className="alien-planet"
@@ -80,7 +83,7 @@ export default function EndGameModal({
         </div>
         <div className="stats-container">
           <div id="stats-container">
-            <p>Congratulations {statsObject.username}, you win!</p>
+          {hasWon ? <p>Congratulations {statsObject.username}, you win!</p> : <p>Sorry, {statsObject.username}, you lose!</p>}
             <p>Score {statsObject.score}</p>
             <p>
               Time {String(statsObject.minutes).length < 2 && 0}

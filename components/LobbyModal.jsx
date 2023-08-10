@@ -12,13 +12,14 @@ const socket = io('https://guess-what-copy.onrender.com/');
 
 export default function LobbyModal({
   setIsLoading,
-
   alienObjects,
   setAlienObjects,
   chosenAlien,
   setChosenAlien,
   chooseSecretAlien,
   setDisplayLobby,
+  isPlaying,
+  setIsPlaying
 }) {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
@@ -27,34 +28,27 @@ export default function LobbyModal({
   const router = useRouter();
 
   useEffect(() => {
-    console.log(thisUser.name, '<<<<< thisUser.name');
     if (thisUser.name) {
-      console.log(thisUser.name, '<<<<< thisUser.name in if condition');
-      socket.emit('find', {
-        name: thisUser.name,
-        aliens: users.allAliens,
-        test: 'test',
-      });
-      let tempThisUser = { ...thisUser };
-      tempThisUser.name = '';
-      setThisUser(tempThisUser);
-      socket.on('your-socketid', (id) => {
-        setYourSocket(id);
-      });
-      socket.on('find', (e) => {
-        let obj = { ...users };
-        obj.p1.p1name = e.allPlayers[0].p1.p1name;
-        obj.p2.p2name = e.allPlayers[0].p2.p2name;
-        obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
-        obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
-        obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
-        obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
-        obj.allAliens = e.allPlayers[0].allAliens;
-        setUsers(obj);
-        console.log(users, '<<<<< users, setting');
-        localStorage.setItem('users', JSON.stringify(users));
-      });
-    }
+    socket.emit('find', { name: thisUser.name, aliens: users.allAliens });
+    let tempThisUser = { ...thisUser };
+    tempThisUser.name = '';
+    setThisUser(tempThisUser);
+    socket.on('your-socketid', (id) => {
+      setYourSocket(id);
+    });
+    socket.on('find', (e) => {
+      let obj = { ...users };
+      obj.p1.p1name = e.allPlayers[0].p1.p1name;
+      obj.p2.p2name = e.allPlayers[0].p2.p2name;
+      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
+      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+      obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
+      obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
+      obj.allAliens = e.allPlayers[0].allAliens;
+      setUsers(obj);
+      localStorage.setItem('users', JSON.stringify(users))
+    });
+  }
   }, [thisUser, users]);
 
   useEffect(() => {
@@ -71,35 +65,6 @@ export default function LobbyModal({
     }
   }, [waitingPlayerTwo]);
 
-  // useEffect(() => {
-  //   if (users.p1.p1name && users.p2.p2name) {
-  // getAliens().then((res) => {
-  //   console.log(res, "<<<<<<res");
-  //   setAlienObjects(res);
-  // setChosenAlien(chooseSecretAlien(res));
-  // let obj = { ...users };
-  // obj.lien = chooseSecretAlien(res);
-  // obj.p2.p2alien = chooseSecretAlien(res);
-  // obj.allAliens = res;
-  // setUsers(obj);
-  //     });
-  //   }
-  // }, [waitingPlayerTwo]);
-
-  // useEffect(()=> {
-
-  //   if (yourSocket === users.p1.p1socketId) {
-  //     getAliens().then((res)=>{
-  //       let obj = {...users}
-  //       obj.allAliens = res
-
-  //       setUsers(obj)
-  //   })}
-
-  //   setAlienObjects(users.allAliens)
-
-  // }, [])
-
   function handleClick() {
     socket.emit('start-game');
   }
@@ -109,6 +74,10 @@ export default function LobbyModal({
 
     setDisplayLobby(false);
     setIsLoading(false);
+    if (yourSocket === users.p2.p2socketId) {
+      setIsPlaying(false)
+    }
+
   });
 
   return (

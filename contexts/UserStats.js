@@ -8,7 +8,9 @@ export default function UserStatsProvider({ children }) {
         username: "",
         minutes: 0,
         seconds: 0,
-        score: 0
+        score: 0,
+        wins: 0,
+        losses: 0
     })
 
     return (
