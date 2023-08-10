@@ -31,19 +31,19 @@ export default function TwoPlayerDisplay() {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
-  const { statsObject, setStatsObject } = useContext(UserStatsContext)
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
 
   useEffect(() => {
-    console.log("in local storage get")
+    console.log('in local storage get');
     const storageUser = JSON.parse(localStorage.getItem('thisUser'));
     const storageUsers = JSON.parse(localStorage.getItem('users'));
-    const storageStats = JSON.parse(localStorage.getItem('statsObject'))
-    console.log(users, "<<<<<<< storage users")
-    setUsers(storageUsers)
-    console.log(storageStats, "<<<<<<<< storage stats")
-    setStatsObject(storageStats)
+    const storageStats = JSON.parse(localStorage.getItem('statsObject'));
+    console.log(users, '<<<<<<< storage users');
+    setUsers(storageUsers);
+    console.log(storageStats, '<<<<<<<< storage stats');
+    setStatsObject(storageStats);
     if (storageUser) {
-      console.log(storageUser, "<<<<<<< storage user")
+      console.log(storageUser, '<<<<<<< storage user');
       setThisUser(storageUser);
     }
   }, []);
@@ -86,10 +86,14 @@ export default function TwoPlayerDisplay() {
         />
         <OpponentCard />
         <UsersCard isLoading={isLoading} />
-        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading} />
+        <UserStats
+          alienObjects={alienObjects}
+          isGameFinished={isGameFinished}
+          isLoading={isLoading}
+        />
         <ScoreTwoPlayer />
       </div>
-      <Footer className='footer'/>
+      <Footer className="footer" />
     </main>
   );
 }
