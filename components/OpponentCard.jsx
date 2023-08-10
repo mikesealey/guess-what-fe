@@ -26,7 +26,7 @@ export default function OpponentCard() {
     }
   }
 
-  const img = <h1 className="question-mark">?</h1>;
+  const img = <img className="opp-logo" src="/assets/guess-what-logo.png" />;
 
   return (
     <div className="opponentcard">
@@ -40,14 +40,24 @@ export default function OpponentCard() {
       ) : null}
       {opponentObject.skinColour || opponentObject.skinTexture ? (
         <img
-          className={`alien-body ${opponentObject.skinColour ? "" : "grayscale"}`}
-          src={`assets/alien-layers/body-${opponentObject.skinColour ? opponentObject.skinColour : "green"}-${opponentObject.skinTexture ? opponentObject.skinTexture : "normal"}.png`}
+          className={`alien-body ${
+            opponentObject.skinColour ? '' : 'grayscale'
+          }`}
+          src={`assets/alien-layers/body-${
+            opponentObject.skinColour ? opponentObject.skinColour : 'green'
+          }-${
+            opponentObject.skinTexture ? opponentObject.skinTexture : 'normal'
+          }.png`}
         />
       ) : null}
       {opponentObject.eyes ? (
         <img
-        className={`alien-body ${opponentObject.eyeColour ? "" : "grayscale"}`}
-          src={`assets/alien-layers/eyes-${opponentObject.eyeColour ? opponentObject.eyeColour : "red"}-${opponentObject.eyes}.png`}
+          className={`alien-body ${
+            opponentObject.eyeColour ? '' : 'grayscale'
+          }`}
+          src={`assets/alien-layers/eyes-${
+            opponentObject.eyeColour ? opponentObject.eyeColour : 'red'
+          }-${opponentObject.eyes}.png`}
         />
       ) : null}
       {mouthRendering(opponentObject.isFriendly, mouth)}

@@ -103,25 +103,28 @@ export default function LobbyModal({
   return (
     <div className="modal">
       <div className="text-box">
-        <h1>lobby</h1>
-        <h2>Welcome to Guess What?!</h2>
-        {users.p1.p1name && <p>{users.p1.p1name} is ready</p>}
-        {users.p2.p2name && <p>{users.p2.p2name} is ready</p>}
-        {waitingPlayerTwo && (
-          <>
-            <p>waiting for your mate...</p>
-            <img src="/assets/flying-saucer-joypixels.gif" width="150px" />
-          </>
-        )}
-        {!waitingPlayerTwo ? (
-          <button
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            start game
-          </button>
-        ) : null}
+        <div className="textbox-contents">
+          <h2>Lobby</h2>
+          <br></br>
+
+          {users.p1.p1name && <p>{users.p1.p1name} is ready</p>}
+          {users.p2.p2name && <p>{users.p2.p2name} is ready</p>}
+          {waitingPlayerTwo && (
+            <>
+              <p>waiting for your mate...</p>
+              <img src="/assets/flying-saucer-joypixels.gif" width="150px" />
+            </>
+          )}
+          {!waitingPlayerTwo ? (
+            <button
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              start game
+            </button>
+          ) : null}
+        </div>
       </div>
     </div>
   );
