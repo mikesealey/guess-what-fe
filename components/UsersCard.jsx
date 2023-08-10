@@ -19,7 +19,7 @@ export default function UsersCard({ isLoading }) {
   if (usersAlien._id) {
     return (
       <div className="two-player-usercard">
-        <div className="alien-img">
+        <div className="aliencard">
           <img
             className="alien-planet"
             src={`assets/alien-layers/planet-${usersAlien.planet}.png`}
@@ -50,6 +50,9 @@ export default function UsersCard({ isLoading }) {
               src={'assets/alien-layers/antenna.png'}
             />
           ) : null}
+          <div className="alien-name-holder">
+            <div className="alien-name">your alien</div>
+          </div>
         </div>
       </div>
     );

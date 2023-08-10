@@ -1,10 +1,12 @@
 // import { useState } from "react";
 
 import { OpponentContext } from '@/contexts/OpponentObject';
+import { UsersContext } from '@/contexts/User';
 import { useContext } from 'react';
 
 export default function OpponentCard() {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
+  const { users, setUsers } = useContext(UsersContext);
 
   const mouth = (
     <img
@@ -74,7 +76,11 @@ export default function OpponentCard() {
           src={'assets/alien-layers/antenna.png'}
         />
       ) : null}
-
+      <div className="alien-name-holder">
+        {users.p2.p2name ? (
+          <div className="alien-name">opponents alien</div>
+        ) : null}
+      </div>
       {/* <UserStats activeAlienCounter={activeAlienCounter}/> */}
     </div>
   );

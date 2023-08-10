@@ -18,7 +18,7 @@ import { ThisUserContext } from '@/contexts/ThisUser';
 
 const { io } = require('socket.io-client');
 
-const socket = io('https://guess-what-api.onrender.com/');
+const socket = io('http://localhost:8080');
 
 export default function TwoPlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
@@ -71,7 +71,7 @@ export default function TwoPlayerDisplay() {
         <UsersCard isLoading={isLoading} />
         <ScoreTwoPlayer />
       </div>
-      <Footer className='footer'/>
+      <Footer className="footer" />
     </main>
   );
 }
