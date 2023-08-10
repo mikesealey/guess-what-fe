@@ -15,6 +15,7 @@ import ScoreTwoPlayer from '@/components/ScoreTwoPlayer';
 import { UsersContext } from '@/contexts/User';
 import { SocketContext } from '@/contexts/Socket';
 import { ThisUserContext } from '@/contexts/ThisUser';
+import { UserStatsContext } from '@/contexts/UserStats';
 
 const { io } = require('socket.io-client');
 
@@ -29,8 +30,23 @@ export default function TwoPlayerDisplay() {
   const [displayLobby, setDisplayLobby] = useState(true);
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
+  const { thisUser, setThisUser } = useContext(ThisUserContext);
+  const { statsObject, setStatsObject } = useContext(UserStatsContext)
 
-  console.log(chosenAlien, '<--- chosen alien');
+  useEffect(() => {
+    console.log("in local storage get")
+    const storageUser = JSON.parse(localStorage.getItem('thisUser'));
+    const storageUsers = JSON.parse(localStorage.getItem('users'));
+    const storageStats = JSON.parse(localStorage.getItem('statsObject'))
+    console.log(users, "<<<<<<< storage users")
+    setUsers(storageUsers)
+    console.log(storageStats, "<<<<<<<< storage stats")
+    setStatsObject(storageStats)
+    if (storageUser) {
+      console.log(storageUser, "<<<<<<< storage user")
+      setThisUser(storageUser);
+    }
+  }, []);
 
   return (
     <main>
@@ -52,6 +68,7 @@ export default function TwoPlayerDisplay() {
             chosenAlien={chosenAlien}
             setIsGameFinished={setIsGameFinished}
             setHasWon={setHasWon}
+            setIsLoading={setIsLoading}
           />
         )}
         <Gameboard
@@ -69,6 +86,7 @@ export default function TwoPlayerDisplay() {
         />
         <OpponentCard />
         <UsersCard isLoading={isLoading} />
+        <UserStats alienObjects={alienObjects} isGameFinished={isGameFinished} isLoading={isLoading} />
         <ScoreTwoPlayer />
       </div>
       <Footer className='footer'/>
