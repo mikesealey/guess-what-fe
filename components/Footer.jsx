@@ -5,7 +5,7 @@ export const Footer = () => {
     <nav>
       <Link
         className="nav-link"
-        href="https://youtu.be/dQw4w9WgXcQ"
+        href="https://youtu.be/crwshgengq0"
         target="_blank"
       >
         About Us
