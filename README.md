@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+##Guess What?!
 
-## Getting Started
+A full stack gaming app, built in 10 days by a team of 6 trainee developers.
 
-First, run the development server:
+[==play the deployed app here==](https://guess-what-gitkermit.netlify.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**About**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For our final project at the Northcoders bootcamp, we created an online game. A take on the classic Guess Who, but with the twist that rather than people, you're guessing the alien.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Here is a short video regarding the game:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[==watch the game presentation==](https://youtu.be/crwshgengq0)
 
-## Learn More
+During the planning phase it was agreed that the single player game would be the MVP, which is what we aimed for.
 
-To learn more about Next.js, take a look at the following resources:
+Once this was achieved, we moved on to creating a two player version. We needed to use websockets for the multiplayer aspect, so for this socket.io was used.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Tech Stack**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Node.js, Express.js, Axios, MongoDB, Jest, Next.js, Socket.io
 
-## Deploy on Vercel
+**Front End Files**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you’d like to _run this project locally_ then click on the green code button and copy the repo url. Then in your terminal type the following commands:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. `git clone https://github.com/jamesyuill/guess-what-fe.git`
+2. `cd guess-what-fe`
+3. `npm install`
+4. `npm run dev`
+
+**Back End Files**
+
+If you’d like to _run this project locally_ then navigate to the project files [==here==](https://github.com/PabloJulianRial/guess-what-be), click on the green code button and copy the repo url. Then follow the steps above, but replacing the url with the backend url.
+
+**The Team:**
+
+[Mike Sealey](https://github.com/mikesealey)<br>
+[Omar Ali](https://github.com/omar-baggio)<br>
+[Pablo Rial](https://github.com/PabloJulianRial)<br>
+[Matt Sheehan](https://github.com/mattc0d3)<br>
+[Connor Kelly](https://github.com/ConnorK519)<br>
+[James Yuill](https://github.com/jamesyuill)
