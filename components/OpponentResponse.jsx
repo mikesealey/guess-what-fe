@@ -16,13 +16,17 @@ export const OpponentResponse = ({ answer, hasWon }) => {
     if (answer === null) {
       responseDiv.current.className = 'response-div';
     } else {
-      responseDiv.current.className = 'response-div-show';
+      setTimeout(changeClass, 500);
     }
 
     if (hasWon !== null) {
-      responseDiv.current.className = 'response-div-show';
+      setTimeout(changeClass, 500);
     }
   }, [answer, hasWon]);
+
+  const changeClass = () => {
+    responseDiv.current.className = 'response-div-show';
+  };
 
   const guessResponse = () => {
     if (hasWon === null) {
