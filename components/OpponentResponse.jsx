@@ -44,25 +44,9 @@ export const OpponentResponse = ({ answer, hasWon }) => {
         <div className="response-text">
           {/* {answer === null && <p>Welcome {`${userOne}`}</p>} */}
           {guessResponse()}
-          {answer && (
-            <p>
-              {
-                positiveResponse[
-                  Math.floor(Math.random() * positiveResponse.length)
-                ]
-              }
-            </p>
-          )}
+          {answer && <p>{positiveResponse[0]}</p>}
 
-          {answer !== null && !answer && (
-            <p>
-              {
-                negativeResponse[
-                  Math.floor(Math.random() * negativeResponse.length)
-                ]
-              }
-            </p>
-          )}
+          {answer !== null && !answer && <p>{negativeResponse[1]}</p>}
         </div>
       </div>
     </div>
