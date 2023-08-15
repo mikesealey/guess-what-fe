@@ -1,5 +1,6 @@
 "use client"
 
+import { getDisplayName } from "next/dist/shared/lib/utils"
 import { useState } from "react"
 
 export default function CreateAlien(){
@@ -23,6 +24,7 @@ const alien = {
   const [isFriendlyIndex, setIsFriendlyIndex] = useState(0)
   const [hornsIndex, setHornsIndex] = useState(0)
   const [antennaIndex, setAntennaIndex] = useState(0)
+  const [name, setName] = useState("Insert Alien Name")
 
   function scramble() {
     setSkinColourIndex(Math.floor(Math.random() * alien.skinColour.length))
@@ -73,10 +75,7 @@ const alien = {
     } else if (attribute === "horns") {
         setHornsIndex(Math.floor(Math.random() * alien.horns.length))
     }
-
-    
   }
-
 
     return (
         <main>
@@ -101,13 +100,19 @@ const alien = {
         
         { alien.horns[hornsIndex] ? <img className="alien-horns" src={`assets/alien-layers/horns-${alien.horns[hornsIndex]}.png`} /> : null}
         { alien.hasAntenna[antennaIndex] ? <img className="alien-antenna" src={`assets/alien-layers/antenna.png`}/> : null }
+        <div className="alien-name-holder">
+        <div className="alien-name">{name}</div>
+        </div>
         
         
 
                         </div>
                 <div className="statsContainer">
+                    <form>
+                        <label htmlFor="name">Name: </label>
+                        <input id="name" value={name} onChange={(e) => {setName(e.target.value), e.preventDefault}} type="text"/>
+                    </form>
                     <button className="question-submit-btn" onClick={()=>{scramble()}}>Scramble!</button> {/* Chose a better styling option that this! */}
-
                     <h3>planet</h3>
                     <button className="question-submit-btn" disabled={planetIndex === 0} onClick={()=>{attributeSetter("planet", -1)}}>{"<<"}</button>
                     <button className="question-submit-btn" onClick={()=>{attributeRandomizer("planet")}}>Random</button>
