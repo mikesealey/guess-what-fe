@@ -78,13 +78,16 @@ const alien = {
     }
   }
 
-  
+//   Works in Firefox - Chrome throws error "Not allowed to navigate top frame to data URL"
     function downloadAlien() {
         var canvas = document.getElementById("capture")
 
+        // Play around with adding and removing classes in order to then display that picture without borders
+        canvas.className = ""
+        // canvas.classList.add("capture-border")
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             var myAlien = canvas.toDataURL("image/png")
-            window.open(myAlien, "_blank")
+            window.open(myAlien, "_self")
         })
         
 
@@ -96,7 +99,7 @@ const alien = {
             <div className="modal">
                 <div className="text-box">
                     <h1>Create your own alien!</h1>
-                        <div className="aliencard winner-card" id="capture"> {/* This div is the one to download */}
+                        <div className="aliencard border winner-card" id="capture"> {/* This div is the one to download */}
                         <img
           className="alien-planet"
           src={`assets/alien-layers/planet-${alien.planet[planetIndex]}.png`}

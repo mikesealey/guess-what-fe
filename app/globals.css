@@ -239,9 +239,16 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
+}
+
+.capture-border {
+  border: 0;
+  border-radius: 0;
+}
+
+.border {
   border: 2px solid rgb(95, 16, 137);
   border-radius: 15px;
-  
 }
 
 /* ------------------------ ALIEN CARD --------------------------- */
@@ -829,3 +836,8 @@ body {
   margin: auto;
   font-size: 3rem;
 }
+
+.alien-name {
+  border: 3px solid lime;
+}
+
