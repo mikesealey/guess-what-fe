@@ -1,7 +1,8 @@
 "use client"
 
-import { getDisplayName } from "next/dist/shared/lib/utils"
+import html2canvas from "html2canvas"
 import { useState } from "react"
+import { saveAs } from "file-saver"
 
 export default function CreateAlien(){
 
@@ -77,13 +78,25 @@ const alien = {
     }
   }
 
+  
+    function downloadAlien() {
+        var canvas = document.getElementById("capture")
+
+        html2canvas(document.getElementById("capture")).then(function(canvas) {
+            var myAlien = canvas.toDataURL("image/png")
+            window.open(myAlien, "_blank")
+        })
+        
+
+
+    }
+        
     return (
         <main>
             <div className="modal">
                 <div className="text-box">
                     <h1>Create your own alien!</h1>
-
-                        <div className="aliencard winner-card">
+                        <div className="aliencard winner-card" id="capture"> {/* This div is the one to download */}
                         <img
           className="alien-planet"
           src={`assets/alien-layers/planet-${alien.planet[planetIndex]}.png`}
@@ -103,16 +116,16 @@ const alien = {
         <div className="alien-name-holder">
         <div className="alien-name">{name}</div>
         </div>
-        
-        
+    </div>
 
-                        </div>
                 <div className="statsContainer">
                     <form>
                         <label htmlFor="name">Name: </label>
                         <input id="name" value={name} onChange={(e) => {setName(e.target.value), e.preventDefault}} type="text"/>
                     </form>
-                    <button className="question-submit-btn" onClick={()=>{scramble()}}>Scramble!</button> {/* Chose a better styling option that this! */}
+                    <button className="question-submit-btn" onClick={()=>{downloadAlien()}}>Download my alien!</button>
+
+                    <button className="question-submit-btn" onClick={()=>{scramble()}}>Scramble!</button>
                     <h3>planet</h3>
                     <button className="question-submit-btn" disabled={planetIndex === 0} onClick={()=>{attributeSetter("planet", -1)}}>{"<<"}</button>
                     <button className="question-submit-btn" onClick={()=>{attributeRandomizer("planet")}}>Random</button>
