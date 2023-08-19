@@ -242,8 +242,8 @@ body {
 }
 
 .capture-border {
-  border: 0;
-  border-radius: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
 }
 
 .border {
@@ -266,7 +266,7 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 13px;
+  /* border-radius: 13px; */
   -webkit-user-drag: none;
 }
 
@@ -837,7 +837,7 @@ body {
   font-size: 3rem;
 }
 
-.alien-name {
-  border: 3px solid lime;
+.test {
+  padding-bottom: 1vh;
 }
 

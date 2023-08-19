@@ -80,20 +80,31 @@ const alien = {
 
 //   Works in Firefox - Chrome throws error "Not allowed to navigate top frame to data URL"
     function downloadAlien() {
-        var canvas = document.getElementById("capture")
+        // Canvas becomes the entirety of what we want to grab hold of
+        
+        // But we still need to lose the border-radius
+        const alienCard = document.getElementById("capture")
+        const nameHolder = document.getElementById("alien-name-holder")
+        const name = document.getElementById("alien-name")
 
-        // Play around with adding and removing classes in order to then display that picture without borders
-        canvas.className = ""
-        // canvas.classList.add("capture-border")
+        alienCard.classList.add("capture-border")
+        nameHolder.classList.add("capture-border")
+        name.classList.add("test")
+        
+        var canvas = document.getElementById("capture")
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             var myAlien = canvas.toDataURL("image/png")
-            window.open(myAlien, "_self")
+            window.open(myAlien, "_blank")
         })
         
-
+        alienCard.classList.remove("capture-border")
+        nameHolder.classList.remove("capture-border")
+        name.classList.remove("test")
 
     }
-        
+    
+
+
     return (
         <main>
             <div className="modal">
@@ -101,23 +112,23 @@ const alien = {
                     <h1>Create your own alien!</h1>
                         <div className="aliencard border winner-card" id="capture"> {/* This div is the one to download */}
                         <img
-          className="alien-planet"
+          className="alien-planet" id="alien-planet"
           src={`assets/alien-layers/planet-${alien.planet[planetIndex]}.png`}
         />
         <img
-          className="alien-body"
+          className="alien-body" id="alien-body"
           src={`assets/alien-layers/body-${alien.skinColour[skinColourIndex]}-${alien.skinTexture[skinTextureIndex]}.png`}
         />
         <img
-          className="alien-eyes"
+          className="alien-eyes" id="alien-eyes"
           src={`assets/alien-layers/eyes-${alien.eyeColour[eyeColourIndex]}-${alien.eyes[eyesIndex]}.png`}
         />
-        <img className="alien-mouth" src={`assets/alien-layers/mouth-${alien.isFriendly[isFriendlyIndex]}.png`} />
+        <img className="alien-mouth" id="alien-mouth" src={`assets/alien-layers/mouth-${alien.isFriendly[isFriendlyIndex]}.png`} />
         
-        { alien.horns[hornsIndex] ? <img className="alien-horns" src={`assets/alien-layers/horns-${alien.horns[hornsIndex]}.png`} /> : null}
-        { alien.hasAntenna[antennaIndex] ? <img className="alien-antenna" src={`assets/alien-layers/antenna.png`}/> : null }
-        <div className="alien-name-holder">
-        <div className="alien-name">{name}</div>
+        { alien.horns[hornsIndex] ? <img className="alien-horns" id="alien-horns" src={`assets/alien-layers/horns-${alien.horns[hornsIndex]}.png`} /> : null}
+        { alien.hasAntenna[antennaIndex] ? <img className="alien-antenna" id="alien-antenna" src={`assets/alien-layers/antenna.png`}/> : null }
+        <div className="alien-name-holder" id="alien-name-holder">
+        <div className="alien-name" id="alien-name">{name}</div>
         </div>
     </div>
 
