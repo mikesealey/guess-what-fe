@@ -38,6 +38,8 @@ const alien = {
     setAntennaIndex(Math.floor(Math.random() * alien.hasAntenna.length))
   }
 
+
+
   function attributeSetter(attribute, increment) {
     if (attribute === "planet") {
         setPlanetIndex(planetIndex + increment)
@@ -84,22 +86,23 @@ const alien = {
         
         // But we still need to lose the border-radius
         const alienCard = document.getElementById("capture")
-        const nameHolder = document.getElementById("alien-name-holder")
-        const name = document.getElementById("alien-name")
+        const alienNameHolder = document.getElementById("alien-name-holder")
+        const alienName = document.getElementById("alien-name")
 
-        alienCard.classList.add("capture-border")
-        nameHolder.classList.add("capture-border")
-        name.classList.add("test")
+        alienCard.classList.add("capture-border", "black")
+        alienNameHolder.classList.add("capture-border")
+        alienName.classList.add("test")
         
         var canvas = document.getElementById("capture")
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             var myAlien = canvas.toDataURL("image/png")
-            window.open(myAlien, "_blank")
+            // window.open(myAlien, "_blank")
+            saveAs(myAlien, `${name} the alien.png`)
         })
         
         alienCard.classList.remove("capture-border")
-        nameHolder.classList.remove("capture-border")
-        name.classList.remove("test")
+        alienNameHolder.classList.remove("capture-border")
+        alienName.classList.remove("test")
 
     }
     
