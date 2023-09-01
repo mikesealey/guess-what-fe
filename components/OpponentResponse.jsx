@@ -16,11 +16,11 @@ export const OpponentResponse = ({ answer, hasWon }) => {
     if (answer === null) {
       responseDiv.current.className = 'response-div';
     } else {
-      setTimeout(changeClass, 500);
+      setTimeout(changeClass(), 500);
     }
 
     if (hasWon !== null) {
-      setTimeout(changeClass, 500);
+      setTimeout(changeClass(), 500);
     }
   }, [answer, hasWon]);
 

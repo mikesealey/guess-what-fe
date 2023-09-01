@@ -6,9 +6,7 @@ import { ThisUserContext } from '@/contexts/ThisUser';
 import { UsersContext } from '@/contexts/User';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
-const { io } = require('socket.io-client');
-
-const socket = io('https://guess-what-copy.onrender.com/');
+import { socket } from '@/app/utils/socketconnection';
 
 export default function LobbyModal({
   setIsLoading,
@@ -19,7 +17,7 @@ export default function LobbyModal({
   chooseSecretAlien,
   setDisplayLobby,
   isPlaying,
-  setIsPlaying
+  setIsPlaying,
 }) {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
@@ -29,26 +27,26 @@ export default function LobbyModal({
 
   useEffect(() => {
     if (thisUser.name) {
-    socket.emit('find', { name: thisUser.name, aliens: users.allAliens });
-    let tempThisUser = { ...thisUser };
-    tempThisUser.name = '';
-    setThisUser(tempThisUser);
-    socket.on('your-socketid', (id) => {
-      setYourSocket(id);
-    });
-    socket.on('find', (e) => {
-      let obj = { ...users };
-      obj.p1.p1name = e.allPlayers[0].p1.p1name;
-      obj.p2.p2name = e.allPlayers[0].p2.p2name;
-      obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
-      obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
-      obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
-      obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
-      obj.allAliens = e.allPlayers[0].allAliens;
-      setUsers(obj);
-      localStorage.setItem('users', JSON.stringify(users))
-    });
-  }
+      socket.emit('find', { name: thisUser.name, aliens: users.allAliens });
+      let tempThisUser = { ...thisUser };
+      tempThisUser.name = '';
+      setThisUser(tempThisUser);
+      socket.on('your-socketid', (id) => {
+        setYourSocket(id);
+      });
+      socket.on('find', (e) => {
+        let obj = { ...users };
+        obj.p1.p1name = e.allPlayers[0].p1.p1name;
+        obj.p2.p2name = e.allPlayers[0].p2.p2name;
+        obj.p1.p1socketId = e.allPlayers[0].p1.p1socketId;
+        obj.p2.p2socketId = e.allPlayers[0].p2.p2socketId;
+        obj.p1.p1alien = e.allPlayers[0].p1.p1alien;
+        obj.p2.p2alien = e.allPlayers[0].p2.p2alien;
+        obj.allAliens = e.allPlayers[0].allAliens;
+        setUsers(obj);
+        localStorage.setItem('users', JSON.stringify(users));
+      });
+    }
   }, [thisUser, users]);
 
   useEffect(() => {
@@ -75,9 +73,8 @@ export default function LobbyModal({
     setDisplayLobby(false);
     setIsLoading(false);
     if (yourSocket === users.p2.p2socketId) {
-      setIsPlaying(false)
+      setIsPlaying(false);
     }
-
   });
 
   return (

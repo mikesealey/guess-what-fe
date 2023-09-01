@@ -7,10 +7,7 @@ import { OpponentResponse } from './OpponentResponse';
 import { UserStatsContext } from '@/contexts/UserStats';
 import { SocketContext } from '@/contexts/Socket';
 import { UsersContext } from '@/contexts/User';
-
-const { io } = require('socket.io-client');
-
-const socket = io('https://guess-what-copy.onrender.com/');
+import { socket } from '@/app/utils/socketconnection';
 
 export default function QuestionCard({
   isGameFinished,
@@ -22,7 +19,7 @@ export default function QuestionCard({
   currentTurn,
   setCurrentTurn,
   isPlaying,
-  setIsPlaying
+  setIsPlaying,
 }) {
   const { opponentObject, setOpponentObject } = useContext(OpponentContext);
   const { statsObject, setStatsObject } = useContext(UserStatsContext);
@@ -35,20 +32,20 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
 
   socket.on('turnIncreased', (nextTurn) => {
-    setCurrentTurn(nextTurn)
-  })
+    setTimeout(setCurrentTurn(nextTurn), 1000);
+  });
 
   socket.on('endGame', () => {
-    setIsGameFinished(true)
-  })
+    setIsGameFinished(true);
+  });
 
   useEffect(() => {
     if (isGameFinished && !hasWon) {
-      const currentStats = {...statsObject}
-      currentStats.losses -= 1
-      setStatsObject(currentStats)
+      const currentStats = { ...statsObject };
+      currentStats.losses -= 1;
+      setStatsObject(currentStats);
     }
-  }, [isGameFinished])
+  }, [isGameFinished]);
 
   const emptyAlienObject = {
     _id: [],
@@ -84,19 +81,19 @@ export default function QuestionCard({
 
   useEffect(() => {
     if (statsObject.score > 0) {
-      socket.emit('turnPlayed')
+      socket.emit('turnPlayed');
     }
-  }, [statsObject])
+  }, [statsObject]);
 
   useEffect(() => {
     if (yourSocket === users.p1.p1socketId && currentTurn % 2 === 0) {
-      setIsPlaying(true)
+      setIsPlaying(true);
     } else if (yourSocket === users.p2.p2socketId && currentTurn % 2 !== 0) {
-      setIsPlaying(true)
+      setIsPlaying(true);
     } else {
-      setIsPlaying(false)
+      setIsPlaying(false);
     }
-  }, [currentTurn, isLoading])
+  }, [currentTurn]);
 
   useEffect(() => {
     generateQuestions(alienObjects).then((questions) => {
@@ -165,11 +162,11 @@ export default function QuestionCard({
   function guessChecker(guess, chosenAlien) {
     if (guess === chosenAlien._id) {
       setHasWon(true);
-      socket.emit("winner")
+      socket.emit('winner');
       setOpponentObject(chosenAlien);
-      const currentStats = {...statsObject}
-      currentStats.wins += 1
-      setStatsObject(currentStats)
+      const currentStats = { ...statsObject };
+      currentStats.wins += 1;
+      setStatsObject(currentStats);
     } else {
       setHasWon(false);
     }
@@ -177,71 +174,73 @@ export default function QuestionCard({
 
   if (validQuestions.length) {
     if (isPlaying) {
-    return (
-      <div className="questioncard">
-        <div id="question-prompt-container">
-          <p id="question-prompt">Does your alien have... </p>
-          <button
-            onClick={() => {
-              indexIncrementer(-1);
-            }}
-            className="question-btn"
-          >
-            ←
-          </button>
-          <p id="question-variable">{validQuestions[indexer].question}</p>
-          <button
-            onClick={() => {
-              indexIncrementer(+1);
-            }}
-            className="question-btn"
-          >
-            →
-          </button>
-          <button
-            onClick={() => {
-              handleSubmit();
-            }}
-            className="question-submit-btn"
-          >
-            Submit
-          </button>
-        </div>
-        <form
-          id="guess-form"
-          onSubmit={(e) => {
-            submitGuess(e);
-          }}
-        >
-          <select
-            onChange={(e) => {
-              setGuess(e.target.value), setHasWon(null), setAnswer(null);
-            }}
-          >
-            <option>Take a guess</option>
-            {alienObjects.map((alien) => {
-              if (alien.isActive) {
-                return (
-                  <option value={alien._id} key={alien.name}>
-                    {alien.name}
-                  </option>
-                );
-              }
-            })}
-          </select>
-          {guess ? (
-            <button className="guess-btn" id="guess-btn">
-              Guess
+      return (
+        <div className="questioncard">
+          <div id="question-prompt-container">
+            <p id="question-prompt">Does your alien have... </p>
+            <button
+              onClick={() => {
+                indexIncrementer(-1);
+              }}
+              className="question-btn"
+            >
+              ←
             </button>
-          ) : null}
-        </form>
-        <OpponentResponse answer={answer} hasWon={hasWon} />
+            <p id="question-variable">{validQuestions[indexer].question}</p>
+            <button
+              onClick={() => {
+                indexIncrementer(+1);
+              }}
+              className="question-btn"
+            >
+              →
+            </button>
+            <button
+              onClick={() => {
+                handleSubmit();
+              }}
+              className="question-submit-btn"
+            >
+              Submit
+            </button>
+          </div>
+          <form
+            id="guess-form"
+            onSubmit={(e) => {
+              submitGuess(e);
+            }}
+          >
+            <select
+              onChange={(e) => {
+                setGuess(e.target.value), setHasWon(null), setAnswer(null);
+              }}
+            >
+              <option>Take a guess</option>
+              {alienObjects.map((alien) => {
+                if (alien.isActive) {
+                  return (
+                    <option value={alien._id} key={alien.name}>
+                      {alien.name}
+                    </option>
+                  );
+                }
+              })}
+            </select>
+            {guess ? (
+              <button className="guess-btn" id="guess-btn">
+                Guess
+              </button>
+            ) : null}
+          </form>
+          <OpponentResponse answer={answer} hasWon={hasWon} />
         </div>
-    );
-          } else {
-            return <div className="questioncard"> 
-            <p id="turn-placeholder">Opponent is taking their turn...</p>
-            </div>
-          }
+      );
+    } else {
+      return (
+        <div className="questioncard">
+          <p id="turn-placeholder">Opponent is taking their turn...</p>
+        </div>
+      );
+    }
   }
 }

@@ -17,10 +17,6 @@ import { SocketContext } from '@/contexts/Socket';
 import { ThisUserContext } from '@/contexts/ThisUser';
 import { UserStatsContext } from '@/contexts/UserStats';
 
-const { io } = require('socket.io-client');
-
-const socket = io('https://guess-what-copy.onrender.com/');
-
 export default function TwoPlayerDisplay() {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,16 +27,16 @@ export default function TwoPlayerDisplay() {
   const { users, setUsers } = useContext(UsersContext);
   const { yourSocket, setYourSocket } = useContext(SocketContext);
   const { thisUser, setThisUser } = useContext(ThisUserContext);
-  const { statsObject, setStatsObject } = useContext(UserStatsContext)
-  const [currentTurn, setCurrentTurn] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const { statsObject, setStatsObject } = useContext(UserStatsContext);
+  const [currentTurn, setCurrentTurn] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const storageUser = JSON.parse(localStorage.getItem('thisUser'));
     const storageUsers = JSON.parse(localStorage.getItem('users'));
-    const storageStats = JSON.parse(localStorage.getItem('statsObject'))
-    setUsers(storageUsers)
-    setStatsObject(storageStats)
+    const storageStats = JSON.parse(localStorage.getItem('statsObject'));
+    setUsers(storageUsers);
+    setStatsObject(storageStats);
     if (storageUser) {
       setThisUser(storageUser);
     }
