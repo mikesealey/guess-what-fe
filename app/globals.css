@@ -239,9 +239,16 @@ body {
   position: relative;
   height: 100%;
   width: 100%;
+}
+
+.capture-border {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.border {
   border: 2px solid rgb(95, 16, 137);
   border-radius: 15px;
-  
 }
 
 /* ------------------------ ALIEN CARD --------------------------- */
@@ -259,7 +266,7 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 13px;
+  /* border-radius: 13px; */
   -webkit-user-drag: none;
 }
 
@@ -829,3 +836,8 @@ body {
   margin: auto;
   font-size: 3rem;
 }
+
+.test {
+  padding-bottom: 1vh;
+}
+
