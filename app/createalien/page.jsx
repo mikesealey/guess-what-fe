@@ -84,11 +84,11 @@ const alien = {
     function downloadAlien() {
         // Canvas becomes the entirety of what we want to grab hold of
         
-        // But we still need to lose the border-radius
         const alienCard = document.getElementById("capture")
         const alienNameHolder = document.getElementById("alien-name-holder")
         const alienName = document.getElementById("alien-name")
-
+        
+        // But we still need to lose the border-radius
         alienCard.classList.add("capture-border", "black")
         alienNameHolder.classList.add("capture-border")
         alienName.classList.add("test")
@@ -96,16 +96,19 @@ const alien = {
         var canvas = document.getElementById("capture")
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             var myAlien = canvas.toDataURL("image/png")
-            // window.open(myAlien, "_blank")
+            // window.open(myAlien, "_blank") Use this as an option to open in new window instead of starting the download
             saveAs(myAlien, `${name} the alien.png`)
         })
         
+        // And then we should re-instate the border radius for the displayed version
         alienCard.classList.remove("capture-border")
         alienNameHolder.classList.remove("capture-border")
         alienName.classList.remove("test")
 
     }
     
+    // Still needs styling
+    // Also wants attributes to loop around when cycling through the array
 
 
     return (
