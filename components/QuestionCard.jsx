@@ -32,7 +32,10 @@ export default function QuestionCard({
   const [guess, setGuess] = useState(null);
 
   socket.on('turnIncreased', (nextTurn) => {
-    setTimeout(setCurrentTurn(nextTurn), 1000);
+    setTimeout(() => {
+      setCurrentTurn(nextTurn);
+      setAnswer(null);
+    }, 5000);
   });
 
   socket.on('endGame', () => {
